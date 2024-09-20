@@ -28,10 +28,26 @@ public class World {
     public Paysan peon;
     
     /** 
-     * Une instance de Lapin, bugs.
+     * Une instance de Lapin, bugs1.
      * @see Lapin
      */
-    public Lapin bugs;
+    public Lapin bugs1;
+    
+    /** 
+     * Une instance de Lapin, bugs2.
+     * @see Lapin
+     */
+    public Lapin bugs2;
+    
+    /** 
+     * Une instance de Guerrier
+     * 
+     */
+    public Guerrier grosBill;
+    
+    public Loup wolfie;
+    
+    
     
     
      /**
@@ -41,9 +57,22 @@ public class World {
        
         this.robin = new Archer();
         this.peon = new Paysan();
-        this.bugs = new Lapin();
+        this.bugs1 = new Lapin();
+        this.bugs2 = new Lapin();
         this.guillaumeT = new Archer();
+        this.grosBill = new Guerrier();
+        this.wolfie = new Loup();
     };
+    
+    public World(Archer a1, Paysan p, Lapin l1, Lapin l2, Archer a2, Guerrier g, Loup l3){
+        this.robin = a1;
+        this.peon = p;
+        this.bugs1 = l1;
+        this.bugs2 = l2;
+        this.guillaumeT = a2;
+        this.grosBill = g;
+        this.wolfie = l3;
+    }
     /** 
     * Création des positions aléatoires des objets du monde. 
     * Deux objets ne peuvent pas être à la même position.
