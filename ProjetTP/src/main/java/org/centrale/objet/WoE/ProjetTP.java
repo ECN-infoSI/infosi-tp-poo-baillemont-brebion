@@ -15,19 +15,21 @@ public class ProjetTP {
         
         monde.creaMondeAlea();
         
-        monde.robin.affiche();
-        monde.guillaumeT.affiche();
-        
-        monde.guillaumeT = new Archer(monde.robin);
-        
-        monde.guillaumeT.affiche();
+        monde.robin.setPos(new Point2D(6,0));
+        monde.robin.setDistMaxAtt(10);
         monde.robin.affiche();
         
-        monde.robin.deplace();
-        monde.guillaumeT.deplace();
         
-        monde.robin.affiche();
+        monde.guillaumeT.setPos(new Point2D(12,0));
+        monde.guillaumeT.setDistMaxAtt(10);
         monde.guillaumeT.affiche();
-
+        
+        
+        monde.wolfie.setPos(new Point2D(0,0));
+        monde.wolfie.affiche();
+        
+        monde.grosBill.setPos(new Point2D(1,0));
+        monde.grosBill.affiche();
+        
     }
 }
