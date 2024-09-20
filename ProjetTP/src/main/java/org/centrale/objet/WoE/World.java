@@ -1,5 +1,6 @@
 package org.centrale.objet.WoE;
 import java.util.Random;
+import java.util.function.Predicate;
 
 /**
  * Création d'un monde WoE comprenant un archer, un paysan et un lapin. 
@@ -78,39 +79,24 @@ public class World {
     * Deux objets ne peuvent pas être à la même position.
     */
     public void creaMondeAlea(){
-        
-        Random r = new Random();
-        
-        int x1 = r.nextInt(201)-100; // nombre compris entre -100 et 100
-        int y1 = r.nextInt(201)-100; // nombre compris entre -100 et 100
-        Point2D posArcher = new Point2D(x1,y1);
-        this.robin.setPos(posArcher);
-        
-        int x2 = r.nextInt(201)-100; // nombre compris entre -100 et 100
-        int y2 = r.nextInt(201)-100; // nombre compris entre -100 et 100
-        while ((x1==x2) && (y1==y2)){
-            x2 = r.nextInt(201)-100; // si meme position alors on reprend 2 nombres aléatoires
-            y2 = r.nextInt(201)-100;
-        }
-        Point2D posPaysan = new Point2D(x2,y2);
-        this.peon.setPos(posPaysan);
-        
-        int x3 = r.nextInt(201)-100; // nombre compris entre -100 et 100
-        int y3 = r.nextInt(201)-100; // nombre compris entre -100 et 100
-        while (((x1==x3) && (y1==y3)) || ((x2==x3) && (y2==y3))){
-            x3 = r.nextInt(201)-100;
-            y3 = r.nextInt(201)-100;
-        }
-        Point2D posLapin = new Point2D(x3,y3);
-        this.bugs.setPos(posLapin);
-        
-        int x4 = r.nextInt(201)-100; // nombre compris entre -100 et 100
-        int y4 = r.nextInt(201)-100; // nombre compris entre -100 et 100
-        while (((x1==x4) && (y1==y4)) || ((x2==x4) && (y2==y4)) || ((x3==x4) && (y3==y4))){
-            x4 = r.nextInt(201)-100;
-            y4 = r.nextInt(201)-100;
-        }
-        Point2D posGuillaume = new Point2D(x4,y4);
-        this.guillaumeT.setPos(posGuillaume);
-    };
+    Random r = new Random();
+    Creature[] creatures = {this.robin, this.peon, this.bugs1, this.bugs2, this.guillaumeT, this.grosBill, this.wolfie};
+    Point2D[] positions = new Point2D[creatures.length];
+
+    for (int i = 0; i < creatures.length; i++) {
+        int x;
+        int y;
+        do {
+            x = r.nextInt(201) - 100;
+            y = r.nextInt(201) - 100;
+            Point2D tempPosition = new Point2D(x, y);
+            if (!java.util.Arrays.stream(positions).anyMatch((Point2D p) -> p != null && p.equals(tempPosition))) {
+                positions[i] = tempPosition;
+                creatures[i].setPos(positions[i]);
+                break;
+            }
+        } while (true);
+    }
+};
+    
 };
