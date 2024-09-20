@@ -10,7 +10,7 @@ import java.util.Random;
  *
  * @author mattlerigolo
  * @author morga
- * 
+ * Classe de personnage.
  * 
  */
 
@@ -72,14 +72,25 @@ public class Personnage {
     };
     
     /**
+     * Constructeur.
      * @param nom
+     *          Nom du personnage
      * @param ptVie
+     *          Nombre de points de vie
      * @param degAtt
+     *          Nombre de dégats d'attaque
      * @param ptPar
+     *          Nombre de points de parade
      * @param pageAtt
+     *          Nombre de page attaque
      * @param pagePar
+     *          Nombre de page Parade
      * @param distMaxAtt
+     *          Distance maximum d'attaque
      * @param pos 
+     *          Position
+     * 
+     * 
      */
     public Personnage(String nom, int ptVie, int degAtt, int ptPar, int pageAtt, int pagePar, int distMaxAtt, Point2D pos){
         this.nom = nom;
@@ -91,6 +102,12 @@ public class Personnage {
         this.pos = pos;
     };
     
+    /**
+     * Construit un personnage à partir des caractéristiques d'un personnage déjà existant.
+     * @param perso 
+     *          Personnage déjà existant
+     * 
+     */
     public Personnage(Personnage perso){
         this.nom = perso.getNom();
         this.ptVie = perso.getPtVie();
@@ -166,7 +183,9 @@ public class Personnage {
     }
     
     
-    
+    /**
+     * Affiche les caractéristiques du personnages.
+     */
     public void affiche(){
         System.out.println("nom : " + this.nom +
                            "\nptVie : " + this.ptVie +
@@ -178,6 +197,9 @@ public class Personnage {
                            "\npos : " + "["+pos.getX()+","+pos.getY()+"] \n" );
     };
     
+    /**
+     * Déplace aléatoirement le personnage, dans un rayon de 1, horizontalement, verticalement, ou en diagonale.
+     */
     public void deplace(){
         Random r = new Random();
         int dx = r.nextInt(2); // le personnage peut se déplacer sur les cases adjacentes
