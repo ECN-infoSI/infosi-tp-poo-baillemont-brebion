@@ -30,13 +30,10 @@ public class ProjetTP {
         monde.grosBill.setPos(new Point2D(1,0));
         monde.grosBill.affiche();
         
-<<<<<<< HEAD
         monde.robin.combattre(monde.wolfie);
         monde.wolfie.affiche();
         monde.robin.affiche();
-        
-=======
+
         monde.afficheWorld();
->>>>>>> 3321cfb1d560351fe36c1fee3e0622e146444657
     }
 }
