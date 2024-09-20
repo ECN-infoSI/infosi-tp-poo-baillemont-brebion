@@ -5,19 +5,29 @@ import java.util.Random;
 /**
  *
  * @author mattlerigolo et @morga
+ * Création d'un monde WoE comprenant un archer, un paysan et un lapin. 
+ * Leur position est initialisée aléatoirement à la création du monde par la méthode {@link #creaMondeAlea()}.
  */
 public class World {
+    
     public Archer robin;
     public Paysan peon;
     public Lapin bugs;
     
     public World(){
+        /**
+         * Constructeur.
+         */
         this.robin = new Archer();
         this.peon = new Paysan();
         this.bugs = new Lapin();
     };
-    
+    /** 
+    * Création des positions aléatoires des objets du monde. 
+    * Deux objets ne peuvent pas être à la même position.
+    */
     public void creaMondeAlea(){
+        
         Random r = new Random();
         
         int x1 = r.nextInt(201)-100; // nombre compris entre -100 et 100
