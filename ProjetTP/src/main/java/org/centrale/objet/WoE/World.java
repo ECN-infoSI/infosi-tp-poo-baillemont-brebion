@@ -4,7 +4,7 @@ import java.util.Random;
 
 /**
  *
- * @author mattlerigolo
+ * @author mattlerigolo et @morga
  */
 public class World {
     public Archer robin;
