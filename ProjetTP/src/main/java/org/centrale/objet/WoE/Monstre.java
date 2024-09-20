@@ -7,13 +7,13 @@ package org.centrale.objet.WoE;
 import java.util.Random;
 
 /**
- *
+ * Classe pour les monstres.
  * @author mattlerigolo
  * @author morga
  * 
- * Classe pour les monstres.
+ * 
  */
-public class Monstre {
+public class Monstre extends Creature{
     
     /**
      * Nombre de points de vie du monstre.
@@ -32,12 +32,12 @@ public class Monstre {
     private int ptPar;
     
     /**
-     * Nombre de page attaque du monstre.
+     * Pourcentage d'attaque du monstre.
      */
     private int pageAtt;
     
     /**
-     * Nombre de page de parade du monstre.
+     * Pourcentage de parade du monstre.
      */
     private int pagePar;
     
@@ -68,9 +68,9 @@ public class Monstre {
      * @param ptPar
      *          Nombre de points d'attaque
      * @param pageAtt
-     *          Nombre de points de parade
+     *          Pourcentage d'attaque
      * @param pagePar
-     *         Nombre de page de parade 
+     *         Pourcentage de parade 
      * @param pos 
      *          Position
      */         

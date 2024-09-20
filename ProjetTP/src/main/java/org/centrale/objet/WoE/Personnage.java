@@ -8,14 +8,13 @@ import java.util.Random;
 
 /**
  *
+ * Classe de personnage.
  * @author mattlerigolo
  * @author morga
- * Classe de personnage.
+ * 
  * 
  */
-
-
-public class Personnage {
+public class Personnage extends Creature{
     
     /**
      * Nom du personnage.
@@ -38,12 +37,12 @@ public class Personnage {
     private int ptPar;
     
     /**
-     * Nombre de page attaque du personnage.
+     * Pourcentage attaque du personnage.
      */
     private int pageAtt;
     
     /**
-     * Nombre de page de parade du personnage.
+     * Pourcentage de parade du personnage.
      */
     private int pagePar;
     
@@ -82,9 +81,9 @@ public class Personnage {
      * @param ptPar
      *          Nombre de points de parade
      * @param pageAtt
-     *          Nombre de page attaque
+     *          Pourcentage d'attaque
      * @param pagePar
-     *          Nombre de page Parade
+     *          Pourcentage de Parade
      * @param distMaxAtt
      *          Distance maximum d'attaque
      * @param pos 
@@ -118,66 +117,130 @@ public class Personnage {
         this.pos = new Point2D(perso.getPos());
     }
     
+    /**
+     *
+     * @return
+     */
     public String getNom(){
         return this.nom ;
     };
 
+    /**
+     *
+     * @return
+     */
     public int getPtVie() {
         return ptVie;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getDegAtt() {
         return degAtt;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getPtPar() {
         return ptPar;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getPageAtt() {
         return pageAtt;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getPagePar() {
         return pagePar;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getDistMaxAtt() {
         return distMaxAtt;
     }
 
+    /**
+     *
+     * @return
+     */
     public Point2D getPos() {
         return pos;
     }
     
+    /**
+     *
+     * @param newNom
+     */
     public void setNom(String newNom){
         this.nom = newNom;
     };
 
+    /**
+     *
+     * @param ptVie
+     */
     public void setPtVie(int ptVie) {
         this.ptVie = ptVie;
     }
 
+    /**
+     *
+     * @param degAtt
+     */
     public void setDegAtt(int degAtt) {
         this.degAtt = degAtt;
     }
 
+    /**
+     *
+     * @param ptPar
+     */
     public void setPtPar(int ptPar) {
         this.ptPar = ptPar;
     }
 
+    /**
+     *
+     * @param pageAtt
+     */
     public void setPageAtt(int pageAtt) {
         this.pageAtt = pageAtt;
     }
 
+    /**
+     *
+     * @param pagePar
+     */
     public void setPagePar(int pagePar) {
         this.pagePar = pagePar;
     }
 
+    /**
+     *
+     * @param distMaxAtt
+     */
     public void setDistMaxAtt(int distMaxAtt) {
         this.distMaxAtt = distMaxAtt;
     }
 
+    /**
+     *
+     * @param pos
+     */
     public void setPos(Point2D pos) {
         this.pos = pos;
     }
