@@ -100,7 +100,10 @@ public class World {
 };
     
     public void afficheWorld(){
-        
+        Creature[] creatures = {this.robin, this.peon, this.bugs1, this.bugs2, this.guillaumeT, this.grosBill, this.wolfie};
+        for (Creature creature : creatures) {
+            creature.affiche();
+        }
     }
     
 };

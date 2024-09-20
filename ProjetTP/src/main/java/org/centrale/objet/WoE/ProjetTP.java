@@ -31,5 +31,6 @@ public class ProjetTP {
         monde.grosBill.setPos(new Point2D(1,0));
         monde.grosBill.affiche();
         
+        monde.afficheWorld();
     }
 }
