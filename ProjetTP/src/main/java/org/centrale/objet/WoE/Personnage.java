@@ -9,19 +9,58 @@ import java.util.Random;
 /**
  *
  * @author mattlerigolo
+ * @author morga
+ * 
+ * 
  */
 
 
 public class Personnage {
+    
+    /**
+     * Nom du personnage.
+     */
     private String nom;
+    
+    /**
+     * Nombre de points de vie du personnage.
+     */
     private int ptVie;
+    
+    /**
+     * Nombre de dégats infligés par le personnages lors d'une attaque simple.
+     */
     private int degAtt;
+    
+    /**
+     * Nombre de points de parade du personnage.
+     */
     private int ptPar;
+    
+    /**
+     * Nombre de page attaque du personnage.
+     */
     private int pageAtt;
+    
+    /**
+     * Nombre de page de parade du personnage.
+     */
     private int pagePar;
+    
+    /**
+     * Distance maximale d'attaque du personnage.
+     */
     private int distMaxAtt;
+    
+    /**
+     * Position 2D du personnage.
+     *@see Point2D
+     */
     private Point2D pos;
     
+    /**
+     * Constructeur par défaut.
+     */
     public Personnage(){
         this.nom = "Robert";
         this.ptVie = 100;
@@ -32,6 +71,16 @@ public class Personnage {
         this.pos = new Point2D();
     };
     
+    /**
+     * @param nom
+     * @param ptVie
+     * @param degAtt
+     * @param ptPar
+     * @param pageAtt
+     * @param pagePar
+     * @param distMaxAtt
+     * @param pos 
+     */
     public Personnage(String nom, int ptVie, int degAtt, int ptPar, int pageAtt, int pagePar, int distMaxAtt, Point2D pos){
         this.nom = nom;
         this.ptVie = ptVie;

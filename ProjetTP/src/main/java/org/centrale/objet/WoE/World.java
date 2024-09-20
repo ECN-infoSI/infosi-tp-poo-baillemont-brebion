@@ -1,23 +1,37 @@
 package org.centrale.objet.WoE;
-
 import java.util.Random;
 
 /**
- *
- * @author mattlerigolo et @morga
+ * @author mattlerigolo
+ * @author morga
  * Création d'un monde WoE comprenant un archer, un paysan et un lapin. 
  * Leur position est initialisée aléatoirement à la création du monde par la méthode {@link #creaMondeAlea()}.
  */
 public class World {
-    
+    /** 
+     * Une instance d'Archer, robin.
+     * @see Archer
+     */
     public Archer robin;
+    
+    /** 
+     * Une instance de Paysan, peon.
+     * @see Paysan
+     */
     public Paysan peon;
+    
+    /** 
+     * Une instance de Lapin, bugs.
+     * @see Lapin
+     */
     public Lapin bugs;
     
+    
+     /**
+     * Constructeur.
+     */
     public World(){
-        /**
-         * Constructeur.
-         */
+       
         this.robin = new Archer();
         this.peon = new Paysan();
         this.bugs = new Lapin();
