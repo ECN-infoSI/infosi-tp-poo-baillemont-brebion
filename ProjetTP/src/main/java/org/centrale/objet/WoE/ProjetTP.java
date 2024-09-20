@@ -22,7 +22,6 @@ public class ProjetTP {
         
         monde.guillaumeT.setPos(new Point2D(12,0));
         monde.guillaumeT.setDistMaxAtt(10);
-        monde.guillaumeT.affiche();
         
         
         monde.wolfie.setPos(new Point2D(0,0));
@@ -30,6 +29,10 @@ public class ProjetTP {
         
         monde.grosBill.setPos(new Point2D(1,0));
         monde.grosBill.affiche();
+        
+        monde.robin.combattre(monde.wolfie);
+        monde.wolfie.affiche();
+        monde.robin.affiche();
         
     }
 }

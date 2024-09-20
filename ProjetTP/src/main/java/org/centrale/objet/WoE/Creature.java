@@ -14,33 +14,33 @@ public abstract class Creature {
     /**
      * Nombre de points de vie de la créature.
      */
-    private int ptVie;
+    protected int ptVie;
     
     /**
      * Nombre de dégats infligés par la créature lors d'une attaque simple.
      */
-    private int degAtt;
+    protected int degAtt;
     
     /**
      * Nombre de points de parade de la créature.
      */
-    private int ptPar;
+    protected int ptPar;
     
     /**
      * Pourcentage attaque de la créature.
      */
-    private int pageAtt;
+    protected int pageAtt;
     
     /**
      * Pourcentage de parade de la créature.
      */
-    private int pagePar;
+    protected int pagePar;
     
      /**
      * Position 2D de la créature.
      *@see Point2D
      */
-    private Point2D pos;
+    protected Point2D pos;
     
     public Creature(){
         this.ptVie = 100;

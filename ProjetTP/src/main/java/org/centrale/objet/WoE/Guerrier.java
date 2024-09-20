@@ -1,10 +1,12 @@
 package org.centrale.objet.WoE;
 
+import java.util.Random;
+
 /**
  *
  * @author mattlerigolo
  */
-public class Guerrier extends Personnage {
+public class Guerrier extends Personnage implements Combattant {
     private Epee epee;
     
     public Guerrier(){
@@ -28,5 +30,28 @@ public class Guerrier extends Personnage {
 
     public void setEpee(Epee epee) {
         this.epee = epee;
+    }
+    
+    @Override public void combattre(Creature c){
+        if ((this.pos.distance(c.getPos())) <= 1){ // le loup ne peut pas attaquer à distance
+            Random r = new Random();
+            int tirageAtt = r.nextInt(99)+1;
+            int tirageDef = r.nextInt(99)+1;
+            
+            if (tirageAtt <= this.pageAtt){
+                if (tirageDef > c.getPagePar()){
+                    c.setPtVie(c.getPtVie()-this.degAtt);
+                }
+                else{
+                    c.setPtVie(c.getPtVie()-this.degAtt+c.getPtPar());
+                }
+            }
+            else {
+                System.out.println("Attaque Ratée !");
+            }
+        }
+        else{
+            System.out.println("Trop loin !");
+        }
     }
 }

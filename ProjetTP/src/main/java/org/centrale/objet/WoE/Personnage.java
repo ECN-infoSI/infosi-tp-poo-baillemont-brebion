@@ -17,12 +17,12 @@ public class Personnage extends Creature{
     /**
      * Nom du personnage.
      */
-    private String nom;
+    protected String nom;
     
     /**
      * Distance maximale d'attaque du personnage.
      */
-    private int distMaxAtt;
+    protected int distMaxAtt;
     
     /**
      * Constructeur par défaut.
