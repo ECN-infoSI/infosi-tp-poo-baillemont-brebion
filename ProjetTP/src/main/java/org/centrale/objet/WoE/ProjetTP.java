@@ -17,16 +17,14 @@ public class ProjetTP {
         
         monde.robin.affiche();
         monde.peon.affiche();
-        
-        monde.creaMondeAlea();
-        
-        monde.robin.affiche();
-        monde.peon.affiche();
+        monde.bugs.affiche();
         
         monde.robin.deplace();
         monde.peon.deplace();
+        monde.bugs.deplace();
         
         monde.robin.affiche();
         monde.peon.affiche();
+        monde.bugs.affiche();
     }
 }
