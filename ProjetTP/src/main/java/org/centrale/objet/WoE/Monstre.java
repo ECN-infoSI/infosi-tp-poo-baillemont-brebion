@@ -4,8 +4,6 @@
  */
 package org.centrale.objet.WoE;
 
-import java.util.Random;
-
 /**
  *
  * @author mattlerigolo
@@ -89,16 +87,7 @@ public class Monstre {
     public void setPos(Point2D pos) {
         this.pos = pos;
     };
-    
-    public void deplace(){
-        Random r = new Random();
-        int dx = r.nextInt(2); // le monstre peut se déplacer sur les cases adjacentes
-        int dirX = r.nextBoolean() ? 1 : -1; // on choisit la direction de déplacement selon x
-        int dy = r.nextInt(2);
-        int dirY = r.nextBoolean() ? 1 : -1; // on choisit la direction de déplacement selon y
-        
-        this.pos.translate(dirX*dx, dirY*dy);
-    }
+
     
     
 }
