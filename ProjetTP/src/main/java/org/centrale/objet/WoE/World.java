@@ -28,7 +28,7 @@ public class World {
         int x2 = r.nextInt(201)-100; // nombre compris entre -100 et 100
         int y2 = r.nextInt(201)-100; // nombre compris entre -100 et 100
         while ((x1==x2) && (y1==y2)){
-            x2 = r.nextInt(201)-100;
+            x2 = r.nextInt(201)-100; // si meme position alors on reprend 2 nombres aléatoires
             y2 = r.nextInt(201)-100;
         }
         Point2D posPaysan = new Point2D(x2,y2);
