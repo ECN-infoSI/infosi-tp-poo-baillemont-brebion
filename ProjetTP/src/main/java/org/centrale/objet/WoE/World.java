@@ -15,6 +15,12 @@ public class World {
     public Archer robin;
     
     /** 
+     * Une instance d'Archer, guillaumeT.
+     * @see Archer
+     */
+    public Archer guillaumeT;
+    
+    /** 
      * Une instance de Paysan, peon.
      * @see Paysan
      */
@@ -35,6 +41,7 @@ public class World {
         this.robin = new Archer();
         this.peon = new Paysan();
         this.bugs = new Lapin();
+        this.guillaumeT = new Archer();
     };
     /** 
     * Création des positions aléatoires des objets du monde. 
@@ -66,5 +73,14 @@ public class World {
         }
         Point2D posLapin = new Point2D(x3,y3);
         this.bugs.setPos(posLapin);
+        
+        int x4 = r.nextInt(201)-100; // nombre compris entre -100 et 100
+        int y4 = r.nextInt(201)-100; // nombre compris entre -100 et 100
+        while (((x1==x4) && (y1==y4)) || ((x2==x4) && (y2==y4)) || ((x3==x4) && (y3==y4))){
+            x4 = r.nextInt(201)-100;
+            y4 = r.nextInt(201)-100;
+        }
+        Point2D posGuillaume = new Point2D(x4,y4);
+        this.guillaumeT.setPos(posGuillaume);
     };
 };

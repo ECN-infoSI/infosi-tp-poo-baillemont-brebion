@@ -16,15 +16,18 @@ public class ProjetTP {
         monde.creaMondeAlea();
         
         monde.robin.affiche();
-        monde.peon.affiche();
-        monde.bugs.affiche();
+        monde.guillaumeT.affiche();
+        
+        monde.guillaumeT = new Archer(monde.robin);
+        
+        monde.guillaumeT.affiche();
+        monde.robin.affiche();
         
         monde.robin.deplace();
-        monde.peon.deplace();
-        monde.bugs.deplace();
+        monde.guillaumeT.deplace();
         
         monde.robin.affiche();
-        monde.peon.affiche();
-        monde.bugs.affiche();
+        monde.guillaumeT.affiche();
+
     }
 }
