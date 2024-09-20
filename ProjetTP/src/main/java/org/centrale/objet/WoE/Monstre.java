@@ -90,6 +90,15 @@ public class Monstre {
         this.pos = pos;
     };
 
+    public void affiche(){
+        System.out.println("Monstre" +
+                           "\nptVie : " + this.ptVie +
+                           "\ndegAtt : " + this.degAtt +
+                           "\nptPar : " + this.ptPar +
+                           "\npageAtt : " + this.pageAtt +
+                           "\npagePar : " + this.pagePar +
+                           "\npos : " + "["+pos.getX()+","+pos.getY()+"] \n" );
+    };
     
     public void deplace(){
         Random r = new Random();
