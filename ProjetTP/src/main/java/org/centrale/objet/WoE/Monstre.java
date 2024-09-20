@@ -9,15 +9,48 @@ import java.util.Random;
 /**
  *
  * @author mattlerigolo
+ * @author morga
+ * 
+ * Classe pour les monstres.
  */
 public class Monstre {
+    
+    /**
+     * Nombre de points de vie du monstre.
+     */
     private int ptVie;
+    
+    /**
+     * Nombre de dégats d'attaque du monstre.
+     * 
+     */
     private int degAtt;
+    
+    /**
+     * Nombre de points de parade du monstre.
+     */
     private int ptPar;
+    
+    /**
+     * Nombre de page attaque du monstre.
+     */
     private int pageAtt;
+    
+    /**
+     * Nombre de page de parade du monstre.
+     */
     private int pagePar;
+    
+    /**
+     * Position ud monstre.
+     * @see Point2D
+     */
     private Point2D pos;
     
+    
+    /**
+     * Constructeur par défaut.
+     */
     public Monstre(){
         this.ptVie = 100;
         this.ptPar = 10;
@@ -26,6 +59,21 @@ public class Monstre {
         this.pos = new Point2D();
     };
     
+    /**
+     * Constructeur.
+     * @param ptVie
+     *          Nombre de points de vie
+     * @param degAtt
+     *          Nombre de dégats d'attaque
+     * @param ptPar
+     *          Nombre de points d'attaque
+     * @param pageAtt
+     *          Nombre de points de parade
+     * @param pagePar
+     *         Nombre de page de parade 
+     * @param pos 
+     *          Position
+     */         
     public Monstre(int ptVie, int degAtt, int ptPar, int pageAtt, int pagePar, Point2D pos){
         this.ptVie = ptVie;
         this.ptPar = ptPar;
@@ -34,6 +82,11 @@ public class Monstre {
         this.pos = pos;
     };
     
+    /**
+     * Construit un monstre à partir des caractéristiques d'un monstre déjà existant.
+     * @param monster 
+     *          monstre déjà existant
+     */
     public Monstre(Monstre monster){
         this.ptVie = monster.getPtVie();
         this.ptPar = monster.getPtPar();
@@ -90,6 +143,9 @@ public class Monstre {
         this.pos = pos;
     };
 
+    /**
+     * Affiche les caractéristiques du monstre.
+     */
     public void affiche(){
         System.out.println("Monstre" +
                            "\nptVie : " + this.ptVie +
@@ -100,6 +156,9 @@ public class Monstre {
                            "\npos : " + "["+pos.getX()+","+pos.getY()+"] \n" );
     };
     
+    /**
+     * Déplace le monstre aléatoirement, dans un rayon de 1, horizontalement, verticalement, ou en diagonale.
+     */
     public void deplace(){
         Random r = new Random();
         int dx = r.nextInt(2); // le personnage peut se déplacer sur les cases adjacentes
