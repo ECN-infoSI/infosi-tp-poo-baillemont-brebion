@@ -40,10 +40,10 @@ public class Guerrier extends Personnage implements Combattant {
             
             if (tirageAtt <= this.pageAtt){
                 if (tirageDef > c.getPagePar()){
-                    c.setPtVie(c.getPtVie()-this.degAtt);
+                    c.setPtVie(c.getPtVie()-this.epee.getPtAtt());
                 }
                 else{
-                    c.setPtVie(c.getPtVie()-this.degAtt+c.getPtPar());
+                    c.setPtVie(c.getPtVie()-this.epee.getPtAtt()+c.getPtPar());
                 }
             }
             else {

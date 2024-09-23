@@ -17,23 +17,35 @@ public class ProjetTP {
         
         monde.robin.setPos(new Point2D(6,0));
         monde.robin.setDistMaxAtt(10);
-        monde.robin.affiche();
+        monde.robin.setNom("Robin");
         
         
         monde.guillaumeT.setPos(new Point2D(12,0));
         monde.guillaumeT.setDistMaxAtt(10);
+        monde.guillaumeT.setNom("Guillaume");
         
         
         monde.wolfie.setPos(new Point2D(0,0));
-        monde.wolfie.affiche();
         
         monde.grosBill.setPos(new Point2D(1,0));
-        monde.grosBill.affiche();
+        monde.grosBill.setNom("Gros Bill");
+
         
+        monde.wolfie.affiche();
+        monde.robin.affiche();
         monde.robin.combattre(monde.wolfie);
         monde.wolfie.affiche();
         monde.robin.affiche();
-
-        monde.afficheWorld();
+        
+        monde.wolfie.affiche();
+        monde.guillaumeT.affiche();
+        monde.guillaumeT.combattre(monde.wolfie);
+        monde.wolfie.affiche();
+        monde.guillaumeT.affiche();
+        
+        monde.wolfie.affiche();
+        monde.grosBill.affiche();
+        monde.wolfie.combattre(monde.grosBill);
+        monde.grosBill.affiche();
     }
 }
