@@ -12,6 +12,7 @@ public class ProjetTP {
 
     public static void main(String[] args) {
         World monde = new World();
+        PotionSoin potion = new PotionSoin();
         
         monde.creaMondeAlea();
         
@@ -46,6 +47,18 @@ public class ProjetTP {
         monde.wolfie.affiche();
         monde.grosBill.affiche();
         monde.wolfie.combattre(monde.grosBill);
+        monde.robin.affiche();
+        monde.grosBill.affiche();
+        
+        monde.robin.boirePotion(potion);
+        if (potion.isConsumed()){
+            potion = null;
+        }
+        monde.robin.affiche();
+        monde.grosBill.boirePotion(potion);
+        if (potion.isConsumed()){
+            potion = null;
+        }
         monde.grosBill.affiche();
     }
 }

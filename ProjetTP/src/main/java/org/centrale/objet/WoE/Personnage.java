@@ -118,4 +118,15 @@ public class Personnage extends Creature{
                            "\ndistMaxAtt : " + this.distMaxAtt +
                            "\npos : " + "["+this.getPos().getX()+","+this.getPos().getY()+"] \n" );
     };
+    
+    public void boirePotion(PotionSoin pot){
+        if ((this.getPos().distance(pot.getPos()) <= 1) && (!pot.isConsumed())){
+            this.setPtVie(this.getPtVie()+pot.getPtSoin());
+            System.out.println(pot.getPtSoin() + " points de vie regagnés !");
+            pot.setIsConsumed(true);
+        }
+        else{
+            System.out.println("Cette potion est trop éloignée ! \n");
+        }
+    }
 }
