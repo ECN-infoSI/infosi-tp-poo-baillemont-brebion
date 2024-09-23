@@ -41,18 +41,23 @@ public class World {
     public Lapin bugs2;
     
     /** 
-     * Une instance de Guerrier
-     * 
+     * Une instance de Guerrier, grosBill
+     * @see Guerrier
      */
     public Guerrier grosBill;
     
+    
+    /** 
+     * Une instance de Loup, wolfie
+     * @see Loup
+     */
     public Loup wolfie;
     
     
     
     
      /**
-     * Constructeur.
+     * Constructeur par défaut.
      */
     public World(){
        
@@ -65,6 +70,25 @@ public class World {
         this.wolfie = new Loup();
     };
     
+    
+    /**
+     * Constructeur.
+     * @param a1
+     *          Archer 1
+     * @param p
+     *          Paysan
+     * @param l1
+     *          Lapin 1
+     * @param l2
+     *          Lapin 2
+     * @param a2
+     *          Archer 2
+     * @param g
+     *          Guerrier
+     * @param l3
+     *          Loup
+     * 
+     */
     public World(Archer a1, Paysan p, Lapin l1, Lapin l2, Archer a2, Guerrier g, Loup l3){
         this.robin = a1;
         this.peon = p;
@@ -99,6 +123,9 @@ public class World {
     }
 };
     
+    /** 
+    * Affichage de toutes les créatures du monde.
+    */
     public void afficheWorld(){
         Creature[] creatures = {this.robin, this.peon, this.bugs1, this.bugs2, this.guillaumeT, this.grosBill, this.wolfie};
         for (Creature creature : creatures) {

@@ -119,6 +119,13 @@ public class Personnage extends Creature{
                            "\npos : " + "["+this.getPos().getX()+","+this.getPos().getY()+"] \n" );
     };
     
+    
+    /**
+     * Action de boire une potion pot.
+     * @param pot 
+     *          Potion que le personnage veut boire
+     */
+    
     public void boirePotion(PotionSoin pot){
         if ((this.getPos().distance(pot.getPos()) <= 1) && (!pot.isConsumed())){
             this.setPtVie(this.getPtVie()+pot.getPtSoin());
