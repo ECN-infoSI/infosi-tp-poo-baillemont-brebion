@@ -3,6 +3,7 @@ package org.centrale.objet.WoE;
 /**
  *
  * @author mattlerigolo
+ * @author morga
  */
 
 import java.util.Random;

@@ -3,6 +3,7 @@ package org.centrale.objet.WoE;
 /**
  *
  * @author morga
+ * @author mattlerigolo
  */
 public class Epee extends Objet{
     

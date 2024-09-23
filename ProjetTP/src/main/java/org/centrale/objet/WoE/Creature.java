@@ -9,6 +9,7 @@ import java.util.Random;
 /**
  *
  * @author morga
+ * @author mattlerigolo
  */
 public abstract class Creature {
     /**
@@ -118,7 +119,7 @@ public abstract class Creature {
     }
     
     /**
-     * Déplace le monstre aléatoirement, dans un rayon de 1, horizontalement, verticalement, ou en diagonale.
+     * Déplace la créature aléatoirement, dans un rayon de 1, horizontalement, verticalement, ou en diagonale.
      */
     public void deplace(){
         Random r = new Random();

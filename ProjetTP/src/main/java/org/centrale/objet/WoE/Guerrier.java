@@ -5,6 +5,7 @@ import java.util.Random;
 /**
  *
  * @author mattlerigolo
+ * @author morga
  */
 public class Guerrier extends Personnage implements Combattant {
     private Epee epee;

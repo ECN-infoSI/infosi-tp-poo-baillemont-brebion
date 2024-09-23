@@ -7,6 +7,7 @@ package org.centrale.objet.WoE;
 /**
  *
  * @author morga
+ * @author mattlerigolo
  */
 public class PotionSoin extends Objet {
     
