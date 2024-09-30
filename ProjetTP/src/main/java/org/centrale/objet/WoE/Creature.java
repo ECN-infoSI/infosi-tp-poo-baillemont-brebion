@@ -120,14 +120,28 @@ public abstract class Creature {
     
     /**
      * Déplace la créature aléatoirement, dans un rayon de 1, horizontalement, verticalement, ou en diagonale.
+     * 
+     * @param plateau
+     * Plateau deu jeu
      */
-    public void deplace(){
+    public void deplace(int[][] plateau){
+        plateau[this.pos.getX()][this.pos.getY()] = 0;
         Random r = new Random();
         int dx = r.nextInt(2); // le personnage peut se déplacer sur les cases adjacentes
         int dirX = r.nextBoolean() ? 1 : -1; // on choisit la direction de déplacement selon x
         int dy = r.nextInt(2);
         int dirY = r.nextBoolean() ? 1 : -1; // on choisit la direction de déplacement selon y
-        
+        int newPosX = this.pos.getX()+dirX*dx;
+        int newPosY = this.pos.getY()+dirY*dy;
+        while ((newPosX < 0 || newPosX > plateau[0].length) || ((newPosY < 0 || newPosX > plateau.length)) || (plateau[newPosX][newPosY] != 0)){
+            dx = r.nextInt(2); // le personnage peut se déplacer sur les cases adjacentes
+            dirX = r.nextBoolean() ? 1 : -1; // on choisit la direction de déplacement selon x
+            dy = r.nextInt(2);
+            dirY = r.nextBoolean() ? 1 : -1; // on choisit la direction de déplacement selon y
+            newPosX = this.pos.getX()+dirX*dx;
+            newPosY = this.pos.getY()+dirY*dy;
+        }
+        plateau[newPosX][newPosY] = 1;
         this.pos.translate(dirX*dx, dirY*dy);
     }
     
