@@ -31,7 +31,7 @@ public class MesureTemps {
                 totalpdv2 += perso.getPtVie();
             }
         long finN2 = System.nanoTime();
-        System.out.println ("Temps ecoule : "+(finN2-debutN2)+"Nombre total de points de vie :"+ totalpdv2);
+        System.out.println (k + " protagonistes, "+"temps ecoule : "+(finN2-debutN2)+", nombre total de points de vie :"+ totalpdv2);
     }
     }
 }
