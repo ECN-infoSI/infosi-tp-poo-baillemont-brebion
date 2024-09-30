@@ -43,6 +43,9 @@ public abstract class Creature {
      */
     protected Point2D pos;
     
+    /**
+     * Constructeur par défaut
+     */
     public Creature(){
         this.ptVie = 100;
         this.degAtt = 15;
@@ -52,6 +55,21 @@ public abstract class Creature {
         this.pos = new Point2D();
     }
     
+    /**
+     * Constructeur
+     * @param ptVie
+     * Nombre de points de vie
+     * @param degAtt
+     * Dégâts d'attaque
+     * @param ptPar
+     * Points de Parade
+     * @param pageAtt
+     * Pourcentage d'attaque
+     * @param pagePar
+     * Pourcentage de parade
+     * @param pos
+     * Position
+     */
     public Creature(int ptVie, int degAtt, int ptPar, int pageAtt, int pagePar, Point2D pos){
         this.ptVie = ptVie;
         this.degAtt = degAtt;
@@ -61,6 +79,11 @@ public abstract class Creature {
         this.pos = new Point2D(pos);
     }
     
+    /**
+     * Constructeur de copie
+     * @param c 
+     * Créature à copier
+     */
     public Creature(Creature c){
         this.ptVie = c.getPtVie();
         this.degAtt = c.getDegAtt();
@@ -122,7 +145,7 @@ public abstract class Creature {
      * Déplace la créature aléatoirement, dans un rayon de 1, horizontalement, verticalement, ou en diagonale.
      * 
      * @param plateau
-     * Plateau deu jeu
+     * Plateau du jeu
      */
     public void deplace(int[][] plateau){
         plateau[this.pos.getX()][this.pos.getY()] = 0;
@@ -145,6 +168,9 @@ public abstract class Creature {
         this.pos.translate(dirX*dx, dirY*dy);
     }
     
+    /**
+     * Affiche les attributs de la créature
+     */
     public abstract void affiche();
     
     

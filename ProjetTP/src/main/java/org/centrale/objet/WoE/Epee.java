@@ -1,28 +1,56 @@
 package org.centrale.objet.WoE;
 
 /**
- *
+ * Sous-classe d'Objet représentant une épée
  * @author morga
  * @author mattlerigolo
  */
 public class Epee extends Objet{
     
+    /**
+     * Points d'attaque
+     */
     private int ptAtt;
+    
+    /**
+     * Points de parade
+     */
     private int ptPar;
+    
+    /**
+     * Nom de l'épée
+     */
     private String nom;
     
+    /**
+     * Constructeur par défaut
+     */
     public Epee(){
         this.ptAtt = 20;
         this.ptPar = 10;
         this.nom = "Excalibur";
     }
     
+    /**
+     * Constructeur
+     * @param pointsAttaque
+     * Points d'attaque
+     * @param pointsParade
+     * Points de parade
+     * @param nom 
+     * Nom de l'épée
+     */
     public Epee(int pointsAttaque, int pointsParade, String nom){
         this.ptAtt = pointsAttaque;
         this.ptPar = pointsParade;
         this.nom = nom;
     }
     
+    /**
+     * Constructeur de copie
+     * @param e 
+     * Epée à copier
+     */
     public Epee(Epee e){
         this.ptAtt = e.getPtAtt();
         
