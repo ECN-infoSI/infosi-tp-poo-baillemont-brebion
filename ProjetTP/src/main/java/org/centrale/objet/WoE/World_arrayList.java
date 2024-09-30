@@ -143,6 +143,7 @@ public class World_arrayList {
         }
         else {
             this.getPersonnages().add(perso);
+            this.plateau[perso.getPos().getX()][perso.getPos().getY()]=1;
         }
     }
     
@@ -156,6 +157,7 @@ public class World_arrayList {
         }
         else {
             this.getMonstres().add(monstre);
+            this.plateau[monstre.getPos().getX()][monstre.getPos().getY()]=1;
         }
     }
     
@@ -196,7 +198,6 @@ public class World_arrayList {
             }
             archer.setPos(new Point2D(x,y));
             this.addPersonnage(archer);
-            plateau[x][y] = 1;
         }
         
         for (int i=0; i<nbPaysan; i++){
@@ -210,7 +211,6 @@ public class World_arrayList {
             }
             paysan.setPos(new Point2D(x,y));
             this.addPersonnage(paysan);
-            plateau[x][y] = 1;
         }
         
         for (int i=0; i<nbGuerrier; i++){
@@ -224,7 +224,6 @@ public class World_arrayList {
             }
             guerrier.setPos(new Point2D(x,y));
             this.addPersonnage(guerrier);
-            plateau[x][y] = 1;
         }
         
         for (int i=0; i<nbLoup; i++){
@@ -238,7 +237,6 @@ public class World_arrayList {
             }
             loup.setPos(new Point2D(x,y));
             this.addMonstre(loup);
-            plateau[x][y] = 1;
         }
         
         for (int i=0; i<nbLapin; i++){
@@ -252,7 +250,6 @@ public class World_arrayList {
             }
             lapin.setPos(new Point2D(x,y));
             this.addMonstre(lapin);
-            plateau[x][y] = 1;
         }
         
         for (int i=0; i<nbPotion; i++){
