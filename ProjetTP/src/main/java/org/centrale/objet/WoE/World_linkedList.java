@@ -88,6 +88,13 @@ public class World_linkedList {
         }
     }
     
+    public World_linkedList(int longueur, int largeur){
+        this.personnages = new LinkedList<Personnage>();
+        this.monstres = new LinkedList<Monstre>();
+        this.objets = new LinkedList<Objet>();
+        this.plateau = new int[largeur][longueur];
+    }
+    
     public LinkedList<Personnage> getPersonnages() {
         return personnages;
     }
@@ -187,9 +194,9 @@ public class World_linkedList {
                 x = r.nextInt(this.plateau.length);
                 y = r.nextInt(this.plateau[0].length);
             }
-            plateau[x][y] = 1;
             archer.setPos(new Point2D(x,y));
             this.addPersonnage(archer);
+            plateau[x][y] = 1;
         }
         
         for (int i=0; i<nbPaysan; i++){
@@ -201,9 +208,9 @@ public class World_linkedList {
                 x = r.nextInt(this.plateau.length);
                 y = r.nextInt(this.plateau[0].length);
             }
-            plateau[x][y] = 1;
             paysan.setPos(new Point2D(x,y));
             this.addPersonnage(paysan);
+            plateau[x][y] = 1;
         }
         
         for (int i=0; i<nbGuerrier; i++){
@@ -215,9 +222,9 @@ public class World_linkedList {
                 x = r.nextInt(this.plateau.length);
                 y = r.nextInt(this.plateau[0].length);
             }
-            plateau[x][y] = 1;
             guerrier.setPos(new Point2D(x,y));
             this.addPersonnage(guerrier);
+            plateau[x][y] = 1;
         }
         
         for (int i=0; i<nbLoup; i++){
@@ -229,9 +236,9 @@ public class World_linkedList {
                 x = r.nextInt(this.plateau.length);
                 y = r.nextInt(this.plateau[0].length);
             }
-            plateau[x][y] = 1;
             loup.setPos(new Point2D(x,y));
             this.addMonstre(loup);
+            plateau[x][y] = 1;
         }
         
         for (int i=0; i<nbLapin; i++){
@@ -243,9 +250,9 @@ public class World_linkedList {
                 x = r.nextInt(this.plateau.length);
                 y = r.nextInt(this.plateau[0].length);
             }
-            plateau[x][y] = 1;
             lapin.setPos(new Point2D(x,y));
             this.addMonstre(lapin);
+            plateau[x][y] = 1;
         }
         
         for (int i=0; i<nbPotion; i++){
