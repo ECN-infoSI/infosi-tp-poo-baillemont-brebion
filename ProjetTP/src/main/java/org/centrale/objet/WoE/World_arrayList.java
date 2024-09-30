@@ -1,6 +1,6 @@
 package org.centrale.objet.WoE;
 import java.util.Random;
-import java.util.function.Predicate;
+import java.util.ArrayList;
 
 /**
  * Création d'un monde WoE comprenant un archer, un paysan et un lapin. 
@@ -10,48 +10,21 @@ import java.util.function.Predicate;
  * 
  */
 public class World_arrayList {
-    /** 
-     * Une instance d'Archer, robin.
-     * @see Archer
+     /** 
+     * Une liste de Personnage
      */
-    public Archer robin;
-    
-    /** 
-     * Une instance d'Archer, guillaumeT.
-     * @see Archer
-     */
-    public Archer guillaumeT;
-    
-    /** 
-     * Une instance de Paysan, peon.
-     * @see Paysan
-     */
-    public Paysan peon;
-    
-    /** 
-     * Une instance de Lapin, bugs1.
-     * @see Lapin
-     */
-    public Lapin bugs1;
-    
-    /** 
-     * Une instance de Lapin, bugs2.
-     * @see Lapin
-     */
-    public Lapin bugs2;
-    
-    /** 
-     * Une instance de Guerrier, grosBill
-     * @see Guerrier
-     */
-    public Guerrier grosBill;
+    private ArrayList<Personnage> personnages;
     
     
     /** 
-     * Une instance de Loup, wolfie
-     * @see Loup
+     * Une liste de Monstre
      */
-    public Loup wolfie;
+    private ArrayList<Monstre> monstres;
+    
+    /** 
+     * Une liste d'Objet
+     */
+    private ArrayList<Objet> objets;
     
     
     
@@ -60,76 +33,134 @@ public class World_arrayList {
      * Constructeur par défaut.
      */
     public World_arrayList(){
-       
-        this.robin = new Archer();
-        this.peon = new Paysan();
-        this.bugs1 = new Lapin();
-        this.bugs2 = new Lapin();
-        this.guillaumeT = new Archer();
-        this.grosBill = new Guerrier();
-        this.wolfie = new Loup();
+        this.personnages = new ArrayList<Personnage>();
+        this.monstres = new ArrayList<Monstre>();
+        this.objets = new ArrayList<Objet>();
     };
     
     
     /**
      * Constructeur.
-     * @param a1
-     *          Archer 1
-     * @param p
-     *          Paysan
-     * @param l1
-     *          Lapin 1
-     * @param l2
-     *          Lapin 2
-     * @param a2
-     *          Archer 2
-     * @param g
-     *          Guerrier
-     * @param l3
-     *          Loup
+     * @param persos
+     * Liste de Personnage
      * 
+     * @param monstres
+     * Liste de monstres
+     * 
+     * @param objets
+     * Liste d'objets
      */
-    public World_arrayList(Archer a1, Paysan p, Lapin l1, Lapin l2, Archer a2, Guerrier g, Loup l3){
-        this.robin = a1;
-        this.peon = p;
-        this.bugs1 = l1;
-        this.bugs2 = l2;
-        this.guillaumeT = a2;
-        this.grosBill = g;
-        this.wolfie = l3;
+    public World_arrayList(ArrayList<Personnage> persos, ArrayList<Monstre> monstres, ArrayList<Objet> objets){
+        this.personnages = new ArrayList<Personnage>(persos);
+        this.monstres = new ArrayList<Monstre>(monstres);
+        this.objets = new ArrayList<Objet>(objets);
     }
-    /** 
-    * Création des positions aléatoires des objets du monde. 
-    * Deux objets ne peuvent pas être à la même position.
-    */
-    public void creaMondeAlea(){
-    Random r = new Random();
-    Creature[] creatures = {this.robin, this.peon, this.bugs1, this.bugs2, this.guillaumeT, this.grosBill, this.wolfie};
-    Point2D[] positions = new Point2D[creatures.length];
+    
+    /**
+     * Constructeur de copie
+     * @param world 
+     * Monde à copier
+     */
+    public World_arrayList(World_arrayList world){
+        this.personnages = new ArrayList<Personnage>(world.getPersonnages());
+        this.monstres = new ArrayList<Monstre>(world.getMonstres());
+        this.objets = new ArrayList<Objet>(world.getObjets());
+    }
+    
+    public ArrayList<Personnage> getPersonnages() {
+        return personnages;
+    }
 
-    for (int i = 0; i < creatures.length; i++) {
-        int x;
-        int y;
-        do {
-            x = r.nextInt(201) - 100;
-            y = r.nextInt(201) - 100;
-            Point2D tempPosition = new Point2D(x, y);
-            if (!java.util.Arrays.stream(positions).anyMatch((Point2D p) -> p != null && p.equals(tempPosition))) {
-                positions[i] = tempPosition;
-                creatures[i].setPos(positions[i]);
-                break;
-            }
-        } while (true);
+    public void setPersonnages(ArrayList<Personnage> personnages) {
+        this.personnages = new ArrayList<Personnage>(personnages);
     }
-};
+
+    public ArrayList<Monstre> getMonstres() {
+        return monstres;
+    }
+
+    public void setMonstres(ArrayList<Monstre> monstres) {
+        this.monstres = new ArrayList<Monstre>(monstres);
+    }
+
+    public ArrayList<Objet> getObjets() {
+        return objets;
+    }
+
+    public void setObjets(ArrayList<Objet> objets) {
+        this.objets = new ArrayList<Objet>(objets);
+    }
+        
+    /**
+     * Ajouter un personnage à notre monde
+     * @param perso 
+     * Personnage à ajouter
+     */
+    public void addPersonnage(Personnage perso){
+        this.getPersonnages().add(perso);
+    }
+    
+    /**
+     * Ajouter un monstre au monde
+     * @param monstre 
+     */
+    public void addMonstre(Monstre monstre){
+        this.getMonstres().add(monstre);
+    }
+    
+    public void addObjet(Objet objet){
+        this.getObjets().add(objet);
+    }
+    
+    
+    /**
+     * Création d'un monde aléatoire
+     * @param nbPaysan
+     * Nombre de paysans dans le monde
+     * @param nbGuerrier
+     * Nombre de guerriers dans le monde
+     * @param nbArcher
+     * Nombre d'archers dans le monde
+     * @param nbLapin
+     * Nombre de lapins dans le monde
+     * @param nbLoup
+     * Nombre de loups dans le monde
+     * @param nbPotion
+     * Nombre de potions dans le monde
+     * @param nbEpee 
+     * Nombre d'épées dans le monde
+     */
+    public void creaMondeAlea(int nbPaysan, int nbGuerrier, int nbArcher, int nbLapin, int nbLoup, int nbPotion, int nbEpee){
+        // On remet le monde à 0
+        this.personnages = new ArrayList<Personnage>();
+        this.monstres = new ArrayList<Monstre>();
+        this.objets = new ArrayList<Objet>();
+        
+        
+    }
+    
+    public void creaMondeAlea(){
+        Random r = new Random();
+        int nbArcher = r.nextInt(11);
+        int nbPaysan = r.nextInt(11);
+        int nbGuerrier = r.nextInt(11);
+        int nbLapin = r.nextInt(11);
+        int nbLoup = r.nextInt(11);
+        int nbPotion = r.nextInt(11);
+        int nbEpee = r.nextInt(11);
+        
+        this.creaMondeAlea(nbPaysan, nbGuerrier, nbArcher, nbLapin, nbLoup, nbPotion, nbEpee);
+    }
     
     /** 
     * Affichage de toutes les créatures du monde.
     */
     public void afficheWorld(){
-        Creature[] creatures = {this.robin, this.peon, this.bugs1, this.bugs2, this.guillaumeT, this.grosBill, this.wolfie};
-        for (Creature creature : creatures) {
-            creature.affiche();
+        for (Personnage perso : this.personnages){
+            perso.affiche();
+        }
+        for (Monstre monstre : this.monstres){
+            monstre.affiche();
         }
     }
     
