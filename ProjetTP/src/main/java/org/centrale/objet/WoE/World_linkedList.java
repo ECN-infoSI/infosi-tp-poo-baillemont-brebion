@@ -1,8 +1,6 @@
 package org.centrale.objet.WoE;
-
 import java.util.Random;
 import java.util.LinkedList;
-
 
 /**
  * Création d'un monde WoE comprenant un archer, un paysan et un lapin. 
@@ -11,30 +9,40 @@ import java.util.LinkedList;
  * @author morga
  * 
  */
-public class World_linkedList{
+public class World_linkedList {
+     /** 
+     * Une liste de Personnage
+     */
+    private LinkedList<Personnage> personnages;
     
-    /** Linked List contenant les personnages du Monde.
-     * 
-     */
-    public LinkedList<Personnage> personnages = new LinkedList<>();
-    /** Linked List contenant les monstres du Monde.
-     * 
-     */
-    public LinkedList<Monstre> monstres = new LinkedList<>();
     
-    /** Linked List contenant les objets du Monde.
-     * 
+    /** 
+     * Une liste de Monstre
      */
-    public LinkedList<Objet> objets = new LinkedList<>();
+    private LinkedList<Monstre> monstres;
+    
+    /** 
+     * Une liste d'Objet
+     */
+    private LinkedList<Objet> objets;
     
     /**
+     * Matrice représentant le plateau de jeu
+     */
+    private int[][] plateau;
+    
+    
+    
+     /**
      * Constructeur par défaut.
      */
     public World_linkedList(){
         this.personnages = new LinkedList<Personnage>();
         this.monstres = new LinkedList<Monstre>();
         this.objets = new LinkedList<Objet>();
+        this.plateau = new int[100][100];
     };
+    
     
     /**
      * Constructeur.
@@ -46,19 +54,46 @@ public class World_linkedList{
      * 
      * @param objets
      * Liste d'objets
+     * 
+     * @param plateau
+     * Plateau de jeu
      */
-    public World_linkedList(LinkedList<Personnage> persos, LinkedList<Monstre> monstres, LinkedList<Objet> objets){
+    public World_linkedList(LinkedList<Personnage> persos, LinkedList<Monstre> monstres, LinkedList<Objet> objets, int[][] plateau){
         this.personnages = new LinkedList<Personnage>(persos);
         this.monstres = new LinkedList<Monstre>(monstres);
         this.objets = new LinkedList<Objet>(objets);
+        this.plateau = new int[plateau.length][plateau[0].length];
+        
+        for (int i=0; i<plateau.length; i++){
+            for (int j=0; i<plateau[0].length; j++){
+                this.plateau[i][j] = plateau[i][j];
+            }
+        }
     }
-
+    
+    /**
+     * Constructeur de copie
+     * @param world 
+     * Monde à copier
+     */
+    public World_linkedList(World_linkedList world){
+        this.personnages = new LinkedList<Personnage>(world.getPersonnages());
+        this.monstres = new LinkedList<Monstre>(world.getMonstres());
+        this.objets = new LinkedList<Objet>(world.getObjets());
+        this.plateau = new int[world.getPlateau().length][world.getPlateau()[0].length];
+        for (int i=0; i<world.getPlateau().length; i++){
+            for (int j=0; i<world.getPlateau()[0].length; j++){
+                this.plateau[i][j] = world.getPlateau()[i][j];
+            }
+        }
+    }
+    
     public LinkedList<Personnage> getPersonnages() {
         return personnages;
     }
 
     public void setPersonnages(LinkedList<Personnage> personnages) {
-        this.personnages = personnages;
+        this.personnages = new LinkedList<Personnage>(personnages);
     }
 
     public LinkedList<Monstre> getMonstres() {
@@ -66,7 +101,7 @@ public class World_linkedList{
     }
 
     public void setMonstres(LinkedList<Monstre> monstres) {
-        this.monstres = monstres;
+        this.monstres = new LinkedList<Monstre>(monstres);
     }
 
     public LinkedList<Objet> getObjets() {
@@ -74,16 +109,34 @@ public class World_linkedList{
     }
 
     public void setObjets(LinkedList<Objet> objets) {
-        this.objets = objets;
+        this.objets = new LinkedList<Objet>(objets);
     }
-    
+
+    public int[][] getPlateau() {
+        return plateau;
+    }
+
+    public void setPlateau(int[][] plateau) {
+        this.plateau = new int[plateau.length][plateau[0].length];
+        for (int i=0; i<plateau.length; i++){
+            for (int j=0; i<plateau[0].length; j++){
+                this.plateau[i][j] = plateau[i][j];
+            }
+        }
+    }
+        
     /**
      * Ajouter un personnage à notre monde
      * @param perso 
      * Personnage à ajouter
      */
     public void addPersonnage(Personnage perso){
-        this.getPersonnages().add(perso);
+        if (this.plateau[perso.getPos().getX()][perso.getPos().getY()] != 0){
+            System.out.println("Une créature se trouve déjà sur la position du personnage à ajouter");
+        }
+        else {
+            this.getPersonnages().add(perso);
+        }
     }
     
     /**
@@ -91,140 +144,141 @@ public class World_linkedList{
      * @param monstre 
      */
     public void addMonstre(Monstre monstre){
-        this.getMonstres().add(monstre);
+        if (this.plateau[monstre.getPos().getX()][monstre.getPos().getY()] != 0){
+            System.out.println("Une créature se trouve déjà sur la position du personnage à ajouter");
+        }
+        else {
+            this.getMonstres().add(monstre);
+        }
     }
     
     public void addObjet(Objet objet){
         this.getObjets().add(objet);
     }
     
-   /**
-     * Constructeur.
-     * @param nbArchers
-     *          Nombre d'archers.
-     * @param nbPaysans
-     *          Nombre de paysans.
-     * @param nbGuerriers
-     *          Nombre de guerriers.
-     * @param nbLoups
-     *          Nombre de loups.
-     * @param nbLapins
-     *          Nombre de lapins.
-     * @param nbPotionSoins
-     *          Nombre de potions de soin.
-     * @param nbEpees
-     *          Nombre d'épées.
-     * 
-     */ 
-    public World_linkedList(int nbArchers, int nbPaysans, int nbGuerriers, int nbLoups, int nbLapins, int nbPotionSoins, int nbEpees){
-
-        // Crée les archers et les ajoute à la liste
-        for (int i = 0; i < nbArchers; i++) {
-            Archer archer = new Archer();
-            archer.setNom("Archer " + (i + 1));
-            listePersonnages.add(archer);
-        }
-
-        // Crée les guerriers et les ajoute à la liste
-        for (int i = 0; i < nbGuerriers; i++) {
-            Guerrier guerrier = new Guerrier();
-            guerrier.setNom("Guerrier " + (i + 1));
-            listePersonnages.add(guerrier);
-        }
-        
-        // Crée les paysans et les ajoute à la liste
-        for (int i = 0; i < nbPaysans; i++) {
-            Paysan paysan = new Paysan();
-            paysan.setNom("Paysan " + (i + 1));
-            listePersonnages.add(paysan);
-        }
-        
-
-        // Crée les loups et les ajoute à la liste
-        for (int i = 0; i < nbLoups; i++) {
-            Loup loup = new Loup();
-            listeMonstres.add(loup);
-        }
-
-        // Crée les lapins et les ajoute à la liste
-        for (int i = 0; i < nbLapins; i++) {
-            Lapin lapin = new Lapin();
-            listeMonstres.add(lapin);
-        }
-        
-        // Crée les Potions de Soin et les ajoute à la liste
-        for (int i = 0; i < nbPotionSoins; i++) {
-            PotionSoin potion = new PotionSoin();
-            listeObjets.add(potion);
-        }
-
-        // Crée les Epees et les ajoute à la liste
-        for (int i = 0; i < nbEpees; i++) {
-            Epee epee = new Epee();
-            listeObjets.add(epee);
-        }
-   
-    };
-
     
-     /**
-     * Constructeur par défaut, crée un nombre alétoire de personnages, monstres et objets.
+    /**
+     * Création d'un monde aléatoire
+     * @param nbPaysan
+     * Nombre de paysans dans le monde
+     * @param nbGuerrier
+     * Nombre de guerriers dans le monde
+     * @param nbArcher
+     * Nombre d'archers dans le monde
+     * @param nbLapin
+     * Nombre de lapins dans le monde
+     * @param nbLoup
+     * Nombre de loups dans le monde
+     * @param nbPotion
+     * Nombre de potions dans le monde
      */
-    public World_linkedList(){
-       // Génère un nombre aléatoire de Personnages
-        Random random = new Random();
-        int nbArchers = random.nextInt();
-        int nbGuerriers = random.nextInt();
-        int nbPaysans = random.nextInt();
+    public void creaMondeAlea(int nbPaysan, int nbGuerrier, int nbArcher, int nbLapin, int nbLoup, int nbPotion){
+        // On remet le monde à 0
+        this.personnages = new LinkedList<Personnage>();
+        this.monstres = new LinkedList<Monstre>();
+        this.objets = new LinkedList<Objet>();
         
-        // Génère un nombre aléatoire de Monstres
-        int nbLoups = random.nextInt();
-        int nbLapins = random.nextInt();
-
-        // Génère un nombre aléatoire d'Objets.
-        int nbPotionSoins = random.nextInt();
-        int nbEpees = random.nextInt();
-
-        Wornew World_linkedList(nbArchers, nbPaysans, nbGuerriers, nbLoups, nbLapins, nbPotionSoins, nbEpees);
-   
-    };
-    
-    
-    
-
-    
-    /** 
-    * Création des positions aléatoires des objets du monde. 
-    * Deux objets ne peuvent pas être à la même position.
-    */
-    public void creaMondeAlea(){
-    Random r = new Random();
-    Creature[] creatures = {this.robin, this.peon, this.bugs1, this.bugs2, this.guillaumeT, this.grosBill, this.wolfie};
-    Point2D[] positions = new Point2D[creatures.length];
-
-    for (int i = 0; i < creatures.length; i++) {
-        int x;
-        int y;
-        do {
-            x = r.nextInt(201) - 100;
-            y = r.nextInt(201) - 100;
-            Point2D tempPosition = new Point2D(x, y);
-            if (!java.util.Arrays.stream(positions).anyMatch((Point2D p) -> p != null && p.equals(tempPosition))) {
-                positions[i] = tempPosition;
-                creatures[i].setPos(positions[i]);
-                break;
+        for (int i=0; i<nbArcher; i++){
+            Archer archer = new Archer();
+            Random r = new Random();
+            int x = r.nextInt(this.plateau.length);
+            int y = r.nextInt(this.plateau[0].length);
+            while (plateau[x][y] != 0){
+                x = r.nextInt(this.plateau.length);
+                y = r.nextInt(this.plateau[0].length);
             }
-        } while (true);
+            plateau[x][y] = 1;
+            archer.setPos(new Point2D(x,y));
+            this.addPersonnage(archer);
+        }
+        
+        for (int i=0; i<nbPaysan; i++){
+            Paysan paysan = new Paysan();
+            Random r = new Random();
+            int x = r.nextInt(this.plateau.length);
+            int y = r.nextInt(this.plateau[0].length);
+            while (plateau[x][y] != 0){
+                x = r.nextInt(this.plateau.length);
+                y = r.nextInt(this.plateau[0].length);
+            }
+            plateau[x][y] = 1;
+            paysan.setPos(new Point2D(x,y));
+            this.addPersonnage(paysan);
+        }
+        
+        for (int i=0; i<nbGuerrier; i++){
+            Guerrier guerrier = new Guerrier();
+            Random r = new Random();
+            int x = r.nextInt(this.plateau.length);
+            int y = r.nextInt(this.plateau[0].length);
+            while (plateau[x][y] != 0){
+                x = r.nextInt(this.plateau.length);
+                y = r.nextInt(this.plateau[0].length);
+            }
+            plateau[x][y] = 1;
+            guerrier.setPos(new Point2D(x,y));
+            this.addPersonnage(guerrier);
+        }
+        
+        for (int i=0; i<nbLoup; i++){
+            Loup loup = new Loup();
+            Random r = new Random();
+            int x = r.nextInt(this.plateau.length);
+            int y = r.nextInt(this.plateau[0].length);
+            while (plateau[x][y] != 0){
+                x = r.nextInt(this.plateau.length);
+                y = r.nextInt(this.plateau[0].length);
+            }
+            plateau[x][y] = 1;
+            loup.setPos(new Point2D(x,y));
+            this.addMonstre(loup);
+        }
+        
+        for (int i=0; i<nbLapin; i++){
+            Lapin lapin = new Lapin();
+            Random r = new Random();
+            int x = r.nextInt(this.plateau.length);
+            int y = r.nextInt(this.plateau[0].length);
+            while (plateau[x][y] != 0){
+                x = r.nextInt(this.plateau.length);
+                y = r.nextInt(this.plateau[0].length);
+            }
+            plateau[x][y] = 1;
+            lapin.setPos(new Point2D(x,y));
+            this.addMonstre(lapin);
+        }
+        
+        for (int i=0; i<nbPotion; i++){
+            PotionSoin potion = new PotionSoin();
+            Random r = new Random();
+            int x = r.nextInt(this.plateau.length);
+            int y = r.nextInt(this.plateau[0].length);
+            potion.setPos(new Point2D(x,y));
+            this.addObjet(potion);
+        }
     }
-};
+    
+    public void creaMondeAlea(){
+        Random r = new Random();
+        int nbArcher = r.nextInt(11);
+        int nbPaysan = r.nextInt(11);
+        int nbGuerrier = r.nextInt(11);
+        int nbLapin = r.nextInt(11);
+        int nbLoup = r.nextInt(11);
+        int nbPotion = r.nextInt(11);
+        
+        this.creaMondeAlea(nbPaysan, nbGuerrier, nbArcher, nbLapin, nbLoup, nbPotion);
+    }
     
     /** 
     * Affichage de toutes les créatures du monde.
     */
     public void afficheWorld(){
-        Creature[] creatures = {this.robin, this.peon, this.bugs1, this.bugs2, this.guillaumeT, this.grosBill, this.wolfie};
-        for (Creature creature : creatures) {
-            creature.affiche();
+        for (Personnage perso : this.personnages){
+            perso.affiche();
+        }
+        for (Monstre monstre : this.monstres){
+            monstre.affiche();
         }
     }
     
