@@ -156,13 +156,19 @@ public abstract class Creature {
         int dirY = r.nextBoolean() ? 1 : -1; // on choisit la direction de déplacement selon y
         int newPosX = this.pos.getX()+dirX*dx;
         int newPosY = this.pos.getY()+dirY*dy;
-        while ((newPosX < 0 || newPosX > plateau[0].length) || ((newPosY < 0 || newPosX > plateau.length)) || (plateau[newPosX][newPosY] != 0)){
-            dx = r.nextInt(2); // le personnage peut se déplacer sur les cases adjacentes
-            dirX = r.nextBoolean() ? 1 : -1; // on choisit la direction de déplacement selon x
-            dy = r.nextInt(2);
-            dirY = r.nextBoolean() ? 1 : -1; // on choisit la direction de déplacement selon y
-            newPosX = this.pos.getX()+dirX*dx;
-            newPosY = this.pos.getY()+dirY*dy;
+        boolean goodPosition = false;
+        while (!goodPosition){
+            if ((newPosX >= 0 && newPosX < plateau.length) && (newPosY >= 0 && newPosY < plateau[0].length) && (plateau[newPosX][newPosY] == 0)){
+                goodPosition = true; // la position est valide
+            }
+            else { // position non-valide donc on tire à nouveau au hasard
+                dx = r.nextInt(2); // le personnage peut se déplacer sur les cases adjacentes
+                dirX = r.nextBoolean() ? 1 : -1; // on choisit la direction de déplacement selon x
+                dy = r.nextInt(2);
+                dirY = r.nextBoolean() ? 1 : -1; // on choisit la direction de déplacement selon y
+                newPosX = this.pos.getX()+dirX*dx;
+                newPosY = this.pos.getY()+dirY*dy;
+            }
         }
         plateau[newPosX][newPosY] = 1;
         this.pos.translate(dirX*dx, dirY*dy);

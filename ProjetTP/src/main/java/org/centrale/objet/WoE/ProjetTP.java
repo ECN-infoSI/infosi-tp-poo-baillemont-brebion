@@ -12,9 +12,21 @@ package org.centrale.objet.WoE;
 public class ProjetTP {
 
     public static void main(String[] args) {
-        World_linkedList monde = new World_linkedList(50,50);
+        World_arrayList monde = new World_arrayList(5,5);
         
-        monde.creaMondeAlea(1,1,1,1,1,1);
-        monde.afficheWorld();
+        monde.creaMondeAlea(1,1,1,1,1,0);
+        monde.getPersonnages().get(0).setNom("Ivan");
+        monde.getPersonnages().get(1).setNom("Dmitri");
+        monde.getPersonnages().get(2).setNom("Aliocha");
+        
+        
+        for (Personnage perso : monde.getPersonnages()){
+            perso.affiche();
+            perso.deplace(monde.getPlateau());
+            System.out.println("\nAprès déplacement : \n");
+            perso.affiche();
+        }
+        
+        monde.affichePlateau();
     }
 }

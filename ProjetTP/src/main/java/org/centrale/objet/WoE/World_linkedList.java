@@ -298,5 +298,17 @@ public class World_linkedList {
         }
     }
     
+    /**
+    * Affiche l'état du plateau actuel
+    */
+    public void affichePlateau(){
+        for (int i = 0; i < this.plateau.length; i++) {
+            for (int j = 0; j < this.plateau[i].length; j++) {
+                System.out.print(this.plateau[i][j] + "\t"); // \t pour une meilleure présentation
+            }
+            System.out.println(); // Passer à la ligne suivante après chaque ligne de la matrice
+        }
+    }
+    
 };
 

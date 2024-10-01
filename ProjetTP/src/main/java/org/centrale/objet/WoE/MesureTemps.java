@@ -13,7 +13,7 @@ public class MesureTemps {
     public static void main(String[] args) {
     for (int k = 100; k < 10000000; k*=10) {
         int totalpdv = 0;
-        World_linkedList world1 = new World_linkedList();
+        World_arrayList world1 = new World_arrayList(5000,5000);
 
         world1.creaMondeAlea (
         k, 0, 0, 0, 0, 0);  
@@ -26,7 +26,7 @@ public class MesureTemps {
         System.out.println (k + " protagonistes, "+"temps ecoule : "+(finN-debutN)+", nombre total de points de vie :"+ totalpdv);
         int totalpdv2 = 0;
         long debutN2 = System.nanoTime();
-    
+        
         for (Personnage perso : world1.getPersonnages()) {
                 totalpdv2 += perso.getPtVie();
             }
