@@ -138,7 +138,13 @@ public class World_arrayList {
      * Personnage à ajouter
      */
     public void addPersonnage(Personnage perso){
-        if (this.plateau[perso.getPos().getX()][perso.getPos().getY()] != 0){
+        if (perso.getPos().getX() < 0 || perso.getPos().getX() >= plateau.length){
+            System.out.println("Position en dehors du plateau");
+        }
+        else if (perso.getPos().getY() < 0 || perso.getPos().getY() >= plateau[0].length){
+            System.out.println("Position en dehors du plateau");
+        }
+        else if (this.plateau[perso.getPos().getX()][perso.getPos().getY()] != 0){
             System.out.println("Une créature se trouve déjà sur la position du personnage à ajouter");
         }
         else {
@@ -152,7 +158,13 @@ public class World_arrayList {
      * @param monstre 
      */
     public void addMonstre(Monstre monstre){
-        if (this.plateau[monstre.getPos().getX()][monstre.getPos().getY()] != 0){
+        if (monstre.getPos().getX() < 0 || monstre.getPos().getX() >= plateau.length){
+            System.out.println("Position en dehors du plateau");
+        }
+        else if (monstre.getPos().getY() < 0 || monstre.getPos().getY() >= plateau[0].length){
+            System.out.println("Position en dehors du plateau");
+        }
+        else if (this.plateau[monstre.getPos().getX()][monstre.getPos().getY()] != 0){
             System.out.println("Une créature se trouve déjà sur la position du personnage à ajouter");
         }
         else {
