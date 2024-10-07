@@ -124,7 +124,7 @@ public class Joueur {
                 System.out.println("Position invalide.");
             }
         }
-        plateau[newPosX][newPosY] = this.perso.ID;
+        plateau[newPosX][newPosY] = this.perso.Id;
         this.perso.pos.translate(newPosX - this.perso.pos.getX(), newPosY - this.perso.pos.getY());
     }
     

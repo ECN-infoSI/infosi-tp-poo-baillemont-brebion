@@ -338,5 +338,33 @@ public class World_arrayList {
         }
     }
     
+    public Creature getMonstre(int id){
+        for (Monstre monstre : this.monstres) {
+            if (monstre.getId() == id) {
+                return monstre;
+            }
+        }
+        return null;
+    }
+            
+    public Object getObjet(int id) {
+        for (Objet objet : this.objets) {
+            if (objet.getId() == id) {
+                return objet;
+            }
+        }
+        return null;
+    }
+    
+    public Personnage getPersonnage(int id) {
+        for (Personnage perso : this.personnages) {
+            if (perso.getId() == id) {
+                return perso;
+            }
+        }
+        return null;
+    }
+    
+    
 };
 

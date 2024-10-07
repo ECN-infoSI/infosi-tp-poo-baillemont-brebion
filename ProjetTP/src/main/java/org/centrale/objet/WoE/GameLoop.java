@@ -36,9 +36,11 @@ public class GameLoop {
             }
         }
     }
-
-    private void updateGame() {
-        // Update game state, handle user input, and perform calculations
+    
+    /**
+     * Déplacement du personnage sur une case choisie par le joueur.
+     */
+    private void deplaceJoueur() {
         Scanner scanner = new Scanner(System.in);
         // Afficher la position du joueur
         System.out.println("Position du joueur : (" + monde.getJoueur().perso.getPos().getX() + ", " + monde.getJoueur().perso.getPos().getY() + ")");
@@ -83,6 +85,76 @@ public class GameLoop {
                     monde.getJoueur().deplace(monde.getPlateau(), newX, newY);
                 }
             }
+        }
+    }
+        
+     
+    private void combattre(){
+        // Trouve des créatures à combattre
+        
+        Scanner scanner = new Scanner(System.in);
+        // Afficher la position du joueur
+        System.out.println("Position du joueur : (" + monde.getJoueur().perso.getPos().getX() + ", " + monde.getJoueur().perso.getPos().getY() + ")");
+        //Afficher les cases accessibles autour du joueur
+        System.out.println("Créatures à combattre :");
+        int x = monde.getJoueur().perso.getPos().getX();
+        int y = monde.getJoueur().perso.getPos().getY();
+        int[][] creaturesAccessibles = new int[3][3];
+        int compteur = 1;
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+                int newX = x + i;
+                int newY = y + j;
+                if (newX >= 0 && newX < monde.getPlateau().length && newY >= 0 && newY < monde.getPlateau()[0].length) {
+                    if (monde.getPlateau()[newX][newY] != 0) {
+                        creaturesAccessibles[i + 1][j + 1] = compteur;
+                        compteur++;
+                    } else {
+                        creaturesAccessibles[i + 1][j + 1] = 0;
+                    }
+                } else {
+                    creaturesAccessibles[i + 1][j + 1] = 0;
+                }
+            }
+        }
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (creaturesAccessibles[i][j] != 0) {
+                    Creature c = (Creature)monde.getObjet(monde.getPlateau()[x + i][y + j]);
+                    System.out.println("Créature " + creaturesAccessibles[i][j] + " : ");
+                    c.affiche();
+                }
+            }
+        }
+
+        // Demander au joueur de choisir une case
+        System.out.println("Choisissez une case :");
+        int choix = scanner.nextInt();
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (creaturesAccessibles[i][j] == choix) {
+                    Creature c = (Creature)monde.getObjet(monde.getPlateau()[x + i][y + j]);
+                    if (monde.getJoueur().perso instanceof Combattant comb){
+                        comb.combattre(c);
+                    }
+                }
+            }
+        }
+    }
+    private void updateGame() {
+        // Update game state, handle user input, and perform calculations
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Voulez-vous vous déplacer ou combattre ? ('Se déplacer' ou 'Combattre')");
+        String classe = scanner.nextLine();
+        
+        if (classe.equalsIgnoreCase("Se déplacer")){
+            deplaceJoueur();
+        }
+        else if(classe.equalsIgnoreCase("Combattre")){
+            combattre();
+        }
+        else{
+            System.out.println("Action non-valide, pas d'action effectuée");
         }
     }
 

@@ -10,7 +10,12 @@ package org.centrale.objet.WoE;
  * @author mattlerigolo
  */
 public class Objet extends ElementDeJeu {
+    protected int Id;
     public Objet(){
-        
+        this.Id = 1;
+    }
+    
+    public int getId() {
+        return Id;
     }
 }
