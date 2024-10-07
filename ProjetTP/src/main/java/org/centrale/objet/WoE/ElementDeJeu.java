@@ -4,7 +4,7 @@ package org.centrale.objet.WoE;
  *
  * @author mattlerigolo
  */
-public class ElementDeJeu {
+public abstract class ElementDeJeu {
     public ElementDeJeu(){
         
     }
