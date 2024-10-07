@@ -11,7 +11,7 @@ import java.util.Random;
  * @author morga
  * @author mattlerigolo
  */
-public abstract class Creature {
+public abstract class Creature implements Deplacable {
     /**
      * Nombre de points de vie de la créature.
      */
@@ -147,7 +147,7 @@ public abstract class Creature {
      * @param plateau
      * Plateau du jeu
      */
-    public void deplace(int[][] plateau){
+    @Override public void deplace(int[][] plateau){
         plateau[this.pos.getX()][this.pos.getY()] = 0;
         Random r = new Random();
         int dx = r.nextInt(2); // le personnage peut se déplacer sur les cases adjacentes

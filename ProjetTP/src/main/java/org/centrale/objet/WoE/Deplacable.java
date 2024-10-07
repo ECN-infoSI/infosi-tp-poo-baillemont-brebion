@@ -1,13 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package org.centrale.objet.WoE;
 
 /**
- *
+ * Interface pour les créatures/objets déplaçables
  * @author mattlerigolo
  */
 public interface Deplacable {
-    
+    public void deplace(int[][] plateau);
 }
