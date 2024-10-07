@@ -10,7 +10,7 @@ import java.util.Random;
  * @author morga
  * @author mattlerigolo
  */
-public abstract class Creature implements Deplacable {
+public abstract class Creature extends ElementDeJeu implements Deplacable {
     /**
      * Nombre de points de vie de la créature.
      */
@@ -153,9 +153,6 @@ public abstract class Creature implements Deplacable {
      * 
      * @param plateau
      * Plateau du jeu
-     * 
-     * @param ID
-     * ID de la créature à déplacer
      */
     @Override public void deplace(int[][] plateau){
         plateau[this.pos.getX()][this.pos.getY()] = 0;
@@ -182,22 +179,6 @@ public abstract class Creature implements Deplacable {
         }
         plateau[newPosX][newPosY] = this.ID;
         this.pos.translate(dirX*dx, dirY*dy);
-    }
-    
-    @Override public void deplace(int[][] plateau, int newPosX, int newPosY){
-        plateau[this.pos.getX()][this.pos.getY()] = 0;
-
-        boolean goodPosition = false;
-        while (!goodPosition){
-            if ((newPosX >= 0 && newPosX < plateau.length) && (newPosY >= 0 && newPosY < plateau[0].length) && (plateau[newPosX][newPosY] == 0)){
-                goodPosition = true; // la position est valide
-            }
-            else { 
-                System.out.println("Position invalide.");
-            }
-        }
-        plateau[newPosX][newPosY] = this.ID;
-        this.pos.translate(newPosX - this.pos.getX(), newPosY - this.pos.getY());
     }
     
     /**
