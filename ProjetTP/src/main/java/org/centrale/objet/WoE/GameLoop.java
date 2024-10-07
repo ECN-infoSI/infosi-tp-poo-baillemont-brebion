@@ -88,6 +88,6 @@ public class GameLoop {
 
     private void renderGame() {
         // Render the updated game state to the screen
-        this.monde.afficheWorld();
+        this.monde.affichePlateau();
     }
 }
