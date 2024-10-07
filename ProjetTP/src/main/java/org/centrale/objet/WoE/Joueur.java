@@ -94,6 +94,22 @@ public class Joueur {
         this.perso = new Personnage(perso);
     }
     
+    public void deplace(int[][] plateau, int newPosX, int newPosY){
+        plateau[this.perso.pos.getX()][this.perso.pos.getY()] = 0;
+
+        boolean goodPosition = false;
+        while (!goodPosition){
+            if ((newPosX >= 0 && newPosX < plateau.length) && (newPosY >= 0 && newPosY < plateau[0].length) && (plateau[newPosX][newPosY] == 0)){
+                goodPosition = true; // la position est valide
+            }
+            else { 
+                System.out.println("Position invalide.");
+            }
+        }
+        plateau[newPosX][newPosY] = this.perso.ID;
+        this.perso.pos.translate(newPosX - this.perso.pos.getX(), newPosY - this.perso.pos.getY());
+    }
+    
     
 }
 
