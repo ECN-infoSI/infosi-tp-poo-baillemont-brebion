@@ -4,7 +4,7 @@ package org.centrale.objet.WoE;
  *
  * @author mattlerigolo
  */
-public class Nourriture extends Objet {
+public class Nourriture extends Objet implements Utilisables {
     private Point2D pos;
     private int bonusMalus;
     private int tempsEffet;

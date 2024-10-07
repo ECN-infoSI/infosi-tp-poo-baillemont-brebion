@@ -9,7 +9,7 @@ package org.centrale.objet.WoE;
  * @author morga
  * @author mattlerigolo
  */
-public class PotionSoin extends Objet {
+public class PotionSoin extends Objet implements Utilisables {
     
     /**
      * Nombre de points de soin
