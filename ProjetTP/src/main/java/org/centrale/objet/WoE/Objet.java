@@ -9,7 +9,7 @@ package org.centrale.objet.WoE;
  * @author morga
  * @author mattlerigolo
  */
-public class Objet {
+public class Objet extends ElementDeJeu {
     public Objet(){
         
     }
