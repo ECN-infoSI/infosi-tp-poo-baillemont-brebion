@@ -5,7 +5,6 @@
 package org.centrale.objet.WoE;
 
 import java.util.Random;
-
 /**
  *
  * @author morga
@@ -44,6 +43,11 @@ public abstract class Creature implements Deplacable {
     protected Point2D pos;
     
     /**
+     * ID de la créature.
+     */
+    protected int ID;
+    
+    /**
      * Constructeur par défaut
      */
     public Creature(){
@@ -53,6 +57,7 @@ public abstract class Creature implements Deplacable {
         this.pageAtt = 75;
         this.pagePar = 50;
         this.pos = new Point2D();
+        this.ID = 1; // à changer TODO
     }
     
     /**
@@ -77,6 +82,7 @@ public abstract class Creature implements Deplacable {
         this.pageAtt = pageAtt;
         this.pagePar = pagePar;
         this.pos = new Point2D(pos);
+        this.ID = 1; // à changer TODO
     }
     
     /**
@@ -91,6 +97,7 @@ public abstract class Creature implements Deplacable {
         this.pageAtt = c.getPageAtt();
         this.pagePar = c.getPagePar();
         this.pos = new Point2D(c.getPos());
+        this.ID = 1; // à changer TODO
     }
 
     public int getPtVie() {
@@ -146,6 +153,9 @@ public abstract class Creature implements Deplacable {
      * 
      * @param plateau
      * Plateau du jeu
+     * 
+     * @param ID
+     * ID de la créature à déplacer
      */
     @Override public void deplace(int[][] plateau){
         plateau[this.pos.getX()][this.pos.getY()] = 0;
@@ -170,8 +180,24 @@ public abstract class Creature implements Deplacable {
                 newPosY = this.pos.getY()+dirY*dy;
             }
         }
-        plateau[newPosX][newPosY] = 1;
+        plateau[newPosX][newPosY] = this.ID;
         this.pos.translate(dirX*dx, dirY*dy);
+    }
+    
+    @Override public void deplace(int[][] plateau, int newPosX, int newPosY){
+        plateau[this.pos.getX()][this.pos.getY()] = 0;
+
+        boolean goodPosition = false;
+        while (!goodPosition){
+            if ((newPosX >= 0 && newPosX < plateau.length) && (newPosY >= 0 && newPosY < plateau[0].length) && (plateau[newPosX][newPosY] == 0)){
+                goodPosition = true; // la position est valide
+            }
+            else { 
+                System.out.println("Position invalide.");
+            }
+        }
+        plateau[newPosX][newPosY] = this.ID;
+        this.pos.translate(newPosX - this.pos.getX(), newPosY - this.pos.getY());
     }
     
     /**

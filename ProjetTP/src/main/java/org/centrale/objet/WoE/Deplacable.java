@@ -6,4 +6,5 @@ package org.centrale.objet.WoE;
  */
 public interface Deplacable {
     public void deplace(int[][] plateau);
+    public void deplace(int[][] plateau, int newPosX, int newPosY);
 }
