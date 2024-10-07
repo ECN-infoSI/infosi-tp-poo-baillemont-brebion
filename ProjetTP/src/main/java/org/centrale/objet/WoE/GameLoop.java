@@ -134,7 +134,8 @@ public class GameLoop {
             for (int j = 0; j < 3; j++) {
                 if (creaturesAccessibles[i][j] == choix) {
                     Creature c = (Creature)monde.getObjet(monde.getPlateau()[x + i][y + j]);
-                    if (monde.getJoueur().perso instanceof Combattant comb){
+                    if (monde.getJoueur().perso instanceof Combattant){
+                        Combattant comb = (Combattant)(monde.getJoueur().perso);
                         comb.combattre(c);
                     }
                 }
