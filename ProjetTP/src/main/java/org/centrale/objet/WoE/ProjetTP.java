@@ -27,6 +27,7 @@ public class ProjetTP {
             perso.affiche();
         }
         
+        monde.afficheWorld();
         monde.affichePlateau();
     }
 }

@@ -10,6 +10,11 @@ import java.util.ArrayList;
  * 
  */
 public class World_arrayList {
+    /**
+     * Le joueur
+     */
+    private Joueur joueur;
+    
      /** 
      * Une liste de Personnage
      */
@@ -37,10 +42,13 @@ public class World_arrayList {
      * Constructeur par défaut.
      */
     public World_arrayList(){
+        this.joueur = new Joueur();
         this.personnages = new ArrayList<Personnage>();
         this.monstres = new ArrayList<Monstre>();
         this.objets = new ArrayList<Objet>();
         this.plateau = new int[100][100];
+        
+        this.plateau[this.joueur.getPerso().getPos().getX()][this.joueur.getPerso().getPos().getY()] = 10; // 10 sera le nombre pour le joueur
     };
     
     
@@ -57,8 +65,12 @@ public class World_arrayList {
      * 
      * @param plateau
      * Plateau de jeu
+     * 
+     * @param joueur
+     * Joueur
      */
-    public World_arrayList(ArrayList<Personnage> persos, ArrayList<Monstre> monstres, ArrayList<Objet> objets, int[][] plateau){
+    public World_arrayList(ArrayList<Personnage> persos, ArrayList<Monstre> monstres, ArrayList<Objet> objets, int[][] plateau, Joueur joueur){
+        this.joueur = new Joueur(joueur);
         this.personnages = new ArrayList<Personnage>(persos);
         this.monstres = new ArrayList<Monstre>(monstres);
         this.objets = new ArrayList<Objet>(objets);
@@ -77,6 +89,7 @@ public class World_arrayList {
      * Monde à copier
      */
     public World_arrayList(World_arrayList world){
+        this.joueur = new Joueur(world.getJoueur());
         this.personnages = new ArrayList<Personnage>(world.getPersonnages());
         this.monstres = new ArrayList<Monstre>(world.getMonstres());
         this.objets = new ArrayList<Objet>(world.getObjets());
@@ -89,10 +102,13 @@ public class World_arrayList {
     }
     
     public World_arrayList(int longueur, int largeur){
+        this.joueur = new Joueur();
         this.personnages = new ArrayList<Personnage>();
         this.monstres = new ArrayList<Monstre>();
         this.objets = new ArrayList<Objet>();
         this.plateau = new int[largeur][longueur];
+        
+        this.plateau[this.joueur.getPerso().getPos().getX()][this.joueur.getPerso().getPos().getY()] = 10; // 10 sera le nombre pour le joueur
     }
     
     public ArrayList<Personnage> getPersonnages() {
@@ -131,7 +147,15 @@ public class World_arrayList {
             }
         }
     }
-        
+
+    public Joueur getJoueur() {
+        return joueur;
+    }
+
+    public void setJoueur(Joueur joueur) {
+        this.joueur = new Joueur(joueur);
+    }
+    
     /**
      * Ajouter un personnage à notre monde
      * @param perso 
@@ -290,6 +314,10 @@ public class World_arrayList {
     * Affichage de toutes les créatures du monde.
     */
     public void afficheWorld(){
+        System.out.println("Personnage principal :");
+        this.joueur.getPerso().affiche();
+        
+        System.out.println("\nAutres créatures :");
         for (Personnage perso : this.personnages){
             perso.affiche();
         }
