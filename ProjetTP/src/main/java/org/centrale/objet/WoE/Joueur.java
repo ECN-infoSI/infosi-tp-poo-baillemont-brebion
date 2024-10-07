@@ -7,12 +7,14 @@ package org.centrale.objet.WoE;
 
 import java.util.Scanner;
 import java.util.Random;
+import java.util.LinkedList;
 
 public class Joueur {
     /**
      * Personnage joué par le joueur
      */
     public Personnage perso;
+    private LinkedList<Utilisables> effets;
     
     /**
      * Constructeur par défaut
@@ -66,15 +68,20 @@ public class Joueur {
         else {
             System.out.println("Nom de classe non-valide, personnage non créé");
         }
+        
+        this.effets = new LinkedList<Utilisables>();
     }
     
     /**
      * Constructeur
      * @param perso
      * Personnage à attribuer au joueur
+     * @param effets
+     * Inventaire du joueur
      */
-    public Joueur(Personnage perso){
+    public Joueur(Personnage perso, LinkedList<Utilisables> effets){
         this.perso = new Personnage(perso);
+        this.effets = new LinkedList<Utilisables>(effets);
     }
     
     /**
@@ -84,6 +91,7 @@ public class Joueur {
      */
     public Joueur(Joueur j){
         this.perso = new Personnage(j.getPerso());
+        this.effets = new LinkedList<Utilisables>(j.getEffets());
     }
 
     public Personnage getPerso() {
@@ -93,6 +101,16 @@ public class Joueur {
     public void setPerso(Personnage perso) {
         this.perso = new Personnage(perso);
     }
+
+    public LinkedList<Utilisables> getEffets() {
+        return effets;
+    }
+
+    public void setEffets(LinkedList<Utilisables> effets) {
+        this.effets = new LinkedList<Utilisables>(effets);
+    }
+    
+    
     
     public void deplace(int[][] plateau, int newPosX, int newPosY){
         plateau[this.perso.pos.getX()][this.perso.pos.getY()] = 0;
