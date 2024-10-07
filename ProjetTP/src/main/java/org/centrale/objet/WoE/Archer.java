@@ -37,6 +37,8 @@ public class Archer extends Personnage implements Combattant {
      * Pourcentage d'attaque
      * @param pagePar
      * Pourcentage de parade
+     * @param distMaxAtt
+     * Distance maximale d'attaque
      * @param pos
      * Position
      * @param nbFleches
@@ -86,20 +88,25 @@ public class Archer extends Personnage implements Combattant {
      * Créature à combattre
      */
     @Override public void combattre(Creature c){
-        this.nbFleches -= 1; // il perd une flèche dans tous les cas
-        if ((this.pos.distance(c.getPos()) > 1) && (this.pos.distance(c.getPos()) <= this.distMaxAtt)){ // l'archer ne peut attaquer qu'a distance
-            Random r = new Random();
-            int tirageAtt = r.nextInt(99)+1;
-            
-            if (tirageAtt <= this.pageAtt){
-                    c.setPtVie(c.getPtVie()-this.degAtt);
-            }
-            else {
-                System.out.println("Attaque Ratée !");
-            }
+        if (this.nbFleches <= 0){
+            System.out.println("Plus de flèches pour attaquer");
         }
         else{
-            System.out.println("Trop loin ou trop proche !");
+            this.nbFleches -= 1; // il perd une flèche dans tous les cas
+            if ((this.pos.distance(c.getPos()) > 1) && (this.pos.distance(c.getPos()) <= this.distMaxAtt)){ // l'archer ne peut attaquer qu'a distance
+                Random r = new Random();
+                int tirageAtt = r.nextInt(99)+1;
+
+                if (tirageAtt <= this.pageAtt){
+                        c.setPtVie(c.getPtVie()-this.degAtt);
+                }
+                else {
+                    System.out.println("Attaque Ratée !");
+                }
+            }
+            else{
+                System.out.println("Trop loin ou trop proche !");
+            }
         }
     }
 }

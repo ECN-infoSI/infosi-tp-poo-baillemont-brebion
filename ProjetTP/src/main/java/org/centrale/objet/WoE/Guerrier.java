@@ -71,7 +71,7 @@ public class Guerrier extends Personnage implements Combattant {
      * Créature à combattre
      */
     @Override public void combattre(Creature c){
-        if ((this.pos.distance(c.getPos())) <= 1){ // le loup ne peut pas attaquer à distance
+        if ((this.pos.distance(c.getPos())) <= 1){ // le guerrier ne peut pas attaquer à distance
             Random r = new Random();
             int tirageAtt = r.nextInt(99)+1;
             int tirageDef = r.nextInt(99)+1;
