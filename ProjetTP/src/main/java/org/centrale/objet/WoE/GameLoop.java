@@ -137,6 +137,7 @@ public class GameLoop {
         }
         if (monde.getJoueur().perso.ptVie == 0) {
             gameOver = true; 
+            System.out.println("GAME OVER");
         }
     }
 
