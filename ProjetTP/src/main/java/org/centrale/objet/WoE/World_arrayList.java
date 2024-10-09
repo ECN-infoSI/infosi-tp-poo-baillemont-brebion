@@ -39,7 +39,7 @@ public class World_arrayList {
     /**
      * Compteur d'ID
      */
-    private int nextId = 0; 
+    private int nextId = 1; 
     
      /**
      * Constructeur par défaut.
