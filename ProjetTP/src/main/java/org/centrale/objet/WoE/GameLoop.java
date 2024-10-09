@@ -60,7 +60,13 @@ public class GameLoop {
                     if (monde.getPlateau()[newX][newY] == 0) {
                         casesAccessibles[i + 1][j + 1] = compteur;
                         compteur++;
-                    } else {
+                    }
+                    else if (i == 0 && j == 0){
+                        // case actuelle est toujours disponible pour le déplacement
+                        casesAccessibles[1][1] = compteur;
+                        compteur++;
+                    }
+                    else {
                         casesAccessibles[i + 1][j + 1] = 0;
                     }
                 } else {
@@ -75,7 +81,7 @@ public class GameLoop {
                 }
             }
         }
-
+        
         // Demander au joueur de choisir une case
         System.out.println("Choisissez une case :");
         int choix = scanner.nextInt();
