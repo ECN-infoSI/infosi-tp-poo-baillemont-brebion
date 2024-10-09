@@ -75,6 +75,7 @@ public class World_arrayList {
      */
     public World_arrayList(ArrayList<Personnage> persos, ArrayList<Monstre> monstres, ArrayList<Objet> objets, int[][] plateau, Joueur joueur){
         this.joueur = new Joueur(joueur);
+        this.joueur.perso.setId(nextId ++);
         this.personnages = new ArrayList<Personnage>(persos);
         this.monstres = new ArrayList<Monstre>(monstres);
         this.objets = new ArrayList<Objet>(objets);
@@ -94,6 +95,7 @@ public class World_arrayList {
      */
     public World_arrayList(World_arrayList world){
         this.joueur = new Joueur(world.getJoueur());
+        this.joueur.perso.setId(nextId ++);
         this.personnages = new ArrayList<Personnage>(world.getPersonnages());
         this.monstres = new ArrayList<Monstre>(world.getMonstres());
         this.objets = new ArrayList<Objet>(world.getObjets());
@@ -107,6 +109,7 @@ public class World_arrayList {
     
     public World_arrayList(int longueur, int largeur){
         this.joueur = new Joueur();
+        this.joueur.perso.setId(nextId ++);
         this.personnages = new ArrayList<Personnage>();
         this.monstres = new ArrayList<Monstre>();
         this.objets = new ArrayList<Objet>();
