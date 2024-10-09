@@ -36,13 +36,17 @@ public class World_arrayList {
      */
     private int[][] plateau;
     
-    
+    /**
+     * Compteur d'ID
+     */
+    private int nextId = 0; 
     
      /**
      * Constructeur par défaut.
      */
     public World_arrayList(){
         this.joueur = new Joueur();
+        this.joueur.perso.setId(nextId ++);
         this.personnages = new ArrayList<Personnage>();
         this.monstres = new ArrayList<Monstre>();
         this.objets = new ArrayList<Objet>();
@@ -108,7 +112,7 @@ public class World_arrayList {
         this.objets = new ArrayList<Objet>();
         this.plateau = new int[largeur][longueur];
         
-        this.plateau[this.joueur.getPerso().getPos().getX()][this.joueur.getPerso().getPos().getY()] = 10; // 10 sera le nombre pour le joueur
+        this.plateau[this.joueur.getPerso().getPos().getX()][this.joueur.getPerso().getPos().getY()] = joueur.perso.getId(); 
     }
     
     public ArrayList<Personnage> getPersonnages() {
@@ -173,7 +177,8 @@ public class World_arrayList {
         }
         else {
             this.getPersonnages().add(perso);
-            this.plateau[perso.getPos().getX()][perso.getPos().getY()]=1;
+            perso.setId(nextId ++);
+            this.plateau[perso.getPos().getX()][perso.getPos().getY()]=perso.getId();
         }
     }
     
@@ -193,7 +198,8 @@ public class World_arrayList {
         }
         else {
             this.getMonstres().add(monstre);
-            this.plateau[monstre.getPos().getX()][monstre.getPos().getY()]=1;
+            monstre.setId(nextId ++);
+            this.plateau[monstre.getPos().getX()][monstre.getPos().getY()]=monstre.getId();
         }
     }
     
@@ -362,6 +368,24 @@ public class World_arrayList {
                 return perso;
             }
         }
+        return null;
+    }
+    
+    public Creature getCreature(int id) {
+        // Cherche dans le tableau de personnages
+        for (Personnage perso : personnages) {
+            if (perso.getId() == id) {
+                return perso;
+            }
+        }
+
+        // Cherche dans le tableau de monstres
+        for (Monstre monstre : monstres) {
+            if (monstre.getId() == id) {
+                return monstre;
+            }
+        }
+
         return null;
     }
     

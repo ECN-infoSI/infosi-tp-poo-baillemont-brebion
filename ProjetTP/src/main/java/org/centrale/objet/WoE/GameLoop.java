@@ -4,8 +4,10 @@
  */
 package org.centrale.objet.WoE;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import org.centrale.objet.WoE.Monstre;
 
 /**
  *
@@ -97,50 +99,26 @@ public class GameLoop {
         System.out.println("Position du joueur : (" + monde.getJoueur().perso.getPos().getX() + ", " + monde.getJoueur().perso.getPos().getY() + ")");
         //Afficher les cases accessibles autour du joueur
         System.out.println("Créatures à combattre :");
-        int x = monde.getJoueur().perso.getPos().getX();
-        int y = monde.getJoueur().perso.getPos().getY();
-        int[][] creaturesAccessibles = new int[3][3];
         int compteur = 1;
-        for (int i = -1; i <= 1; i++) {
-            for (int j = -1; j <= 1; j++) {
-                int newX = x + i;
-                int newY = y + j;
-                if (newX >= 0 && newX < monde.getPlateau().length && newY >= 0 && newY < monde.getPlateau()[0].length) {
-                    if (monde.getPlateau()[newX][newY] != 0) {
-                        creaturesAccessibles[i + 1][j + 1] = compteur;
-                        compteur++;
-                    } else {
-                        creaturesAccessibles[i + 1][j + 1] = 0;
-                    }
-                } else {
-                    creaturesAccessibles[i + 1][j + 1] = 0;
-                }
-            }
+        ArrayList<Creature> creatures = new ArrayList<>();
+        for (Personnage perso : monde.getPersonnages()){
+            creatures.add((Creature)perso); 
         }
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                if (creaturesAccessibles[i][j] != 0) {
-                    Creature c = (Creature)monde.getObjet(monde.getPlateau()[x + i][y + j]);
-                    System.out.println("Créature " + creaturesAccessibles[i][j] + " : ");
-                    c.affiche();
-                }
-            }
+        for (Monstre monstre : monde.getMonstres()){
+            creatures.add((Creature)monstre); 
         }
-
+        for (Creature creature : creatures) {
+            System.out.println("Créature " + compteur + " : ");
+            creature.affiche();
+            compteur ++;
+        }
         // Demander au joueur de choisir une case
-        System.out.println("Choisissez une case :");
+        System.out.println("Choisissez une créature :");
         int choix = scanner.nextInt();
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                if (creaturesAccessibles[i][j] == choix) {
-                    Creature c = (Creature)monde.getObjet(monde.getPlateau()[x + i][y + j]);
-                    if (monde.getJoueur().perso instanceof Combattant){
-                        Combattant comb = (Combattant)(monde.getJoueur().perso);
-                        comb.combattre(c);
-                    }
-                }
-            }
-        }
+        if (monde.getJoueur().perso instanceof Combattant){
+            Combattant comb = (Combattant)(monde.getJoueur().perso);
+            comb.combattre(creatures.get(choix - 1));
+        }   
     }
     private void updateGame() {
         // Update game state, handle user input, and perform calculations
@@ -157,10 +135,14 @@ public class GameLoop {
         else{
             System.out.println("Action non-valide, pas d'action effectuée");
         }
+        if (monde.getJoueur().perso.ptVie == 0) {
+            gameOver = true; 
+        }
     }
 
     private void renderGame() {
         // Render the updated game state to the screen
+        monde.getJoueur().perso.affiche();
         this.monde.affichePlateau();
     }
 }

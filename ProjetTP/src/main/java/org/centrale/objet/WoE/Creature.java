@@ -82,7 +82,7 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
         this.pageAtt = pageAtt;
         this.pagePar = pagePar;
         this.pos = new Point2D(pos);
-        this.Id = 1; // à changer TODO
+        this.Id = 1; 
     }
     
     /**
@@ -97,7 +97,7 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
         this.pageAtt = c.getPageAtt();
         this.pagePar = c.getPagePar();
         this.pos = new Point2D(c.getPos());
-        this.Id = 1; // à changer TODO
+        this.Id = 1; 
     }
 
     public int getPtVie() {
@@ -126,6 +126,10 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
     
     public int getId() {
         return Id;
+    }
+    
+    public void setId(int id) {
+        this.Id = id;
     }
 
     public void setPtVie(int ptVie) {
