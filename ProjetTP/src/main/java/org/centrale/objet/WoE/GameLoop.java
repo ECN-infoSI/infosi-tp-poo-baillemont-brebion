@@ -192,36 +192,41 @@ public class GameLoop {
         int compteur = 1;
         LinkedList<Utilisables> inventaire = this.monde.getJoueur().getInventaire();
         LinkedList<Utilisables> effets = this.monde.getJoueur().getEffets();
-        for (Utilisables objet : inventaire){
-            System.out.println("Objet " + compteur + " : ");
-            System.out.println(objet.getClass().getSimpleName() + "\n");
-            compteur++;
-        }
-        System.out.println("Choisissez un objet à consommer :");
-        int choix = scanner.nextInt();
-        if (choix >= 1 && choix <= inventaire.size()){
-            Utilisables objetChoisi = inventaire.get(choix - 1); // Récupérer l'objet (indices commençant à 0)
-            // Ajouter l'objet à la liste des effets
-            if (objetChoisi instanceof Nourriture){
-                Nourriture nourriture = (Nourriture) objetChoisi;
-                effets.add(nourriture);
-                // Supprimer l'objet de l'inventaire
-                inventaire.remove(objetChoisi);
-                System.out.println(objetChoisi.getClass().getSimpleName() + " a été consommé et ajouté aux effets. \n");
-                nourriture.mangerPar(this.monde.getJoueur().getPerso());
-                
-            }
-            else if (objetChoisi instanceof PotionSoin){
-                PotionSoin potion = (PotionSoin) objetChoisi;
-                this.monde.getJoueur().getPerso().boirePotion(potion);
-            }
-            
-            
+        
+        if (inventaire.isEmpty()){
+            System.out.println("Dommage, l'inventaire est vide !");
         }
         else {
-            System.out.println("Choix non valide, aucune action effectuée \n");
+            for (Utilisables objet : inventaire){
+                System.out.println("Objet " + compteur + " : ");
+                System.out.println(objet.getClass().getSimpleName() + "\n");
+                compteur++;
+            }
+            System.out.println("Choisissez un objet à consommer :");
+            int choix = scanner.nextInt();
+            if (choix >= 1 && choix <= inventaire.size()){
+                Utilisables objetChoisi = inventaire.get(choix - 1); // Récupérer l'objet (indices commençant à 0)
+                // Ajouter l'objet à la liste des effets
+                if (objetChoisi instanceof Nourriture){
+                    Nourriture nourriture = (Nourriture) objetChoisi;
+                    effets.add(nourriture);
+                    // Supprimer l'objet de l'inventaire
+                    inventaire.remove(objetChoisi);
+                    System.out.println(objetChoisi.getClass().getSimpleName() + " a été consommé et ajouté aux effets. \n");
+                    nourriture.mangerPar(this.monde.getJoueur().getPerso());
+
+                }
+                else if (objetChoisi instanceof PotionSoin){
+                    PotionSoin potion = (PotionSoin) objetChoisi;
+                    this.monde.getJoueur().getPerso().boirePotion(potion);
+                }
+
+
+            }
+            else {
+                System.out.println("Choix non valide, aucune action effectuée \n");
+            }
         }
-        
     }
     
     private void updateEffets(){
