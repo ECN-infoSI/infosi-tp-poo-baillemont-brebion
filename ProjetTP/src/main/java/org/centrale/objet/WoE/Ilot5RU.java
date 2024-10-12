@@ -1,7 +1,7 @@
 package org.centrale.objet.WoE;
 
 /**
- *
+ * Nourriture qui diminue les points d'attaque quand consommée
  * @author mattlerigolo
  */
 public class Ilot5RU extends Nourriture {
@@ -17,12 +17,12 @@ public class Ilot5RU extends Nourriture {
         super(n);
     }
     
-    public void mangerPar(Personnage p){
+    @Override public void mangerPar(Personnage p){
         p.setDegAtt(p.getDegAtt()-this.getBonusMalus());
         this.setIsConsumed(true);
     }
     
-    public void finEffet(Personnage p){
+    @Override public void finEffet(Personnage p){
         if (this.effetFini()){
             p.setDegAtt(p.getDegAtt()+this.getBonusMalus());
         }

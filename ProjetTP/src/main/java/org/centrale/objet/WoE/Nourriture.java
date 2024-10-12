@@ -4,7 +4,7 @@ package org.centrale.objet.WoE;
  *
  * @author mattlerigolo
  */
-public class Nourriture extends Objet implements Utilisables {
+public abstract class Nourriture extends Objet implements Utilisables {
     private Point2D pos;
     private int bonusMalus;
     private int tempsEffet;
@@ -13,8 +13,8 @@ public class Nourriture extends Objet implements Utilisables {
     
     public Nourriture(){
         this.pos = new Point2D();
-        this.bonusMalus = 1;
-        this.tempsEffet = 1;
+        this.bonusMalus = 10;
+        this.tempsEffet = 3;
         this.isConsumed = false;
     }
 
@@ -64,6 +64,10 @@ public class Nourriture extends Objet implements Utilisables {
     public void setIsConsumed(boolean isConsumed) {
         this.isConsumed = isConsumed;
     }
+    
+    public abstract void mangerPar(Personnage p);
+    
+    public abstract void finEffet(Personnage p);
     
     public void passerTour(){
         this.setTempsEffet(this.getTempsEffet()-1);

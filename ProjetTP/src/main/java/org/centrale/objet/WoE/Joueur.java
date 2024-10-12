@@ -14,6 +14,7 @@ public class Joueur {
      * Personnage joué par le joueur
      */
     public Personnage perso;
+    private LinkedList<Utilisables> inventaire;
     private LinkedList<Utilisables> effets;
     
     /**
@@ -70,6 +71,7 @@ public class Joueur {
         }
         
         this.effets = new LinkedList<Utilisables>();
+        this.inventaire = new LinkedList<Utilisables>();
     }
     
     /**
@@ -82,6 +84,7 @@ public class Joueur {
     public Joueur(Personnage perso, LinkedList<Utilisables> effets){
         this.perso = new Personnage(perso);
         this.effets = new LinkedList<Utilisables>(effets);
+        this.inventaire = new LinkedList<Utilisables>(inventaire);
     }
     
     /**
@@ -92,6 +95,7 @@ public class Joueur {
     public Joueur(Joueur j){
         this.perso = new Personnage(j.getPerso());
         this.effets = new LinkedList<Utilisables>(j.getEffets());
+        this.inventaire = new LinkedList<Utilisables>(j.getInventaire());
     }
 
     public Personnage getPerso() {
@@ -109,8 +113,14 @@ public class Joueur {
     public void setEffets(LinkedList<Utilisables> effets) {
         this.effets = new LinkedList<Utilisables>(effets);
     }
-    
-    
+
+    public LinkedList<Utilisables> getInventaire() {
+        return inventaire;
+    }
+
+    public void setInventaire(LinkedList<Utilisables> inventaire) {
+        this.inventaire = inventaire;
+    }
     
     public void deplace(int[][] plateau, int newPosX, int newPosY){
         plateau[this.perso.pos.getX()][this.perso.pos.getY()] = 0;

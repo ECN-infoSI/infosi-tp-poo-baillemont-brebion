@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 import org.centrale.objet.WoE.Monstre;
+import java.util.LinkedList;
 
 /**
  *
@@ -97,6 +98,24 @@ public class GameLoop {
                 }
             }
         }
+        for (Utilisables objet : this.monde.getObjets()){
+            if (objet instanceof PotionSoin) {
+            // Traiter l'objet comme une PotionSoin
+                PotionSoin potion = (PotionSoin) objet;
+                if (potion.getPos().samePosition(monde.getJoueur().getPerso().getPos())){
+                    monde.getJoueur().getInventaire().add(potion);
+                    System.out.println("Objet ajouté à l'inventaire !");
+                }
+            }       
+            else if (objet instanceof Nourriture) {
+            // Traiter l'objet comme une Nourriture
+                Nourriture nourriture = (Nourriture) objet;
+                if (nourriture.getPos().samePosition(monde.getJoueur().getPerso().getPos())){
+                    monde.getJoueur().getInventaire().add(nourriture);
+                    System.out.println("Objet ajouté à l'inventaire !");
+                }
+    }
+        }
     }
         
      
@@ -129,10 +148,63 @@ public class GameLoop {
             comb.combattre(creatures.get(choix - 1));
         }   
     }
+    
+    private void consommer(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Objets dans l'inventaire :");
+        int compteur = 1;
+        LinkedList<Utilisables> inventaire = this.monde.getJoueur().getInventaire();
+        LinkedList<Utilisables> effets = this.monde.getJoueur().getEffets();
+        for (Utilisables objet : inventaire){
+            System.out.println("Objet " + compteur + " : ");
+            System.out.println(objet.getClass().getSimpleName() + "\n");
+            compteur++;
+        }
+        System.out.println("Choisissez un objet à consommer :");
+        int choix = scanner.nextInt();
+        if (choix >= 1 && choix <= inventaire.size()){
+            Utilisables objetChoisi = inventaire.get(choix - 1); // Récupérer l'objet (indices commençant à 0)
+            // Ajouter l'objet à la liste des effets
+            if (objetChoisi instanceof Nourriture){
+                Nourriture nourriture = (Nourriture) objetChoisi;
+                effets.add(nourriture);
+                // Supprimer l'objet de l'inventaire
+                inventaire.remove(objetChoisi);
+                System.out.println(objetChoisi.getClass().getSimpleName() + " a été consommé et ajouté aux effets.");
+                nourriture.mangerPar(this.monde.getJoueur().getPerso());
+                
+            }
+            else if (objetChoisi instanceof PotionSoin){
+                PotionSoin potion = (PotionSoin) objetChoisi;
+                this.monde.getJoueur().getPerso().boirePotion(potion);
+            }
+            
+            
+        }
+        else {
+            System.out.println("Choix non valide, aucune action effectuée");
+        }
+        
+    }
+    
+    private void updateEffets(){
+        LinkedList<Utilisables> effets = this.monde.getJoueur().getEffets();
+        for (Utilisables objet : effets){
+            if (objet instanceof Nourriture){
+                Nourriture nourriture = (Nourriture) objet;
+                nourriture.passerTour();
+                if (nourriture.effetFini()){
+                    nourriture.finEffet(this.monde.getJoueur().getPerso());
+                }
+            }
+        }
+    }
+    
     private void updateGame() {
         // Update game state, handle user input, and perform calculations
+        this.updateEffets();
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Voulez-vous vous déplacer ou combattre ? ('Se déplacer' ou 'Combattre')");
+        System.out.println("Voulez-vous vous déplacer ou combattre ou consommer un objet de votre inventaire ? ('Se déplacer' ou 'Combattre' ou 'Consommer')");
         String classe = scanner.nextLine();
         
         if (classe.equalsIgnoreCase("Se déplacer")){
@@ -140,6 +212,9 @@ public class GameLoop {
         }
         else if(classe.equalsIgnoreCase("Combattre")){
             combattre();
+        }
+        else if(classe.equalsIgnoreCase("Consommer")){
+            consommer();
         }
         else{
             System.out.println("Action non-valide, pas d'action effectuée");
@@ -157,7 +232,6 @@ public class GameLoop {
         for (Monstre monstre : this.monde.getMonstres()){
             monstre.deplace(this.monde.getPlateau());
         }
-        
     }
 
     private void renderGame() {

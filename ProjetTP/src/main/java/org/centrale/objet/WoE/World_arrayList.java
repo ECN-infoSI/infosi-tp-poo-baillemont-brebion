@@ -1,6 +1,7 @@
 package org.centrale.objet.WoE;
 import java.util.Random;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * Création d'un monde WoE comprenant un archer, un paysan et un lapin. 
@@ -29,7 +30,7 @@ public class World_arrayList {
     /** 
      * Une liste d'Objet
      */
-    private ArrayList<Objet> objets;
+    private LinkedList<Utilisables> objets;
     
     /**
      * Matrice représentant le plateau de jeu
@@ -49,7 +50,7 @@ public class World_arrayList {
         this.joueur.perso.setId(nextId ++);
         this.personnages = new ArrayList<Personnage>();
         this.monstres = new ArrayList<Monstre>();
-        this.objets = new ArrayList<Objet>();
+        this.objets = new LinkedList<Utilisables>();
         this.plateau = new int[100][100];
         
         this.plateau[this.joueur.getPerso().getPos().getX()][this.joueur.getPerso().getPos().getY()] = 10; // 10 sera le nombre pour le joueur
@@ -73,12 +74,12 @@ public class World_arrayList {
      * @param joueur
      * Joueur
      */
-    public World_arrayList(ArrayList<Personnage> persos, ArrayList<Monstre> monstres, ArrayList<Objet> objets, int[][] plateau, Joueur joueur){
+    public World_arrayList(ArrayList<Personnage> persos, ArrayList<Monstre> monstres, LinkedList<Utilisables> objets, int[][] plateau, Joueur joueur){
         this.joueur = new Joueur(joueur);
         this.joueur.perso.setId(nextId ++);
         this.personnages = new ArrayList<Personnage>(persos);
         this.monstres = new ArrayList<Monstre>(monstres);
-        this.objets = new ArrayList<Objet>(objets);
+        this.objets = new LinkedList<Utilisables>(objets);
         this.plateau = new int[plateau.length][plateau[0].length];
         
         for (int i=0; i<plateau.length; i++){
@@ -98,7 +99,7 @@ public class World_arrayList {
         this.joueur.perso.setId(nextId ++);
         this.personnages = new ArrayList<Personnage>(world.getPersonnages());
         this.monstres = new ArrayList<Monstre>(world.getMonstres());
-        this.objets = new ArrayList<Objet>(world.getObjets());
+        this.objets = new LinkedList<Utilisables>(world.getObjets());
         this.plateau = new int[world.getPlateau().length][world.getPlateau()[0].length];
         for (int i=0; i<world.getPlateau().length; i++){
             for (int j=0; i<world.getPlateau()[0].length; j++){
@@ -112,7 +113,7 @@ public class World_arrayList {
         this.joueur.perso.setId(nextId ++);
         this.personnages = new ArrayList<Personnage>();
         this.monstres = new ArrayList<Monstre>();
-        this.objets = new ArrayList<Objet>();
+        this.objets = new LinkedList<Utilisables>();
         this.plateau = new int[largeur][longueur];
         
         this.plateau[this.joueur.getPerso().getPos().getX()][this.joueur.getPerso().getPos().getY()] = joueur.perso.getId(); 
@@ -134,12 +135,12 @@ public class World_arrayList {
         this.monstres = new ArrayList<Monstre>(monstres);
     }
 
-    public ArrayList<Objet> getObjets() {
+    public LinkedList<Utilisables> getObjets() {
         return objets;
     }
 
-    public void setObjets(ArrayList<Objet> objets) {
-        this.objets = new ArrayList<Objet>(objets);
+    public void setObjets(LinkedList<Utilisables> objets) {
+        this.objets = new LinkedList<Utilisables>(objets);
     }
 
     public int[][] getPlateau() {
@@ -206,7 +207,7 @@ public class World_arrayList {
         }
     }
     
-    public void addObjet(Objet objet){
+    public void addObjet(Utilisables objet){
         this.getObjets().add(objet);
     }
     
@@ -225,12 +226,16 @@ public class World_arrayList {
      * Nombre de loups dans le monde
      * @param nbPotion
      * Nombre de potions dans le monde
+     * @param nbBurger
+     * Nombre du burgers dans le monde (bonus)
+     * @param nbIlot5
+     * Nombre d'ilôts 5 du RU dans le monde (malus)
      */
-    public void creaMondeAlea(int nbPaysan, int nbGuerrier, int nbArcher, int nbLapin, int nbLoup, int nbPotion){
+    public void creaMondeAlea(int nbPaysan, int nbGuerrier, int nbArcher, int nbLapin, int nbLoup, int nbPotion, int nbBurger, int nbIlot5){
         // On remet le monde à 0
         this.personnages = new ArrayList<Personnage>();
         this.monstres = new ArrayList<Monstre>();
-        this.objets = new ArrayList<Objet>();
+        this.objets = new LinkedList<Utilisables>();
         
         for (int i=0; i<nbArcher; i++){
             Archer archer = new Archer();
@@ -305,6 +310,24 @@ public class World_arrayList {
             potion.setPos(new Point2D(x,y));
             this.addObjet(potion);
         }
+        
+        for (int i=0; i<nbBurger; i++){
+            ClassiqueBurger burger = new ClassiqueBurger();
+            Random r = new Random();
+            int x = r.nextInt(this.plateau.length);
+            int y = r.nextInt(this.plateau[0].length);
+            burger.setPos(new Point2D(x,y));
+            this.addObjet(burger);
+        }
+        
+        for (int i=0; i<nbIlot5; i++){
+            Ilot5RU ilot = new Ilot5RU();
+            Random r = new Random();
+            int x = r.nextInt(this.plateau.length);
+            int y = r.nextInt(this.plateau[0].length);
+            ilot.setPos(new Point2D(x,y));
+            this.addObjet(ilot);
+        }
     }
     
     public void creaMondeAlea(){
@@ -315,8 +338,10 @@ public class World_arrayList {
         int nbLapin = r.nextInt(11);
         int nbLoup = r.nextInt(11);
         int nbPotion = r.nextInt(11);
+        int nbBurger = r.nextInt(11);
+        int nbIlot = r.nextInt(11);
         
-        this.creaMondeAlea(nbPaysan, nbGuerrier, nbArcher, nbLapin, nbLoup, nbPotion);
+        this.creaMondeAlea(nbPaysan, nbGuerrier, nbArcher, nbLapin, nbLoup, nbPotion, nbBurger, nbIlot);
     }
     
     /** 
@@ -355,15 +380,17 @@ public class World_arrayList {
         }
         return null;
     }
-            
+          
+    /**
     public Object getObjet(int id) {
-        for (Objet objet : this.objets) {
+        for (Utilisables objet : this.objets) {
             if (objet.getId() == id) {
                 return objet;
             }
         }
         return null;
     }
+    */
     
     public Personnage getPersonnage(int id) {
         for (Personnage perso : this.personnages) {

@@ -1,7 +1,7 @@
 package org.centrale.objet.WoE;
 
 /**
- *
+ * Nourriture qui augmente les points de parade quand consommée
  * @author mattlerigolo
  */
 public class ClassiqueBurger extends Nourriture {
@@ -18,12 +18,12 @@ public class ClassiqueBurger extends Nourriture {
         super(n);
     }
     
-    public void mangerPar(Personnage p){
+    @Override public void mangerPar(Personnage p){
         p.setPtPar(p.getPtPar()+this.getBonusMalus());
         this.setIsConsumed(true);
     }
     
-    public void finEffet(Personnage p){
+    @Override public void finEffet(Personnage p){
         if (this.effetFini()){
             p.setPtPar(p.getPtPar()-this.getBonusMalus());
         }
