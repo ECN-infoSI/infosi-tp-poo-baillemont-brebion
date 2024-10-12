@@ -1,13 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.centrale.objet.WoE;
 
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 import org.centrale.objet.WoE.Monstre;
+import java.util.Random;
 import java.util.LinkedList;
 
 /**
@@ -89,6 +86,7 @@ public class GameLoop {
         // Demander au joueur de choisir une case
         System.out.println("Choisissez une case :");
         int choix = scanner.nextInt();
+        System.out.println();
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if (casesAccessibles[i][j] == choix) {
@@ -104,7 +102,7 @@ public class GameLoop {
                 PotionSoin potion = (PotionSoin) objet;
                 if (potion.getPos().samePosition(monde.getJoueur().getPerso().getPos())){
                     monde.getJoueur().getInventaire().add(potion);
-                    System.out.println("Objet ajouté à l'inventaire !");
+                    System.out.println("Objet ajouté à l'inventaire ! \n");
                 }
             }       
             else if (objet instanceof Nourriture) {
@@ -112,7 +110,7 @@ public class GameLoop {
                 Nourriture nourriture = (Nourriture) objet;
                 if (nourriture.getPos().samePosition(monde.getJoueur().getPerso().getPos())){
                     monde.getJoueur().getInventaire().add(nourriture);
-                    System.out.println("Objet ajouté à l'inventaire !");
+                    System.out.println("Objet ajouté à l'inventaire ! \n");
                 }
     }
         }
@@ -141,12 +139,13 @@ public class GameLoop {
             compteur ++;
         }
         // Demander au joueur de choisir une case
-        System.out.println("Choisissez une créature :");
+        System.out.println("Choisissez une créature : \n");
         int choix = scanner.nextInt();
         if (monde.getJoueur().perso instanceof Combattant){
             Combattant comb = (Combattant)(monde.getJoueur().perso);
             comb.combattre(creatures.get(choix - 1));
-        }   
+        }
+        System.out.println("\n");
     }
     
     private void consommer(){
@@ -170,7 +169,7 @@ public class GameLoop {
                 effets.add(nourriture);
                 // Supprimer l'objet de l'inventaire
                 inventaire.remove(objetChoisi);
-                System.out.println(objetChoisi.getClass().getSimpleName() + " a été consommé et ajouté aux effets.");
+                System.out.println(objetChoisi.getClass().getSimpleName() + " a été consommé et ajouté aux effets. \n");
                 nourriture.mangerPar(this.monde.getJoueur().getPerso());
                 
             }
@@ -182,7 +181,7 @@ public class GameLoop {
             
         }
         else {
-            System.out.println("Choix non valide, aucune action effectuée");
+            System.out.println("Choix non valide, aucune action effectuée \n");
         }
         
     }
@@ -206,7 +205,6 @@ public class GameLoop {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Voulez-vous vous déplacer ou combattre ou consommer un objet de votre inventaire ? ('Se déplacer' ou 'Combattre' ou 'Consommer')");
         String classe = scanner.nextLine();
-        
         if (classe.equalsIgnoreCase("Se déplacer")){
             deplaceJoueur();
         }
@@ -217,20 +215,38 @@ public class GameLoop {
             consommer();
         }
         else{
-            System.out.println("Action non-valide, pas d'action effectuée");
+            System.out.println("Action non-valide, pas d'action effectuée \n");
         }
         if (monde.getJoueur().perso.ptVie == 0) {
             gameOver = true; 
             System.out.println("GAME OVER");
         }
-        // on fait se déplacer tous les personnages
-        for (Personnage perso : this.monde.getPersonnages()){
+        Random random = new Random();
+        // On fait se déplacer tous les personnages et ceux qui peuvent attaquer tentent d'attaquer
+        for (Personnage perso : this.monde.getPersonnages()) {
             perso.deplace(this.monde.getPlateau());
+            // Si c'est un combattant, il a 25% de chances d'attaquer le joueur
+            if (perso instanceof Combattant) {
+                if (random.nextInt(100) < 25) { // 25% de chance
+                    System.out.println(perso.getNom() + " attaque le joueur !");
+                    Combattant combattant = (Combattant) perso;
+                    combattant.combattre(this.monde.getJoueur().getPerso());
+                }
+            }
         }
-        
-        // on fait se déplacer tous les monstres
-        for (Monstre monstre : this.monde.getMonstres()){
+    
+        // On fait se déplacer tous les monstres et ceux qui peuvent attaquer tentent d'attaquer
+        for (Monstre monstre : this.monde.getMonstres()) {
             monstre.deplace(this.monde.getPlateau());
+
+            // Si c'est un combattant, il a 60% de chances d'attaquer le joueur
+            if (monstre instanceof Combattant) {
+                if (random.nextInt(100) < 60) { // 60% de chance
+                    System.out.println(monstre.getClass().getSimpleName() + " attaque le joueur !");
+                    Combattant combattant = (Combattant) monstre;
+                    combattant.combattre(this.monde.getJoueur().getPerso());
+                }
+            }
         }
     }
 

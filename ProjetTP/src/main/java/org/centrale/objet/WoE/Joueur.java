@@ -24,11 +24,13 @@ public class Joueur {
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
         
-        System.out.print("Quelle classe voulez-vous jouer ? (Guerrier ou Archer)");
+        System.out.print("Quelle classe voulez-vous jouer ? (Guerrier ou Archer) \n");
         String classe = scanner.nextLine();
         
-        System.out.print("Quel nom voulez vous donner à votre personnage ?");
+        System.out.print("Quel nom voulez vous donner à votre personnage ? \n");
         String nom = scanner.nextLine();
+        
+        System.out.print("\n");
         
         if (classe.equalsIgnoreCase("Archer")){
             Archer perso = new Archer();
