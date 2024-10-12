@@ -79,19 +79,19 @@ public class Guerrier extends Personnage implements Combattant {
             if (tirageAtt <= this.pageAtt){
                 if (tirageDef > c.getPagePar()){
                     c.setPtVie(c.getPtVie()-this.epee.getPtAtt());
-                    System.out.println("Attaque Réussie ! \n");
+                    System.out.println("Attaque Réussie !");
                 }
                 else{
                     c.setPtVie(c.getPtVie()-this.epee.getPtAtt()+c.getPtPar());
-                    System.out.println("Attaque Réussie, mais parade de l'adversaire ! \n");
+                    System.out.println("Attaque Réussie, mais parade de l'adversaire !");
                 }
             }
             else {
-                System.out.println("Attaque Ratée ! \n");
+                System.out.println("Attaque Ratée !");
             }
         }
         else{
-            System.out.println("Trop loin ! \n");
+            System.out.println("Trop loin !");
         }
     }
 }

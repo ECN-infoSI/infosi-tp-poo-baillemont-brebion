@@ -128,7 +128,7 @@ public class GameLoop {
         int compteur = 1;
         ArrayList<Creature> creatures = new ArrayList<>();
         for (Personnage perso : monde.getPersonnages()){
-            creatures.add((Creature)perso); 
+            creatures.add((Creature)perso);
         }
         for (Monstre monstre : monde.getMonstres()){
             creatures.add((Creature)monstre); 
@@ -139,11 +139,23 @@ public class GameLoop {
             compteur ++;
         }
         // Demander au joueur de choisir une case
-        System.out.println("Choisissez une créature : \n");
+        System.out.println("Choisissez une créature :");
         int choix = scanner.nextInt();
-        if (monde.getJoueur().perso instanceof Combattant){
-            Combattant comb = (Combattant)(monde.getJoueur().perso);
-            comb.combattre(creatures.get(choix - 1));
+        
+        // Trouver la créature correspondante à l'ID choisi
+        Creature creatureChoisie = null;
+        for (Creature creature : creatures) {
+            if (creature.getId() == choix) {
+                creatureChoisie = creature;
+                break;
+            }
+        }
+
+        if (creatureChoisie != null && monde.getJoueur().perso instanceof Combattant) {
+            Combattant comb = (Combattant) (monde.getJoueur().perso);
+            comb.combattre(creatureChoisie);
+        } else {
+            System.out.println("Créature non trouvée ou choix invalide.");
         }
         System.out.println("\n");
     }
