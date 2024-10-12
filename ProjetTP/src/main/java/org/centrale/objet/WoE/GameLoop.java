@@ -23,6 +23,9 @@ public class GameLoop {
     }
     
     public void startGame(World_arrayList monde) {
+        monde.getJoueur().getPerso().affiche();
+        
+        monde.affichePlateau();
         while (!gameOver) {
             // Update stage
             updateGame();
@@ -114,7 +117,7 @@ public class GameLoop {
             creatures.add((Creature)monstre); 
         }
         for (Creature creature : creatures) {
-            System.out.println("Créature " + compteur + " : ");
+            System.out.println("Créature " + creature.getId() + " : ");
             creature.affiche();
             compteur ++;
         }
@@ -145,6 +148,16 @@ public class GameLoop {
             gameOver = true; 
             System.out.println("GAME OVER");
         }
+        // on fait se déplacer tous les personnages
+        for (Personnage perso : this.monde.getPersonnages()){
+            perso.deplace(this.monde.getPlateau());
+        }
+        
+        // on fait se déplacer tous les monstres
+        for (Monstre monstre : this.monde.getMonstres()){
+            monstre.deplace(this.monde.getPlateau());
+        }
+        
     }
 
     private void renderGame() {

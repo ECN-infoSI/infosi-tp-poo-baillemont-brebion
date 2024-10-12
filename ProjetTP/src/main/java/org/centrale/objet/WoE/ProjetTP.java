@@ -19,14 +19,6 @@ public class ProjetTP {
         monde.getPersonnages().get(1).setNom("Dmitri");
         monde.getPersonnages().get(2).setNom("Aliocha");
         
-        
-        for (Personnage perso : monde.getPersonnages()){
-            perso.affiche();
-            perso.deplace(monde.getPlateau());
-            System.out.println("\nAprès déplacement : \n");
-            perso.affiche();
-        }
-        
         Game.startGame(monde);
         monde.afficheWorld();
         monde.affichePlateau();
