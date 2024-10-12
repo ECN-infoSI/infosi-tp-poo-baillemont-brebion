@@ -157,6 +157,25 @@ public class GameLoop {
         } else {
             System.out.println("Créature non trouvée ou choix invalide.");
         }
+        if (creatureChoisie.estMort()){
+            if (creatureChoisie instanceof Monstre){
+                Monstre monstre = (Monstre) creatureChoisie;
+                if (monstre.estMort()){
+                    System.out.println(monstre.getClass().getSimpleName() + " est mort");
+                    this.monde.getPlateau()[monstre.getPos().getX()][monstre.getPos().getY()] = 0;
+                    this.monde.getMonstres().remove(monstre);
+                }
+            }
+            else if (creatureChoisie instanceof Personnage){
+                Personnage perso = (Personnage) creatureChoisie;
+                if (perso.estMort()){
+                    System.out.println(perso.getNom() + " est mort");
+                    this.monde.getPlateau()[perso.getPos().getX()][perso.getPos().getY()] = 0;
+                    this.monde.getPersonnages().remove(perso);
+                }
+            }
+            
+        }
         System.out.println("\n");
     }
     

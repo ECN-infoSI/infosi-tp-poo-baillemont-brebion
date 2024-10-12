@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package org.centrale.objet.WoE;
 
 /**
@@ -16,6 +12,7 @@ public class ProjetTP {
         GameLoop Game = new GameLoop(monde);
         monde.creaMondeAlea(1,1,1,1,1,50,50,50);
         monde.getPersonnages().get(0).setNom("Ivan");
+        monde.getPersonnages().get(0).setPtVie(1);
         monde.getPersonnages().get(1).setNom("Dmitri");
         monde.getPersonnages().get(2).setNom("Aliocha");
         

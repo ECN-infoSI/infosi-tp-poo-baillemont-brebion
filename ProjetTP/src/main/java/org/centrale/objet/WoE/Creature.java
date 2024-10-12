@@ -190,6 +190,15 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
     }
     
     /**
+     * Renvoie un booléen true si la créature est morte
+     * @return 
+     * Morte ou pas
+     */
+    public boolean estMort(){
+        return (this.ptVie<=0);
+    }
+    
+    /**
      * Affiche les attributs de la créature
      */
     public abstract void affiche();
