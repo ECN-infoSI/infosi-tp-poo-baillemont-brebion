@@ -64,7 +64,7 @@ public class NuageToxique extends Objet implements Combattant, Deplacable {
     
     @Override public void deplace(int[][] plateau){
         Random r = new Random();
-        int dx = r.nextInt(2); // le personnage peut se déplacer sur les cases adjacentes
+        int dx = r.nextInt(2); // le nuage peut se déplacer sur les cases adjacentes
         int dirX = r.nextBoolean() ? 1 : -1; // on choisit la direction de déplacement selon x
         int dy = r.nextInt(2);
         int dirY = r.nextBoolean() ? 1 : -1; // on choisit la direction de déplacement selon y
@@ -76,7 +76,7 @@ public class NuageToxique extends Objet implements Combattant, Deplacable {
                 goodPosition = true; // la position est valide
             }
             else { // position non-valide donc on tire à nouveau au hasard
-                dx = r.nextInt(2); // le personnage peut se déplacer sur les cases adjacentes
+                dx = r.nextInt(2); // le nuage peut se déplacer sur les cases adjacentes
                 dirX = r.nextBoolean() ? 1 : -1; // on choisit la direction de déplacement selon x
                 dy = r.nextInt(2);
                 dirY = r.nextBoolean() ? 1 : -1; // on choisit la direction de déplacement selon y

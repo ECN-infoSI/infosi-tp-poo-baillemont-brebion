@@ -1,11 +1,11 @@
 package org.centrale.objet.WoE;
 
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
 import org.centrale.objet.WoE.Monstre;
 import java.util.Random;
 import java.util.LinkedList;
+import java.util.Iterator;
 
 /**
  *
@@ -96,7 +96,7 @@ public class GameLoop {
                 }
             }
         }
-        for (Utilisables objet : this.monde.getObjets()){
+        for (Objet objet : this.monde.getObjets()){
             if (objet instanceof PotionSoin) {
             // Traiter l'objet comme une PotionSoin
                 PotionSoin potion = (PotionSoin) objet;
@@ -112,7 +112,14 @@ public class GameLoop {
                     monde.getJoueur().getInventaire().add(nourriture);
                     System.out.println("Objet ajouté à l'inventaire ! \n");
                 }
-    }
+            }
+            else if (objet instanceof NuageToxique){
+                NuageToxique nuage = (NuageToxique) objet;
+                if (nuage.getPos().samePosition(monde.getJoueur().getPerso().getPos())){
+                    nuage.combattre(monde.getJoueur().getPerso());
+                    System.out.println("On dirait le gaz dans BrawlStar. " + nuage.getDegats()+ " points de vie perdus. \n");
+                }
+            }
         }
     }
         
@@ -256,12 +263,23 @@ public class GameLoop {
         // On fait se déplacer tous les personnages et ceux qui peuvent attaquer tentent d'attaquer
         for (Personnage perso : this.monde.getPersonnages()) {
             perso.deplace(this.monde.getPlateau());
+            // on regarde s'il dans un nuage toxique
+            for (Objet objet : this.monde.getObjets()){
+                if (objet instanceof NuageToxique){
+                    NuageToxique nuage = (NuageToxique) objet;
+                    if (nuage.getPos().samePosition(perso.getPos())){
+                        nuage.combattre(perso);
+                        System.out.println(perso.getNom() + " est dans un nuage toxique \n");
+                    }
+                }
+            }
             // Si c'est un combattant, il a 25% de chances d'attaquer le joueur
             if (perso instanceof Combattant) {
                 if (random.nextInt(100) < 25) { // 25% de chance
                     System.out.println(perso.getNom() + " attaque le joueur !");
                     Combattant combattant = (Combattant) perso;
                     combattant.combattre(this.monde.getJoueur().getPerso());
+                    System.out.println("\n");
                 }
             }
         }
@@ -269,16 +287,69 @@ public class GameLoop {
         // On fait se déplacer tous les monstres et ceux qui peuvent attaquer tentent d'attaquer
         for (Monstre monstre : this.monde.getMonstres()) {
             monstre.deplace(this.monde.getPlateau());
-
+            // on regarde s'il dans un nuage toxique
+            for (Objet objet : this.monde.getObjets()){
+                if (objet instanceof NuageToxique){
+                    NuageToxique nuage = (NuageToxique) objet;
+                    if (nuage.getPos().samePosition(monstre.getPos())){
+                        nuage.combattre(monstre);
+                        System.out.println(monstre.getClass().getSimpleName() + " est dans un nuage toxique \n");
+                    }
+                }
+            }
             // Si c'est un combattant, il a 60% de chances d'attaquer le joueur
             if (monstre instanceof Combattant) {
                 if (random.nextInt(100) < 60) { // 60% de chance
                     System.out.println(monstre.getClass().getSimpleName() + " attaque le joueur !");
                     Combattant combattant = (Combattant) monstre;
                     combattant.combattre(this.monde.getJoueur().getPerso());
+                    System.out.println("\n");
+                }
+            } 
+        }
+        
+        // on fait se déplacer les nuages toxiques
+        for (Objet objet : this.monde.getObjets()){
+            if (objet instanceof NuageToxique){
+                NuageToxique nuage = (NuageToxique) objet;
+                nuage.deplace(this.monde.getPlateau());
+                for (Personnage perso : this.monde.getPersonnages()){
+                    if (nuage.getPos().samePosition(monde.getJoueur().getPerso().getPos())){
+                            nuage.combattre(perso);
+                            System.out.println(perso.getClass().getSimpleName() + " est dans un nuage toxique \n");
+                    }
+                }
+                for (Monstre monstre : this.monde.getMonstres()){
+                    if (nuage.getPos().samePosition(monde.getJoueur().getPerso().getPos())){
+                            nuage.combattre(monstre);
+                            System.out.println(monstre.getClass().getSimpleName() + " est dans un nuage toxique \n");
+                    }
                 }
             }
         }
+        
+        // Parcours des monstres et suppression des morts
+        Iterator<Monstre> monstreIterator = this.monde.getMonstres().iterator();
+        while (monstreIterator.hasNext()) {
+            Monstre monstre = monstreIterator.next();
+            if (monstre.estMort()) {
+                monstreIterator.remove(); // Suppression sûre
+                System.out.println(monstre.getClass().getSimpleName() + " est mort \n");
+            }
+        }
+
+        // Parcours des personnages et suppression des morts
+        Iterator<Personnage> persoIterator = this.monde.getPersonnages().iterator();
+        while (persoIterator.hasNext()) {
+            Personnage perso = persoIterator.next();
+            if (perso.estMort()) {
+                persoIterator.remove(); // Suppression sûre
+                System.out.println(perso.getNom() + " est mort \n");
+            }
+        }
+
+        
+        
     }
 
     private void renderGame() {

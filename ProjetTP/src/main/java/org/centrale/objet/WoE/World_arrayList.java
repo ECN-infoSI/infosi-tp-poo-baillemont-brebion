@@ -30,7 +30,7 @@ public class World_arrayList {
     /** 
      * Une liste d'Objet
      */
-    private LinkedList<Utilisables> objets;
+    private LinkedList<Objet> objets;
     
     /**
      * Matrice représentant le plateau de jeu
@@ -50,7 +50,7 @@ public class World_arrayList {
         this.joueur.perso.setId(nextId ++);
         this.personnages = new ArrayList<Personnage>();
         this.monstres = new ArrayList<Monstre>();
-        this.objets = new LinkedList<Utilisables>();
+        this.objets = new LinkedList<Objet>();
         this.plateau = new int[100][100];
         
         this.plateau[this.joueur.getPerso().getPos().getX()][this.joueur.getPerso().getPos().getY()] = 10; // 10 sera le nombre pour le joueur
@@ -74,12 +74,12 @@ public class World_arrayList {
      * @param joueur
      * Joueur
      */
-    public World_arrayList(ArrayList<Personnage> persos, ArrayList<Monstre> monstres, LinkedList<Utilisables> objets, int[][] plateau, Joueur joueur){
+    public World_arrayList(ArrayList<Personnage> persos, ArrayList<Monstre> monstres, LinkedList<Objet> objets, int[][] plateau, Joueur joueur){
         this.joueur = new Joueur(joueur);
         this.joueur.perso.setId(nextId ++);
         this.personnages = new ArrayList<Personnage>(persos);
         this.monstres = new ArrayList<Monstre>(monstres);
-        this.objets = new LinkedList<Utilisables>(objets);
+        this.objets = new LinkedList<Objet>(objets);
         this.plateau = new int[plateau.length][plateau[0].length];
         
         for (int i=0; i<plateau.length; i++){
@@ -99,7 +99,7 @@ public class World_arrayList {
         this.joueur.perso.setId(nextId ++);
         this.personnages = new ArrayList<Personnage>(world.getPersonnages());
         this.monstres = new ArrayList<Monstre>(world.getMonstres());
-        this.objets = new LinkedList<Utilisables>(world.getObjets());
+        this.objets = new LinkedList<Objet>(world.getObjets());
         this.plateau = new int[world.getPlateau().length][world.getPlateau()[0].length];
         for (int i=0; i<world.getPlateau().length; i++){
             for (int j=0; i<world.getPlateau()[0].length; j++){
@@ -113,7 +113,7 @@ public class World_arrayList {
         this.joueur.perso.setId(nextId ++);
         this.personnages = new ArrayList<Personnage>();
         this.monstres = new ArrayList<Monstre>();
-        this.objets = new LinkedList<Utilisables>();
+        this.objets = new LinkedList<Objet>();
         this.plateau = new int[largeur][longueur];
         
         this.plateau[this.joueur.getPerso().getPos().getX()][this.joueur.getPerso().getPos().getY()] = joueur.perso.getId(); 
@@ -135,12 +135,12 @@ public class World_arrayList {
         this.monstres = new ArrayList<Monstre>(monstres);
     }
 
-    public LinkedList<Utilisables> getObjets() {
+    public LinkedList<Objet> getObjets() {
         return objets;
     }
 
-    public void setObjets(LinkedList<Utilisables> objets) {
-        this.objets = new LinkedList<Utilisables>(objets);
+    public void setObjets(LinkedList<Objet> objets) {
+        this.objets = new LinkedList<Objet>(objets);
     }
 
     public int[][] getPlateau() {
@@ -207,7 +207,7 @@ public class World_arrayList {
         }
     }
     
-    public void addObjet(Utilisables objet){
+    public void addObjet(Objet objet){
         this.getObjets().add(objet);
     }
     
@@ -230,12 +230,14 @@ public class World_arrayList {
      * Nombre du burgers dans le monde (bonus)
      * @param nbIlot5
      * Nombre d'ilôts 5 du RU dans le monde (malus)
+     * @param nbNuage
+     * Nombre de nuages toxiques dans le monde
      */
-    public void creaMondeAlea(int nbPaysan, int nbGuerrier, int nbArcher, int nbLapin, int nbLoup, int nbPotion, int nbBurger, int nbIlot5){
+    public void creaMondeAlea(int nbPaysan, int nbGuerrier, int nbArcher, int nbLapin, int nbLoup, int nbPotion, int nbBurger, int nbIlot5, int nbNuage){
         // On remet le monde à 0
         this.personnages = new ArrayList<Personnage>();
         this.monstres = new ArrayList<Monstre>();
-        this.objets = new LinkedList<Utilisables>();
+        this.objets = new LinkedList<Objet>();
         
         for (int i=0; i<nbArcher; i++){
             Archer archer = new Archer();
@@ -328,6 +330,17 @@ public class World_arrayList {
             ilot.setPos(new Point2D(x,y));
             this.addObjet(ilot);
         }
+        
+        for (int i=0; i<nbIlot5; i++){
+            NuageToxique nuage = new NuageToxique();
+            Random r = new Random();
+            int x = r.nextInt(this.plateau.length);
+            int y = r.nextInt(this.plateau[0].length);
+            nuage.setPos(new Point2D(x,y));
+            this.addObjet(nuage);
+        }
+        
+        
     }
     
     public void creaMondeAlea(){
@@ -340,8 +353,9 @@ public class World_arrayList {
         int nbPotion = r.nextInt(11);
         int nbBurger = r.nextInt(11);
         int nbIlot = r.nextInt(11);
+        int nbNuage = r.nextInt(11);
         
-        this.creaMondeAlea(nbPaysan, nbGuerrier, nbArcher, nbLapin, nbLoup, nbPotion, nbBurger, nbIlot);
+        this.creaMondeAlea(nbPaysan, nbGuerrier, nbArcher, nbLapin, nbLoup, nbPotion, nbBurger, nbIlot, nbNuage);
     }
     
     /** 

@@ -10,7 +10,7 @@ public class ProjetTP {
     public static void main(String[] args) {
         World_arrayList monde = new World_arrayList(5,5);
         GameLoop Game = new GameLoop(monde);
-        monde.creaMondeAlea(1,1,1,1,1,50,50,50);
+        monde.creaMondeAlea(1,1,1,1,1,5,5,5,3);
         monde.getPersonnages().get(0).setNom("Ivan");
         monde.getPersonnages().get(0).setPtVie(1);
         monde.getPersonnages().get(1).setNom("Dmitri");

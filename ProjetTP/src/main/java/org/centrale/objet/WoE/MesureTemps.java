@@ -16,7 +16,7 @@ public class MesureTemps {
         World_arrayList world1 = new World_arrayList(5000,5000);
 
         world1.creaMondeAlea (
-        k, 0, 0, 0, 0, 0, 0, 0);  
+        k, 0, 0, 0, 0, 0, 0, 0, 0);  
         long debutN = System.nanoTime();
         for (int i = 0; i < world1.getPersonnages().size(); i++) {
             totalpdv += world1.getPersonnages().get(i).getPtVie();
