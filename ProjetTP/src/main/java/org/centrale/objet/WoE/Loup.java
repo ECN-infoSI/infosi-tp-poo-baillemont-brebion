@@ -63,15 +63,15 @@ public class Loup extends Monstre implements Combattant {
                 }
                 else{
                     c.setPtVie(c.getPtVie()-this.degAtt+c.getPtPar());
-                    System.out.println("Attaque Réussie, mais parade de l'adversaire ! \n");
+                    System.out.println("Attaque Réussie, mais parade de l'adversaire !");
                 }
             }
             else {
-                System.out.println("Attaque Ratée ! \n");
+                System.out.println("Attaque Ratée !");
             }
         }
         else{
-            System.out.println("Trop loin ! \n");
+            System.out.println("Trop loin !");
         }
     }
 }

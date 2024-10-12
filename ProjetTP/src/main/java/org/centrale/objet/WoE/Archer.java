@@ -89,7 +89,7 @@ public class Archer extends Personnage implements Combattant {
      */
     @Override public void combattre(Creature c){
         if (this.nbFleches <= 0){
-            System.out.println("Plus de flèches pour attaquer \n");
+            System.out.println("Plus de flèches pour attaquer");
         }
         else{
             this.nbFleches -= 1; // il perd une flèche dans tous les cas
@@ -99,14 +99,14 @@ public class Archer extends Personnage implements Combattant {
 
                 if (tirageAtt <= this.pageAtt){
                     c.setPtVie(c.getPtVie()-this.degAtt);
-                    System.out.println("Attaque Réussie ! \n");
+                    System.out.println("Attaque Réussie !");
                 }
                 else {
-                    System.out.println("Attaque Ratée ! \n");
+                    System.out.println("Attaque Ratée !");
                 }
             }
             else{
-                System.out.println("Trop loin ou trop proche ! \n");
+                System.out.println("Trop loin ou trop proche !");
             }
         }
     }

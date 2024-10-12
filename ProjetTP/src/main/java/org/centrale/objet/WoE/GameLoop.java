@@ -183,7 +183,6 @@ public class GameLoop {
             }
             
         }
-        System.out.println("\n");
     }
     
     private void consommer(){
@@ -246,20 +245,21 @@ public class GameLoop {
         // Update game state, handle user input, and perform calculations
         this.updateEffets();
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Voulez-vous vous déplacer ou combattre ou consommer un objet de votre inventaire ? ('Se déplacer' ou 'Combattre' ou 'Consommer')");
+        System.out.println("Voulez-vous vous déplacer, combattre ou consommer un objet de votre inventaire ?\n1 : Se déplacer\n2 : Combattre\n3 : Consommer");
         String classe = scanner.nextLine();
-        if (classe.equalsIgnoreCase("Se déplacer")){
+        if (classe.equalsIgnoreCase("1")){
             deplaceJoueur();
         }
-        else if(classe.equalsIgnoreCase("Combattre")){
+        else if(classe.equalsIgnoreCase("2")){
             combattre();
         }
-        else if(classe.equalsIgnoreCase("Consommer")){
+        else if(classe.equalsIgnoreCase("3")){
             consommer();
         }
         else{
             System.out.println("Action non-valide, pas d'action effectuée \n");
         }
+        System.out.println();
         if (monde.getJoueur().perso.ptVie == 0) {
             gameOver = true; 
             System.out.println("GAME OVER");
@@ -319,13 +319,13 @@ public class GameLoop {
                 NuageToxique nuage = (NuageToxique) objet;
                 nuage.deplace(this.monde.getPlateau());
                 for (Personnage perso : this.monde.getPersonnages()){
-                    if (nuage.getPos().samePosition(monde.getJoueur().getPerso().getPos())){
+                    if (nuage.getPos().samePosition(perso.getPos())){
                             nuage.combattre(perso);
-                            System.out.println(perso.getClass().getSimpleName() + " est dans un nuage toxique \n");
+                            System.out.println(perso.getNom() + " est dans un nuage toxique \n");
                     }
                 }
                 for (Monstre monstre : this.monde.getMonstres()){
-                    if (nuage.getPos().samePosition(monde.getJoueur().getPerso().getPos())){
+                    if (nuage.getPos().samePosition(monstre.getPos())){
                             nuage.combattre(monstre);
                             System.out.println(monstre.getClass().getSimpleName() + " est dans un nuage toxique \n");
                     }
@@ -338,6 +338,7 @@ public class GameLoop {
         while (monstreIterator.hasNext()) {
             Monstre monstre = monstreIterator.next();
             if (monstre.estMort()) {
+                this.monde.getPlateau()[monstre.getPos().getX()][monstre.getPos().getY()] = 0;
                 monstreIterator.remove(); // Suppression sûre
                 System.out.println(monstre.getClass().getSimpleName() + " est mort \n");
             }
@@ -348,6 +349,7 @@ public class GameLoop {
         while (persoIterator.hasNext()) {
             Personnage perso = persoIterator.next();
             if (perso.estMort()) {
+                this.monde.getPlateau()[perso.getPos().getX()][perso.getPos().getY()] = 0;
                 persoIterator.remove(); // Suppression sûre
                 System.out.println(perso.getNom() + " est mort \n");
             }

@@ -331,7 +331,7 @@ public class World_arrayList {
             this.addObjet(ilot);
         }
         
-        for (int i=0; i<nbIlot5; i++){
+        for (int i=0; i<nbNuage; i++){
             NuageToxique nuage = new NuageToxique();
             Random r = new Random();
             int x = r.nextInt(this.plateau.length);
