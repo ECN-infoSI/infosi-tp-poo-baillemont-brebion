@@ -131,7 +131,7 @@ public class GameLoop {
         // Afficher la position du joueur
         System.out.println("Position du joueur : (" + monde.getJoueur().perso.getPos().getX() + ", " + monde.getJoueur().perso.getPos().getY() + ")");
         //Afficher les cases accessibles autour du joueur
-        System.out.println("Créatures à combattre :");
+        System.out.println("Créatures à bonne distance de combat (si aucune créature ne s'affiche, taper 0) :");
         int compteur = 1;
         ArrayList<Creature> creatures = new ArrayList<>();
         for (Personnage perso : monde.getPersonnages()){
@@ -141,9 +141,12 @@ public class GameLoop {
             creatures.add((Creature)monstre); 
         }
         for (Creature creature : creatures) {
-            System.out.println("Créature " + creature.getId() + " : ");
-            creature.affiche();
-            compteur ++;
+            Personnage persoJoueur = monde.getJoueur().getPerso();
+            if (creature.getPos().distance(persoJoueur.getPos()) <= persoJoueur.getDistMaxAtt()){
+                System.out.println("Créature " + creature.getId() + " : ");
+                creature.affiche();
+                compteur ++;
+            }
         }
         // Demander au joueur de choisir une case
         System.out.println("Choisissez une créature :");
@@ -161,27 +164,27 @@ public class GameLoop {
         if (creatureChoisie != null && monde.getJoueur().perso instanceof Combattant) {
             Combattant comb = (Combattant) (monde.getJoueur().perso);
             comb.combattre(creatureChoisie);
-        } else {
+            if (creatureChoisie.estMort()){
+                if (creatureChoisie instanceof Monstre){
+                    Monstre monstre = (Monstre) creatureChoisie;
+                    if (monstre.estMort()){
+                        System.out.println(monstre.getClass().getSimpleName() + " est mort");
+                        this.monde.getPlateau()[monstre.getPos().getX()][monstre.getPos().getY()] = 0;
+                        this.monde.getMonstres().remove(monstre);
+                    }
+                }
+                else if (creatureChoisie instanceof Personnage){
+                    Personnage perso = (Personnage) creatureChoisie;
+                    if (perso.estMort()){
+                        System.out.println(perso.getNom() + " est mort");
+                        this.monde.getPlateau()[perso.getPos().getX()][perso.getPos().getY()] = 0;
+                        this.monde.getPersonnages().remove(perso);
+                    }
+                }
+            }
+        } 
+        else {
             System.out.println("Créature non trouvée ou choix invalide.");
-        }
-        if (creatureChoisie.estMort()){
-            if (creatureChoisie instanceof Monstre){
-                Monstre monstre = (Monstre) creatureChoisie;
-                if (monstre.estMort()){
-                    System.out.println(monstre.getClass().getSimpleName() + " est mort");
-                    this.monde.getPlateau()[monstre.getPos().getX()][monstre.getPos().getY()] = 0;
-                    this.monde.getMonstres().remove(monstre);
-                }
-            }
-            else if (creatureChoisie instanceof Personnage){
-                Personnage perso = (Personnage) creatureChoisie;
-                if (perso.estMort()){
-                    System.out.println(perso.getNom() + " est mort");
-                    this.monde.getPlateau()[perso.getPos().getX()][perso.getPos().getY()] = 0;
-                    this.monde.getPersonnages().remove(perso);
-                }
-            }
-            
         }
     }
     
@@ -278,13 +281,16 @@ public class GameLoop {
                     }
                 }
             }
-            // Si c'est un combattant, il a 25% de chances d'attaquer le joueur
+            // Si c'est un combattant, il a 25% de chances d'attaquer le joueur s'il est à distance
             if (perso instanceof Combattant) {
-                if (random.nextInt(100) < 25) { // 25% de chance
-                    System.out.println(perso.getNom() + " attaque le joueur !");
-                    Combattant combattant = (Combattant) perso;
-                    combattant.combattre(this.monde.getJoueur().getPerso());
-                    System.out.println("\n");
+                Personnage persoJoueur = this.monde.getJoueur().getPerso();
+                if (perso.getPos().distance(persoJoueur.getPos()) <= perso.getDistMaxAtt()){
+                    if (random.nextInt(100) < 25) { // 25% de chance
+                        System.out.println(perso.getNom() + " attaque le joueur !");
+                        Combattant combattant = (Combattant) perso;
+                        combattant.combattre(this.monde.getJoueur().getPerso());
+                        System.out.println("\n");
+                    }
                 }
             }
         }
@@ -302,13 +308,16 @@ public class GameLoop {
                     }
                 }
             }
-            // Si c'est un combattant, il a 60% de chances d'attaquer le joueur
+            // Si c'est un combattant, il a 60% de chances d'attaquer le joueur s'il est à bonne distance
             if (monstre instanceof Combattant) {
-                if (random.nextInt(100) < 60) { // 60% de chance
-                    System.out.println(monstre.getClass().getSimpleName() + " attaque le joueur !");
-                    Combattant combattant = (Combattant) monstre;
-                    combattant.combattre(this.monde.getJoueur().getPerso());
-                    System.out.println("\n");
+                Personnage persoJoueur = this.monde.getJoueur().getPerso();
+                if (monstre.getPos().distance(persoJoueur.getPos()) <= 1){ // on considère que les monstres ne peuvent attaquer à distance
+                    if (random.nextInt(100) < 60) { // 60% de chance
+                        System.out.println(monstre.getClass().getSimpleName() + " attaque le joueur !");
+                        Combattant combattant = (Combattant) monstre;
+                        combattant.combattre(this.monde.getJoueur().getPerso());
+                        System.out.println("\n");
+                    }
                 }
             } 
         }
@@ -353,10 +362,7 @@ public class GameLoop {
                 persoIterator.remove(); // Suppression sûre
                 System.out.println(perso.getNom() + " est mort \n");
             }
-        }
-
-        
-        
+        }   
     }
 
     private void renderGame() {
