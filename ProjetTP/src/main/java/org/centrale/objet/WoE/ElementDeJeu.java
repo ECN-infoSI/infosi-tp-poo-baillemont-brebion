@@ -6,6 +6,8 @@ package org.centrale.objet.WoE;
  */
 public abstract class ElementDeJeu {
     public ElementDeJeu(){
-        
+
     }
+    
+    public abstract void creaElementDeJeuAlea();
 }

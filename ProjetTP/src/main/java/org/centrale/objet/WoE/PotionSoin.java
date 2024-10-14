@@ -1,8 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.centrale.objet.WoE;
+
+import java.util.Random;
 
 /**
  *  Sous-classe de Objet représentant une potion de soin
@@ -83,6 +81,9 @@ public class PotionSoin extends Objet implements Utilisables {
         this.consumed = consumed;
     }
     
-    
+    @Override public void creaElementDeJeuAlea(){
+        Random random = new Random();
+        this.setPtSoin(random.nextInt(11)+7); // entre 7 et 17
+    }
     
 }

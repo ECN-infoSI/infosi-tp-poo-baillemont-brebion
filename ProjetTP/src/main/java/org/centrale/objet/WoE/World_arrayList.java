@@ -241,7 +241,7 @@ public class World_arrayList {
         
         for (int i=0; i<nbArcher; i++){
             Archer archer = new Archer();
-            archer.creaArcherAlea();
+            archer.creaElementDeJeuAlea();
             Random r = new Random();
             int x = r.nextInt(this.plateau.length);
             int y = r.nextInt(this.plateau[0].length);
@@ -255,7 +255,7 @@ public class World_arrayList {
         
         for (int i=0; i<nbPaysan; i++){
             Paysan paysan = new Paysan();
-            paysan.creaPaysanAlea();
+            paysan.creaElementDeJeuAlea();
             Random r = new Random();
             int x = r.nextInt(this.plateau.length);
             int y = r.nextInt(this.plateau[0].length);
@@ -269,7 +269,7 @@ public class World_arrayList {
         
         for (int i=0; i<nbGuerrier; i++){
             Guerrier guerrier = new Guerrier();
-            guerrier.creaGuerrierAlea();
+            guerrier.creaElementDeJeuAlea();
             Random r = new Random();
             int x = r.nextInt(this.plateau.length);
             int y = r.nextInt(this.plateau[0].length);
@@ -283,7 +283,7 @@ public class World_arrayList {
         
         for (int i=0; i<nbLoup; i++){
             Loup loup = new Loup();
-            loup.creaLoupAlea();
+            loup.creaElementDeJeuAlea();
             Random r = new Random();
             int x = r.nextInt(this.plateau.length);
             int y = r.nextInt(this.plateau[0].length);
@@ -297,7 +297,7 @@ public class World_arrayList {
         
         for (int i=0; i<nbLapin; i++){
             Lapin lapin = new Lapin();
-            lapin.creaLapinAlea();
+            lapin.creaElementDeJeuAlea();
             Random r = new Random();
             int x = r.nextInt(this.plateau.length);
             int y = r.nextInt(this.plateau[0].length);
@@ -311,6 +311,7 @@ public class World_arrayList {
         
         for (int i=0; i<nbPotion; i++){
             PotionSoin potion = new PotionSoin();
+            potion.creaElementDeJeuAlea();
             Random r = new Random();
             int x = r.nextInt(this.plateau.length);
             int y = r.nextInt(this.plateau[0].length);
@@ -320,6 +321,7 @@ public class World_arrayList {
         
         for (int i=0; i<nbBurger; i++){
             ClassiqueBurger burger = new ClassiqueBurger();
+            burger.creaElementDeJeuAlea();
             Random r = new Random();
             int x = r.nextInt(this.plateau.length);
             int y = r.nextInt(this.plateau[0].length);
@@ -329,6 +331,7 @@ public class World_arrayList {
         
         for (int i=0; i<nbIlot5; i++){
             Ilot5RU ilot = new Ilot5RU();
+            ilot.creaElementDeJeuAlea();
             Random r = new Random();
             int x = r.nextInt(this.plateau.length);
             int y = r.nextInt(this.plateau[0].length);
@@ -338,6 +341,7 @@ public class World_arrayList {
         
         for (int i=0; i<nbNuage; i++){
             NuageToxique nuage = new NuageToxique();
+            nuage.creaElementDeJeuAlea();
             Random r = new Random();
             int x = r.nextInt(this.plateau.length);
             int y = r.nextInt(this.plateau[0].length);

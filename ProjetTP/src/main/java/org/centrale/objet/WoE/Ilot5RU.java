@@ -1,7 +1,9 @@
 package org.centrale.objet.WoE;
 
+import java.util.Random;
+
 /**
- * Nourriture qui diminue les points d'attaque quand consommée
+ * Nourriture qui influe sur les points d'attaque quand consommée
  * @author mattlerigolo
  */
 public class Ilot5RU extends Nourriture {
@@ -27,5 +29,4 @@ public class Ilot5RU extends Nourriture {
             p.setDegAtt(p.getDegAtt()+this.getBonusMalus());
         }
     }
-    
 }

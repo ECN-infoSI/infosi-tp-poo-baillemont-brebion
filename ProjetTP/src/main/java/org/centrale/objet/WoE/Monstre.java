@@ -52,7 +52,7 @@ public abstract class Monstre extends Creature{
      * Affiche les caractéristiques du monstre.
      */
     @Override public void affiche(){
-        System.out.println("Monstre" +
+        System.out.println(this.getClass().getSimpleName() + " n°" + this.Id +
                            "\nptVie : " + this.getPtVie() +
                            "\ndegAtt : " + this.getDegAtt() +
                            "\nptPar : " + this.getPtPar() +

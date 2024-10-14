@@ -97,4 +97,9 @@ public class NuageToxique extends Objet implements Combattant, Deplacable {
     @Override public boolean aDistancedAttaque(Creature c){
         return this.getPos().samePosition(c.getPos()); //le nuage attaque seulement s'il est sur la même case qu'une créature
     }
+    
+    @Override public void creaElementDeJeuAlea(){
+        Random random = new Random();
+        this.setDegats(random.nextInt(6)+3);
+    }
 }

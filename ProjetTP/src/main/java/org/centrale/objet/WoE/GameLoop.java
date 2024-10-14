@@ -28,10 +28,13 @@ public class GameLoop {
      * Fonction pour lancer le jeu
      */
     public void startGame() {
+        int tour = 0;
         this.monde.getJoueur().getPerso().affiche();
         
         this.monde.affichePlateau();
         while (!gameOver) {
+            tour++;
+            System.out.println("Tour n°" + tour);
             // Update stage
             updateGame();
 
@@ -180,7 +183,7 @@ public class GameLoop {
                 if (creatureChoisie instanceof Monstre){
                     Monstre monstre = (Monstre) creatureChoisie;
                     if (monstre.estMort()){
-                        System.out.println(monstre.getClass().getSimpleName() + " est mort");
+                        System.out.println(monstre.getClass().getSimpleName() + " n°" + monstre.getId() + " est mort");
                         this.monde.getPlateau()[monstre.getPos().getX()][monstre.getPos().getY()] = 0;
                         this.monde.getMonstres().remove(monstre);
                     }
@@ -224,6 +227,7 @@ public class GameLoop {
                 if (objetChoisi instanceof Nourriture){
                     Nourriture nourriture = (Nourriture) objetChoisi;
                     effets.add(nourriture);
+                    nourriture.setIsConsumed(true);
                     // Supprimer l'objet de l'inventaire
                     inventaire.remove(objetChoisi);
                     System.out.println(objetChoisi.getClass().getSimpleName() + " a été consommé et ajouté aux effets. \n");
@@ -250,6 +254,7 @@ public class GameLoop {
                 Nourriture nourriture = (Nourriture) objet;
                 nourriture.passerTour();
                 if (nourriture.effetFini()){
+                    System.out.println("L'effet de " + nourriture.getClass().getSimpleName() + " s'est fini.");
                     nourriture.finEffet(this.monde.getJoueur().getPerso());
                 }
             }
@@ -312,7 +317,7 @@ public class GameLoop {
                     NuageToxique nuage = (NuageToxique) objet;
                     if (nuage.aDistancedAttaque(monstre)){
                         nuage.combattre(monstre);
-                        System.out.println(monstre.getClass().getSimpleName() + " est dans un nuage toxique \n");
+                        System.out.println(monstre.getClass().getSimpleName() + " n°" + monstre.getId() + " est dans un nuage toxique \n");
                     }
                 }
             }
@@ -344,7 +349,7 @@ public class GameLoop {
                 for (Monstre monstre : this.monde.getMonstres()){
                     if (nuage.getPos().samePosition(monstre.getPos())){
                             nuage.combattre(monstre);
-                            System.out.println(monstre.getClass().getSimpleName() + " est dans un nuage toxique \n");
+                            System.out.println(monstre.getClass().getSimpleName() + " n°" + monstre.getId() + " est dans un nuage toxique \n");
                     }
                 }
             }
@@ -357,7 +362,7 @@ public class GameLoop {
             if (monstre.estMort()) {
                 this.monde.getPlateau()[monstre.getPos().getX()][monstre.getPos().getY()] = 0;
                 monstreIterator.remove(); // Suppression sûre
-                System.out.println(monstre.getClass().getSimpleName() + " est mort \n");
+                System.out.println(monstre.getClass().getSimpleName() + " n°" + monstre.getId() + " est mort \n");
             }
         }
 

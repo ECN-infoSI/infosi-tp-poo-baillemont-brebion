@@ -68,7 +68,7 @@ public class Guerrier extends Personnage implements Combattant {
     /**
      * Crée un guerrier avec des attributs aléatoires
      */
-    public void creaGuerrierAlea(){
+    @Override public void creaElementDeJeuAlea(){
         Random random = new Random();
         this.ptVie = random.nextInt(50)+75; // points de vie entre 75 et 125
         this.degAtt = random.nextInt(15)+15; // degats d'attaque entre 15 et 30

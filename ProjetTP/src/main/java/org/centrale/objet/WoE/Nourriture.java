@@ -1,5 +1,7 @@
 package org.centrale.objet.WoE;
 
+import java.util.Random;
+
 /**
  *
  * @author mattlerigolo
@@ -75,5 +77,11 @@ public abstract class Nourriture extends Objet implements Utilisables {
     
     public boolean effetFini(){
         return(this.tempsEffet==0);
+    }
+    
+    @Override public void creaElementDeJeuAlea(){
+        Random random = new Random();
+        this.setBonusMalus(random.nextInt(11)-5); // entre -5 et 5
+        this.setTempsEffet(random.nextInt(5)+1); // entre 1 et 5
     }
 }

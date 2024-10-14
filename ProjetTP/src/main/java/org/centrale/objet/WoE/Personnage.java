@@ -4,6 +4,8 @@
  */
 package org.centrale.objet.WoE;
 
+import java.util.Random;
+
 /**
  *
  * Classe de personnage.
@@ -135,5 +137,14 @@ public class Personnage extends Creature{
         else{
             System.out.println("Cette potion est trop éloignée ! \n");
         }
+    }
+    
+    @Override public void creaElementDeJeuAlea(){
+        Random random = new Random();
+        this.ptVie = random.nextInt(50)+25; // points de vie entre 25 et 75
+        this.ptPar = random.nextInt(10)+5; // entre 5 et 15
+        this.degAtt = random.nextInt(10)+5; // degats d'attaque entre 5 et 15
+        this.pagePar = random.nextInt(101); // entre 0 et 100
+        this.pageAtt = random.nextInt(101); // entre 0 et 100
     }
 }

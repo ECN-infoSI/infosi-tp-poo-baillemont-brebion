@@ -1,5 +1,7 @@
 package org.centrale.objet.WoE;
 
+import java.util.Random;
+
 /**
  * Sous-classe d'Objet représentant une épée
  * @author morga
@@ -80,5 +82,10 @@ public class Epee extends Objet{
         this.nom = nom;
     }
     
+    @Override public void creaElementDeJeuAlea(){
+        Random random = new Random();
+        this.setPtAtt(random.nextInt(11)+5); // entre 5 et 15
+        this.setPtPar(random.nextInt(11)+5); // entre 5 et 15
+    }
     
 }

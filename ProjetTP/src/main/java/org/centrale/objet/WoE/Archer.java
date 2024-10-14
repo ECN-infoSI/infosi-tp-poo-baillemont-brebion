@@ -71,7 +71,7 @@ public class Archer extends Personnage implements Combattant {
     /**
      * Crée un archer avec des attributs aléatoires
      */
-    public void creaArcherAlea(){
+    @Override public void creaElementDeJeuAlea(){
         Random random = new Random();
         this.ptVie = random.nextInt(50)+50; // points de vie entre 50 et 100
         this.ptPar = random.nextInt(10)+5; // entre 5 et 15
