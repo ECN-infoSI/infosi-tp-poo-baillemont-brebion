@@ -18,7 +18,5 @@ public class ProjetTP {
         // monde.getPersonnages().get(2).setNom("Aliocha");
         
         Game.startGame(monde);
-        monde.afficheWorld();
-        monde.affichePlateau();
     }
 }

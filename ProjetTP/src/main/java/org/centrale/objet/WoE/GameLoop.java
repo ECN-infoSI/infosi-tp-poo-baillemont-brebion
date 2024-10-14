@@ -268,10 +268,6 @@ public class GameLoop {
             System.out.println("Action non-valide, pas d'action effectuée \n");
         }
         System.out.println();
-        if (monde.getJoueur().perso.ptVie == 0) {
-            gameOver = true; 
-            System.out.println("GAME OVER");
-        }
         Random random = new Random();
         // On fait se déplacer tous les personnages et ceux qui peuvent attaquer tentent d'attaquer
         for (Personnage perso : this.monde.getPersonnages()) {
@@ -367,7 +363,12 @@ public class GameLoop {
                 persoIterator.remove(); // Suppression sûre
                 System.out.println(perso.getNom() + " est mort \n");
             }
-        }   
+        }
+        
+        if (monde.getJoueur().perso.ptVie <= 0) {
+            gameOver = true; 
+            System.out.println("GAME OVER : votre personnage est mort ! \n");
+        }
     }
 
     private void renderGame() {
