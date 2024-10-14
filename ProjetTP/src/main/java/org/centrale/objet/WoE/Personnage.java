@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.centrale.objet.WoE;
 
 import java.util.ArrayList;
@@ -94,6 +90,19 @@ public class Personnage extends Creature{
         }
         Personnage perso = new Personnage(mots_ligne.get(1), Integer.parseInt(mots_ligne.get(2)), Integer.parseInt(mots_ligne.get(3)), Integer.parseInt(mots_ligne.get(4)), Integer.parseInt(mots_ligne.get(5)), Integer.parseInt(mots_ligne.get(6)), Integer.parseInt(mots_ligne.get(7)), new Point2D(Integer.parseInt(mots_ligne.get(8)), Integer.parseInt(mots_ligne.get(9))));
         return perso;
+    }
+    
+    @Override public String ligneSauvegarde(){
+        return this.getClass().getSimpleName() + 
+                " " + this.getNom() +
+                " " + this.getPtVie() + 
+                " " + this.getDegAtt() + 
+                " " + this.getPtPar() +
+                " " + this.getPageAtt() +
+                " " + this.getPagePar() +
+                " " + this.getDistMaxAtt() +
+                " " + this.getPos().getX() +
+                " " + this.getPos().getY();
     }
     
     /**

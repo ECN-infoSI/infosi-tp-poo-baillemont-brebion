@@ -78,6 +78,13 @@ public class PotionSoin extends Objet implements Utilisables {
         PotionSoin potion = new PotionSoin(Integer.parseInt(mots_ligne.get(1)), new Point2D(Integer.parseInt(mots_ligne.get(2)), Integer.parseInt(mots_ligne.get(3))));
         return potion;
     }
+    
+    @Override public String ligneSauvegarde(){
+        return this.getClass().getSimpleName() +
+                " " + this.getPtSoin() +
+                " " + this.getPos().getX() +
+                " " + this.getPos().getY();
+    }
 
     public int getPtSoin() {
         return ptSoin;

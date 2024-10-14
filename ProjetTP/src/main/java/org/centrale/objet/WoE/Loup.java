@@ -67,6 +67,17 @@ public class Loup extends Monstre implements Combattant {
         return loup;
     }
     
+    @Override public String ligneSauvegarde(){
+        return this.getClass().getSimpleName() + 
+                " " + this.getPtVie() + 
+                " " + this.getDegAtt() + 
+                " " + this.getPtPar() +
+                " " + this.getPageAtt() +
+                " " + this.getPagePar() +
+                " " + this.getPos().getX() +
+                " " + this.getPos().getY();
+    }
+    
     /**
      * Crée un loup avec des attributs aléatoires
      */

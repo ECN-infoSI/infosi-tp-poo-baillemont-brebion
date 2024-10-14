@@ -62,6 +62,14 @@ public class NuageToxique extends Objet implements Combattant, Deplacable {
         return nuage;
     }
     
+    
+    @Override public String ligneSauvegarde(){
+        return this.getClass().getSimpleName() +
+                " " + this.getPos().getX() +
+                " " + this.getPos().getY() +
+                " " + this.getDegats();
+    }
+    
     public Point2D getPos() {
         return pos;
     }

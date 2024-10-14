@@ -41,6 +41,23 @@ public class Ilot5RU extends Nourriture {
         return ilot;
     }
     
+    
+    @Override public String ligneSauvegarde(){
+        int consumed;
+        if (this.isIsConsumed()){
+            consumed = 1;
+        }
+        else {
+            consumed = 0;
+        }
+        return this.getClass().getSimpleName() +
+                " " + this.getPos().getX() +
+                " " + this.getPos().getY() +
+                " " + this.getBonusMalus() +
+                " " + this.getTempsEffet() +
+                " " + consumed;
+    }
+    
     @Override public void mangerPar(Personnage p){
         p.setDegAtt(p.getDegAtt()-this.getBonusMalus());
         this.setIsConsumed(true);

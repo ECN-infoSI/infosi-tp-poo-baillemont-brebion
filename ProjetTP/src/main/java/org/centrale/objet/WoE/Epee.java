@@ -80,6 +80,13 @@ public class Epee extends Objet{
         Epee epee = new Epee(Integer.parseInt(mots_ligne.get(1)), Integer.parseInt(mots_ligne.get(2)), mots_ligne.get(3));
         return epee;
     }
+    
+    @Override public String ligneSauvegarde(){
+        return this.getClass().getSimpleName() +
+                " " + this.getPtAtt() + 
+                " " + this.getPtPar() +
+                " " + this.getNom();
+    }
 
     public int getPtAtt() {
         return ptAtt;

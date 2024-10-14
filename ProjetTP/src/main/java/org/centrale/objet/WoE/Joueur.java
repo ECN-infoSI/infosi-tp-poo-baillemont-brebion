@@ -5,9 +5,11 @@ package org.centrale.objet.WoE;
  * @author mattlerigolo
  */
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Random;
 import java.util.LinkedList;
+import java.util.StringTokenizer;
 
 public class Joueur {
     /**
@@ -85,7 +87,7 @@ public class Joueur {
      * @param effets
      * Inventaire du joueur
      */
-    public Joueur(Personnage perso, LinkedList<Utilisables> effets){
+    public Joueur(Personnage perso, LinkedList<Utilisables> effets, LinkedList<Utilisables> inventaire){
         this.perso = new Personnage(perso);
         this.effets = new LinkedList<Utilisables>(effets);
         this.inventaire = new LinkedList<Utilisables>(inventaire);
@@ -101,6 +103,8 @@ public class Joueur {
         this.effets = new LinkedList<Utilisables>(j.getEffets());
         this.inventaire = new LinkedList<Utilisables>(j.getInventaire());
     }
+    
+    
 
     public Personnage getPerso() {
         return perso;
@@ -151,6 +155,67 @@ public class Joueur {
         this.perso.pos.translate(newPosX - this.perso.pos.getX(), newPosY - this.perso.pos.getY());
     }
     
+    public Joueur create(String ligne){
+        // tokenisation
+        
+        StringTokenizer tokenizer = new StringTokenizer(ligne, " ");
+        ArrayList<String> mots_ligne = new ArrayList<>();
+        while (tokenizer.hasMoreTokens()){
+            String mot = tokenizer.nextToken();
+            mot = mot.toLowerCase(); // mot en minuscules
+            mots_ligne.add(mot);
+        }
+        if (mots_ligne.get(1).equals("Archer")){
+            Archer personnage = new Archer(mots_ligne.get(2), Integer.parseInt(mots_ligne.get(3)), Integer.parseInt(mots_ligne.get(4)), Integer.parseInt(mots_ligne.get(5)), Integer.parseInt(mots_ligne.get(6)), Integer.parseInt(mots_ligne.get(7)), Integer.parseInt(mots_ligne.get(8)), new Point2D(Integer.parseInt(mots_ligne.get(9)), Integer.parseInt(mots_ligne.get(10))), Integer.parseInt(mots_ligne.get(11)));
+            Joueur joueur = new Joueur(personnage, new LinkedList<Utilisables>(), new LinkedList<Utilisables>());
+            return joueur;
+        }       
+        else if (mots_ligne.get(1).equals("Guerrier")){
+            Epee epee_guerrier = new Epee(Integer.parseInt(mots_ligne.get(11)), Integer.parseInt(mots_ligne.get(12)), mots_ligne.get(13));
+            Guerrier personnage = new Guerrier(mots_ligne.get(2), Integer.parseInt(mots_ligne.get(3)), Integer.parseInt(mots_ligne.get(4)), Integer.parseInt(mots_ligne.get(5)), Integer.parseInt(mots_ligne.get(6)), Integer.parseInt(mots_ligne.get(7)), Integer.parseInt(mots_ligne.get(8)), new Point2D(Integer.parseInt(mots_ligne.get(9)), Integer.parseInt(mots_ligne.get(10))), epee_guerrier);
+            Joueur joueur = new Joueur(personnage, new LinkedList<Utilisables>(), new LinkedList<Utilisables>());
+            return joueur;
+        }
+        else {
+            return new Joueur();
+        }
+    }
+    
+    public String ligneSauvegarde(){
+        if (this.getPerso() instanceof Archer){
+            Archer archer = (Archer) this.getPerso();
+            return this.getClass().getSimpleName() + 
+                " " + archer.getClass().getSimpleName() +
+                " " + archer.getPtVie() + 
+                " " + archer.getDegAtt() + 
+                " " + archer.getPtPar() +
+                " " + archer.getPageAtt() +
+                " " + archer.getPagePar() +
+                " " + archer.getDistMaxAtt() +
+                " " + archer.getPos().getX() +
+                " " + archer.getPos().getY() +
+                " " + archer.getNbFleches();
+        }
+        else if (this.getPerso() instanceof Guerrier){
+            Guerrier guerrier = (Guerrier) this.getPerso();
+            return this.getClass().getSimpleName() + 
+                " " + guerrier.getClass().getSimpleName() +
+                " " + guerrier.getPtVie() + 
+                " " + guerrier.getDegAtt() + 
+                " " + guerrier.getPtPar() +
+                " " + guerrier.getPageAtt() +
+                " " + guerrier.getPagePar() +
+                " " + guerrier.getDistMaxAtt() +
+                " " + guerrier.getPos().getX() +
+                " " + guerrier.getPos().getY() +
+                " " + guerrier.getEpee().getPtAtt() +
+                " " + guerrier.getEpee().getPtPar() +
+                " " + guerrier.getEpee().getNom();
+        }
+        else  {
+            return "";
+        }
+    }
     
 }
 

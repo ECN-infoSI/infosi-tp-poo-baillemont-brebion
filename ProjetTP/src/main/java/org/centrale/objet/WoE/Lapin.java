@@ -67,6 +67,18 @@ public class Lapin extends Monstre {
         return lapin;
     }
     
+    
+    @Override public String ligneSauvegarde(){
+        return this.getClass().getSimpleName() + 
+                " " + this.getPtVie() + 
+                " " + this.getDegAtt() + 
+                " " + this.getPtPar() +
+                " " + this.getPageAtt() +
+                " " + this.getPagePar() +
+                " " + this.getPos().getX() +
+                " " + this.getPos().getY();
+    }
+    
     /**
      * Crée un lapin avec des attributs aléatoires
      */
