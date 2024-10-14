@@ -46,6 +46,18 @@ public class Loup extends Monstre implements Combattant {
     }
     
     /**
+     * Crée un loup avec des attributs aléatoires
+     */
+    public void creaLoupAlea(){
+        Random random = new Random();
+        this.ptVie = random.nextInt(50)+25; // points de vie entre 25 et 755
+        this.degAtt = random.nextInt(15)+15; // degats d'attaque entre 15 et 30
+        this.pagePar = random.nextInt(101); // entre 0 et 100
+        this.pageAtt = random.nextInt(101); // entre 0 et 100
+        this.ptPar = random.nextInt(10)+5; // entre 5 et 15
+    }
+    
+    /**
      * Action de combattre
      * @param c 
      * Créature à combattre

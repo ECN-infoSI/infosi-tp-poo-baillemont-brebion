@@ -1,8 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.centrale.objet.WoE;
+
+import java.util.Random;
 
 /**
  * Sous-classe de Monstre représentant un lapin
@@ -46,4 +44,13 @@ public class Lapin extends Monstre {
     public Lapin(Lapin l){
         super(l);
     };
+    
+    public void creaLapinAlea(){
+        Random random = new Random();
+        this.ptVie = random.nextInt(20)+10; // points de vie entre 10 et 30
+        this.degAtt = random.nextInt(5)+1; // degats d'attaque entre 1 et 5
+        this.pagePar = random.nextInt(101); // entre 0 et 100
+        this.pageAtt = random.nextInt(101); // entre 0 et 100
+        this.ptPar = random.nextInt(10)+5; // entre 5 et 15
+    }
 }

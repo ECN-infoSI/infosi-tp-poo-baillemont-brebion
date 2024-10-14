@@ -65,6 +65,17 @@ public class Guerrier extends Personnage implements Combattant {
         this.epee = epee;
     }
     
+    public void creaGuerrierAlea(){
+        Random random = new Random();
+        this.ptVie = random.nextInt(50)+75; // points de vie entre 75 et 125
+        this.degAtt = random.nextInt(15)+15; // degats d'attaque entre 15 et 30
+        this.ptPar = random.nextInt(10)+5; // entre 5 et 15
+        this.pagePar = random.nextInt(101); // entre 0 et 100
+        this.pageAtt = random.nextInt(101); // entre 0 et 100
+        this.epee = new Epee();
+        this.epee.setPtAtt(degAtt);
+    }
+    
     /**
      * Action de combattre
      * @param c 

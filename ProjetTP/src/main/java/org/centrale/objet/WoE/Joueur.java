@@ -62,6 +62,8 @@ public class Joueur {
             perso.setPagePar(pagePar);
             int pageAtt = random.nextInt(101); // entre 0 et 100
             perso.setPageAtt(pageAtt);
+            int ptPar = random.nextInt(10)+5; // entre 5 et 15
+            perso.setPtPar(ptPar);
             Epee epee = new Epee();
             epee.setPtAtt(degAtt);
             perso.setEpee(epee);

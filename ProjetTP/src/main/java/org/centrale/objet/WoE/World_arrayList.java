@@ -241,6 +241,7 @@ public class World_arrayList {
         
         for (int i=0; i<nbArcher; i++){
             Archer archer = new Archer();
+            archer.creaArcherAlea();
             Random r = new Random();
             int x = r.nextInt(this.plateau.length);
             int y = r.nextInt(this.plateau[0].length);
@@ -254,6 +255,7 @@ public class World_arrayList {
         
         for (int i=0; i<nbPaysan; i++){
             Paysan paysan = new Paysan();
+            paysan.creaPaysanAlea();
             Random r = new Random();
             int x = r.nextInt(this.plateau.length);
             int y = r.nextInt(this.plateau[0].length);
@@ -267,6 +269,7 @@ public class World_arrayList {
         
         for (int i=0; i<nbGuerrier; i++){
             Guerrier guerrier = new Guerrier();
+            guerrier.creaGuerrierAlea();
             Random r = new Random();
             int x = r.nextInt(this.plateau.length);
             int y = r.nextInt(this.plateau[0].length);
@@ -280,6 +283,7 @@ public class World_arrayList {
         
         for (int i=0; i<nbLoup; i++){
             Loup loup = new Loup();
+            loup.creaLoupAlea();
             Random r = new Random();
             int x = r.nextInt(this.plateau.length);
             int y = r.nextInt(this.plateau[0].length);
@@ -293,6 +297,7 @@ public class World_arrayList {
         
         for (int i=0; i<nbLapin; i++){
             Lapin lapin = new Lapin();
+            lapin.creaLapinAlea();
             Random r = new Random();
             int x = r.nextInt(this.plateau.length);
             int y = r.nextInt(this.plateau[0].length);
