@@ -65,7 +65,7 @@ public class Personnage extends Creature{
     /**
      * Construit un personnage à partir des caractéristiques d'un personnage déjà existant.
      * @param perso 
-     *          Personnage déjà existant
+     * Personnage déjà existant
      * 
      */
     public Personnage(Personnage perso){
@@ -77,6 +77,7 @@ public class Personnage extends Creature{
     /**
      *
      * @return
+     * Nom du personnage
      */
     public String getNom(){
         return this.nom ;
@@ -85,6 +86,7 @@ public class Personnage extends Creature{
     /**
      *
      * @return
+     * Distance Maximale d'attaque
      */
     public int getDistMaxAtt() {
         return distMaxAtt;
@@ -93,6 +95,7 @@ public class Personnage extends Creature{
     /**
      *
      * @param newNom
+     * Nouveau nom
      */
     public void setNom(String newNom){
         this.nom = newNom;
@@ -101,6 +104,7 @@ public class Personnage extends Creature{
     /**
      *
      * @param distMaxAtt
+     * Distance maximale d'attaque
      */
     public void setDistMaxAtt(int distMaxAtt) {
         this.distMaxAtt = distMaxAtt;
@@ -125,7 +129,7 @@ public class Personnage extends Creature{
     /**
      * Action de boire une potion pot.
      * @param pot 
-     *          Potion que le personnage veut boire
+     * Potion que le personnage veut boire
      */
     
     public void boirePotion(PotionSoin pot){
@@ -139,6 +143,9 @@ public class Personnage extends Creature{
         }
     }
     
+    /**
+     * Crée un personnage avec des attributs aléatoires
+     */
     @Override public void creaElementDeJeuAlea(){
         Random random = new Random();
         this.ptVie = random.nextInt(50)+25; // points de vie entre 25 et 75

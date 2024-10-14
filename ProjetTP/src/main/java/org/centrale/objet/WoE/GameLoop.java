@@ -18,7 +18,8 @@ public class GameLoop {
     
     /**
      * Constructeur
-     * @param monde 
+     * @param monde
+     * Monde qui sert de base au jeu
      */
     public GameLoop(World_arrayList monde) {
         this.monde = monde;

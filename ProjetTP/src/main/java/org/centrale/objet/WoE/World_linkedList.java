@@ -3,8 +3,7 @@ import java.util.Random;
 import java.util.LinkedList;
 
 /**
- * Création d'un monde WoE comprenant un archer, un paysan et un lapin. 
- * Leur position est initialisée aléatoirement à la création du monde par la méthode {@link #creaMondeAlea()}.
+ * Création d'un monde WoE.
  * @author mattlerigolo
  * @author morga
  * 
@@ -156,6 +155,7 @@ public class World_linkedList {
     /**
      * Ajouter un monstre au monde
      * @param monstre 
+     * Monstre à ajouter au monde
      */
     public void addMonstre(Monstre monstre){
         if (monstre.getPos().getX() < 0 || monstre.getPos().getX() >= plateau.length){

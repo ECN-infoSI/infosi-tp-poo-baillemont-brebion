@@ -127,7 +127,7 @@ public class Archer extends Personnage implements Combattant {
     }
     
     /**
-     * Fonction vérifiant si la créature c est à une distance > 1 et <= distMaxAtt de l'Archer
+     * Fonction vérifiant si la créature c est à une distance strictment plus grande que 1 et plus petite que distMaxAtt de l'Archer
      * @param c
      * Créature que l'on veut attaquer
      * @return 

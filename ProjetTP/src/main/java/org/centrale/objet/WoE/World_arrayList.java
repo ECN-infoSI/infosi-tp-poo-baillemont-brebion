@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
- * Création d'un monde WoE comprenant un archer, un paysan et un lapin. 
- * Leur position est initialisée aléatoirement à la création du monde par la méthode {@link #creaMondeAlea()}.
+ * Création d'un monde WoE. 
  * @author mattlerigolo
  * @author morga
  * 
@@ -189,6 +188,7 @@ public class World_arrayList {
     /**
      * Ajouter un monstre au monde
      * @param monstre 
+     * Monstre à ajouter au monde
      */
     public void addMonstre(Monstre monstre){
         if (monstre.getPos().getX() < 0 || monstre.getPos().getX() >= plateau.length){
@@ -207,6 +207,11 @@ public class World_arrayList {
         }
     }
     
+    /**
+     * Ajouter un objet au monde
+     * @param objet
+     * Objet à ajouter au monde
+     */
     public void addObjet(Objet objet){
         this.getObjets().add(objet);
     }
@@ -422,6 +427,14 @@ public class World_arrayList {
     }
     */
     
+    
+    /**
+     * Récupère le personnage à partir de son ID, null si l'ID ne correspond à rien
+     * @param id
+     * ID à chercher
+     * @return
+     * Personnage correspondant à l'ID
+     */
     public Personnage getPersonnage(int id) {
         for (Personnage perso : this.personnages) {
             if (perso.getId() == id) {
@@ -431,6 +444,14 @@ public class World_arrayList {
         return null;
     }
     
+    
+    /**
+     * Récupère le monstre à partir de son ID, null si l'ID ne correspond à rien
+     * @param id
+     * ID à chercher
+     * @return
+     * Monstre correspondant à l'ID
+     */
     public Creature getCreature(int id) {
         // Cherche dans le tableau de personnages
         for (Personnage perso : personnages) {

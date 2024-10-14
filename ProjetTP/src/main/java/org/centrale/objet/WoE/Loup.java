@@ -88,7 +88,7 @@ public class Loup extends Monstre implements Combattant {
     }
     
     /**
-     * Fonction vérifiant si la créature c est à une distance <= 1 du loup 
+     * Fonction vérifiant si la créature c est à une distance inférieure ou égale à 1 du loup 
      * @param c
      * Créature que l'on veut attaquer
      * @return 
