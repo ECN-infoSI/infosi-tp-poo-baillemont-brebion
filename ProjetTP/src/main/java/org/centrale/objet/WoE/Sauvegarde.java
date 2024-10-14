@@ -81,7 +81,7 @@ public class Sauvegarde {
                     try {
                         Class<?> clazz = Class.forName(classe);
                         Constructor<?> constructor = clazz.getConstructor(String.class);
-                        Utilisables instance = (Utilisables) constructor.newInstance(ligne);
+                        Utilisables instance = (Utilisables) constructor.newInstance(ligne.substring(11));
                         monde.getJoueur().getInventaire().add(instance);
                     }catch (Exception e){
                         e.printStackTrace();
@@ -92,8 +92,19 @@ public class Sauvegarde {
                     try {
                         Class<?> clazz = Class.forName(classe);
                         Constructor<?> constructor = clazz.getConstructor(String.class);
-                        Utilisables instance = (Utilisables) constructor.newInstance(ligne);
+                        Utilisables instance = (Utilisables) constructor.newInstance(ligne.substring(6));
                         monde.getJoueur().getEffets().add(instance);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+                else if (premier_mot == "Joueur"){
+                    String classe = tokenizer.nextToken();
+                    try {
+                        Class<?> clazz = Class.forName(classe);
+                        Constructor<?> constructor = clazz.getConstructor(String.class);
+                        Personnage instance = (Personnage) constructor.newInstance(ligne.substring(7));
+                        monde.getJoueur().setPerso(instance);
                     }catch (Exception e){
                         e.printStackTrace();
                     }
