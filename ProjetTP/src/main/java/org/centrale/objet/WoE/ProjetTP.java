@@ -8,9 +8,9 @@ package org.centrale.objet.WoE;
 public class ProjetTP {
 
     public static void main(String[] args) {
-        World_arrayList monde = new World_arrayList(5,5);
+        World_arrayList monde = new World_arrayList(10,10);
         GameLoop Game = new GameLoop(monde);
-        monde.creaMondeAlea(1,1,1,1,1,50,50,50,10);
+        monde.creaMondeAlea(2,2,2,2,2,10,10,10,3);
         monde.getPersonnages().get(0).setNom("Ivan");
         monde.getPersonnages().get(0).setPtVie(1);
         monde.getPersonnages().get(1).setNom("Dmitri");
