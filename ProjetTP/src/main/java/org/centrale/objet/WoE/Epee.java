@@ -1,6 +1,8 @@
 package org.centrale.objet.WoE;
 
+import java.util.ArrayList;
 import java.util.Random;
+import java.util.StringTokenizer;
 
 /**
  * Sous-classe d'Objet représentant une épée
@@ -55,7 +57,28 @@ public class Epee extends Objet{
      */
     public Epee(Epee e){
         this.ptAtt = e.getPtAtt();
-        
+        this.nom = e.getNom();
+        this.ptPar = e.getPtPar();
+    }
+    
+    /**
+     * Création d'une épée à partir d'une ligne de texte de la sauvegarde
+     * @param ligne
+     * Ligne représentant le guerrier dans un .txt
+     * @return 
+     * Épée construit à partir de la ligne
+     */
+    @Override public Epee create(String ligne){
+        // tokenisation
+        StringTokenizer tokenizer = new StringTokenizer(ligne, " ");
+        ArrayList<String> mots_ligne = new ArrayList<>();
+        while (tokenizer.hasMoreTokens()){
+            String mot = tokenizer.nextToken();
+            mot = mot.toLowerCase(); // mot en minuscules
+            mots_ligne.add(mot);
+        }
+        Epee epee = new Epee(Integer.parseInt(mots_ligne.get(1)), Integer.parseInt(mots_ligne.get(2)), mots_ligne.get(3));
+        return epee;
     }
 
     public int getPtAtt() {

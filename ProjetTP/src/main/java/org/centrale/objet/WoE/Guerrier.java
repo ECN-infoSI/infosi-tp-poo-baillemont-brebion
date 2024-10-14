@@ -51,11 +51,13 @@ public class Guerrier extends Personnage implements Combattant {
     }
     
     /**
-     * Constructeur de sauvegarde
+     * Création d'un guerrier à partir d'une ligne de texte de la sauvegarde
      * @param ligne
-     * ligne de sauvegarde
+     * Ligne représentant le guerrier dans un .txt
+     * @return 
+     * Guerrier construit à partir de la ligne
      */
-    public Guerrier(String ligne){
+    @Override public Guerrier create(String ligne){
         // tokenisation
         StringTokenizer tokenizer = new StringTokenizer(ligne, " ");
         ArrayList<String> mots_ligne = new ArrayList<>();
@@ -66,10 +68,10 @@ public class Guerrier extends Personnage implements Combattant {
         }
         // construction de l'épée
         Epee epee_guerrier = new Epee(Integer.parseInt(mots_ligne.get(10)), Integer.parseInt(mots_ligne.get(11)), mots_ligne.get(12));
-        // construction du guerrier
-        this(mots_ligne.get(1), Integer.parseInt(mots_ligne.get(2)), Integer.parseInt(mots_ligne.get(3)), Integer.parseInt(mots_ligne.get(4)), Integer.parseInt(mots_ligne.get(5)), Integer.parseInt(mots_ligne.get(6)), Integer.parseInt(mots_ligne.get(7)), new Point2D(Integer.parseInt(mots_ligne.get(8)), Integer.parseInt(mots_ligne.get(9))), epee_guerrier);
+        Guerrier guerrier = new Guerrier(mots_ligne.get(1), Integer.parseInt(mots_ligne.get(2)), Integer.parseInt(mots_ligne.get(3)), Integer.parseInt(mots_ligne.get(4)), Integer.parseInt(mots_ligne.get(5)), Integer.parseInt(mots_ligne.get(6)), Integer.parseInt(mots_ligne.get(7)), new Point2D(Integer.parseInt(mots_ligne.get(8)), Integer.parseInt(mots_ligne.get(9))), epee_guerrier);
+        return guerrier;
     }
-    
+
     /**
      * Constructeur de copie
      * @param g 

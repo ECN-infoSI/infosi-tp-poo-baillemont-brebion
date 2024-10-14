@@ -9,5 +9,7 @@ public abstract class ElementDeJeu {
 
     }
     
+    public abstract ElementDeJeu create(String ligne);
+    
     public abstract void creaElementDeJeuAlea();
 }

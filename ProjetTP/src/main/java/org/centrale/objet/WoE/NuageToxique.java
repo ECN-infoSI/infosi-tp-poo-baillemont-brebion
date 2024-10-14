@@ -1,6 +1,8 @@
 package org.centrale.objet.WoE;
 
+import java.util.ArrayList;
 import java.util.Random;
+import java.util.StringTokenizer;
 
 /**
  *  Nuage toxique qui se déplace aléatoirement et fais des dégâts aux créatures
@@ -38,6 +40,26 @@ public class NuageToxique extends Objet implements Combattant, Deplacable {
     public NuageToxique(NuageToxique n){
         this.pos = new Point2D(n.getPos());
         this.degats = n.getDegats();
+    }
+    
+    /**
+     * Création d'un NuageToxique à partir d'une ligne de texte de la sauvegarde
+     * @param ligne
+     * Ligne représentant le guerrier dans un .txt
+     * @return 
+     * NuageToxique construite à partir de la ligne
+     */
+    @Override public NuageToxique create(String ligne){
+        // tokenisation
+        StringTokenizer tokenizer = new StringTokenizer(ligne, " ");
+        ArrayList<String> mots_ligne = new ArrayList<>();
+        while (tokenizer.hasMoreTokens()){
+            String mot = tokenizer.nextToken();
+            mot = mot.toLowerCase(); // mot en minuscules
+            mots_ligne.add(mot);
+        }
+        NuageToxique nuage = new NuageToxique(new Point2D(Integer.parseInt(mots_ligne.get(1)), Integer.parseInt(mots_ligne.get(2))), Integer.parseInt(mots_ligne.get(3)));
+        return nuage;
     }
     
     public Point2D getPos() {
