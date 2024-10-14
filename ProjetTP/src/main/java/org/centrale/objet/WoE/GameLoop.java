@@ -1,8 +1,9 @@
 package org.centrale.objet.WoE;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import org.centrale.objet.WoE.Monstre;
 import java.util.Random;
 import java.util.LinkedList;
 import java.util.Iterator;
@@ -29,6 +30,26 @@ public class GameLoop {
      * Fonction pour lancer le jeu
      */
     public void startGame() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Voulez-vous charger une partie sauvegardée ou commencer une nouvelle partie ?\n1 : Charger une partie\n2 : Commencer une nouvelle partie");
+        String choix = scanner.nextLine();
+        if (choix.equalsIgnoreCase("1")){
+            System.out.println("Entrez le nom du fichier de sauvegarde (par exemple : sauvegarde.txt)");
+            String fichier = scanner.nextLine();
+            try {
+                Sauvegarde sauv = new Sauvegarde(fichier);
+                monde = sauv.chargementPartie();
+                if (monde != null) {
+                    System.out.println("Partie chargée avec succès !");
+                } else {
+                    System.out.println("Erreur lors du chargement de la partie.");
+                    return;
+                }
+            } catch (IOException e) {
+                System.out.println("Erreur lors du chargement de la partie : " + e.getMessage());
+                return;
+            }
+        }
         int tour = 0;
         this.monde.getJoueur().getPerso().affiche();
         
@@ -276,6 +297,38 @@ public class GameLoop {
         }
         else if(classe.equalsIgnoreCase("3")){
             consommer();
+        }
+        else if(classe.equalsIgnoreCase("4")){
+            System.out.println("Voulez-vous vraiment sauvegarder la partie ? (o/n)");
+            String choix = scanner.nextLine();
+            if (choix.equalsIgnoreCase("o")){
+                try {
+                    System.out.println("Voulez-vous donner un nom à la sauvegarde ? (o/n)");
+                    choix = scanner.nextLine();
+                    String nom_sauv;
+                    if (choix.equalsIgnoreCase("o")){
+                        System.out.println("Entrez le nom de la sauvegarde");
+                        nom_sauv = scanner.nextLine();
+                    } 
+                    else{
+                        // Recherche du prochain numéro de sauvegarde
+                        int numeroSauvegarde = 1;
+                        while (true) {
+                            nom_sauv = "sauvegarde_" + numeroSauvegarde + ".txt";
+                            File fichier = new File(nom_sauv);
+                            if (!fichier.exists()) {
+                                break;
+                            }
+                            numeroSauvegarde++;
+                        }
+                    }
+                    Sauvegarde sauv = new Sauvegarde(nom_sauv);
+                    sauv.sauvegardePartie(monde);
+                    System.out.println("Partie sauvegardée avec succès !");
+                } catch (IOException e) {
+                    System.out.println("Erreur lors de la sauvegarde : " + e.getMessage());
+                }
+            }
         }
         else{
             System.out.println("Action non-valide, pas d'action effectuée \n");
