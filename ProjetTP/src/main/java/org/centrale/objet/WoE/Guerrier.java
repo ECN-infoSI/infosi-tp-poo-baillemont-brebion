@@ -1,6 +1,8 @@
 package org.centrale.objet.WoE;
 
+import java.util.ArrayList;
 import java.util.Random;
+import java.util.StringTokenizer;
 
 /**
  * Sous-classe de personnage représentant un guerrier
@@ -42,9 +44,30 @@ public class Guerrier extends Personnage implements Combattant {
      * @param epee
      * Epée du guerrier
      */
+    
     public Guerrier(String nom, int ptVie, int degAtt, int ptPar, int pageAtt, int pagePar, int distMaxAtt, Point2D pos, Epee epee){
         super(nom, ptVie, degAtt, ptPar, pageAtt, pagePar, distMaxAtt, pos);
         this.epee = epee;
+    }
+    
+    /**
+     * Constructeur de sauvegarde
+     * @param ligne
+     * ligne de sauvegarde
+     */
+    public Guerrier(String ligne){
+        // tokenisation
+        StringTokenizer tokenizer = new StringTokenizer(ligne, " ");
+        ArrayList<String> mots_ligne = new ArrayList<>();
+        while (tokenizer.hasMoreTokens()){
+            String mot = tokenizer.nextToken();
+            mot = mot.toLowerCase(); // mot en minuscules
+            mots_ligne.add(mot);
+        }
+        // construction de l'épée
+        Epee epee_guerrier = new Epee(Integer.parseInt(mots_ligne.get(10)), Integer.parseInt(mots_ligne.get(11)), mots_ligne.get(12));
+        // construction du guerrier
+        this(mots_ligne.get(1), Integer.parseInt(mots_ligne.get(2)), Integer.parseInt(mots_ligne.get(3)), Integer.parseInt(mots_ligne.get(4)), Integer.parseInt(mots_ligne.get(5)), Integer.parseInt(mots_ligne.get(6)), Integer.parseInt(mots_ligne.get(7)), new Point2D(Integer.parseInt(mots_ligne.get(8)), Integer.parseInt(mots_ligne.get(9))), epee_guerrier);
     }
     
     /**
@@ -110,7 +133,7 @@ public class Guerrier extends Personnage implements Combattant {
     }
     
     /**
-     * Fonction vérifiant si la créature c est à une distance <= à distMaxAtt du Guerrier
+     * Fonction vérifiant si la créature c est à une distance inférieure ou égale à distMaxAtt du Guerrier
      * @param c
      * Créature que l'on veut attaquer
      * @return 
@@ -120,4 +143,7 @@ public class Guerrier extends Personnage implements Combattant {
         double distance = this.getPos().distance(c.getPos());
         return distance<=this.getDistMaxAtt();
     }
+
+    
+     
 }
