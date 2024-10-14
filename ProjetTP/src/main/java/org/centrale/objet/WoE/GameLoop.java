@@ -327,7 +327,7 @@ public class GameLoop {
                 Combattant combattant = (Combattant) monstre;
                 if (combattant.aDistancedAttaque(persoJoueur)){ // on considère que les monstres ne peuvent attaquer à distance
                     if (random.nextInt(100) < 60) { // 60% de chance
-                        System.out.println(monstre.getClass().getSimpleName() + " attaque le joueur !");
+                        System.out.println(monstre.getClass().getSimpleName() + " n°" + monstre.getId() + " attaque le joueur !");
                         combattant.combattre(this.monde.getJoueur().getPerso());
                         System.out.println("\n");
                     }

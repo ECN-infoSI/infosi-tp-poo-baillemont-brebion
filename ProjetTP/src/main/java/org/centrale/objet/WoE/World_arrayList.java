@@ -352,17 +352,24 @@ public class World_arrayList {
         
     }
     
-    public void creaMondeAlea(){
+    /**
+     * Création d'un monde aléatoire avec des nombres de créatures et objets aléatoires
+     * @param nbMaxCreatures
+     * Nombre maximum pour chaque créature
+     * @param nbMaxObjets 
+     * Nombre maximum pour chaque objet
+     */
+    public void creaMondeAlea(int nbMaxCreatures, int nbMaxObjets){
         Random r = new Random();
-        int nbArcher = r.nextInt(11);
-        int nbPaysan = r.nextInt(11);
-        int nbGuerrier = r.nextInt(11);
-        int nbLapin = r.nextInt(11);
-        int nbLoup = r.nextInt(11);
-        int nbPotion = r.nextInt(11);
-        int nbBurger = r.nextInt(11);
-        int nbIlot = r.nextInt(11);
-        int nbNuage = r.nextInt(11);
+        int nbArcher = r.nextInt(nbMaxCreatures+1);
+        int nbPaysan = r.nextInt(nbMaxCreatures+1);
+        int nbGuerrier = r.nextInt(nbMaxCreatures+1);
+        int nbLapin = r.nextInt(nbMaxCreatures+1);
+        int nbLoup = r.nextInt(nbMaxCreatures+1);
+        int nbPotion = r.nextInt(nbMaxObjets+1);
+        int nbBurger = r.nextInt(nbMaxObjets+1);
+        int nbIlot = r.nextInt(nbMaxObjets+1);
+        int nbNuage = r.nextInt(nbMaxObjets+1);
         
         this.creaMondeAlea(nbPaysan, nbGuerrier, nbArcher, nbLapin, nbLoup, nbPotion, nbBurger, nbIlot, nbNuage);
     }
