@@ -15,4 +15,6 @@ public interface Combattant {
      * Créature à combattre
      */
     public void combattre(Creature c);
+    
+    public boolean aDistancedAttaque(Creature c);
 }

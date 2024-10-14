@@ -142,10 +142,13 @@ public class GameLoop {
         }
         for (Creature creature : creatures) {
             Personnage persoJoueur = monde.getJoueur().getPerso();
-            if (creature.getPos().distance(persoJoueur.getPos()) <= persoJoueur.getDistMaxAtt()){
-                System.out.println("Créature " + creature.getId() + " : ");
-                creature.affiche();
-                compteur ++;
+            if (persoJoueur instanceof Combattant){
+                Combattant combJoueur = (Combattant) persoJoueur;
+                if (combJoueur.aDistancedAttaque(creature)){ // on n'affiche que les créatures à bonne distance pour attaquer
+                    System.out.println("Créature " + creature.getId() + " : ");
+                    creature.affiche();
+                    compteur ++;
+                }
             }
         }
         // Demander au joueur de choisir une case
@@ -164,6 +167,8 @@ public class GameLoop {
         if (creatureChoisie != null && monde.getJoueur().perso instanceof Combattant) {
             Combattant comb = (Combattant) (monde.getJoueur().perso);
             comb.combattre(creatureChoisie);
+            System.out.println("Créature " + choix + " après l'attaque :");
+            creatureChoisie.affiche();
             if (creatureChoisie.estMort()){
                 if (creatureChoisie instanceof Monstre){
                     Monstre monstre = (Monstre) creatureChoisie;
@@ -284,10 +289,10 @@ public class GameLoop {
             // Si c'est un combattant, il a 25% de chances d'attaquer le joueur s'il est à distance
             if (perso instanceof Combattant) {
                 Personnage persoJoueur = this.monde.getJoueur().getPerso();
-                if (perso.getPos().distance(persoJoueur.getPos()) <= perso.getDistMaxAtt()){
+                Combattant combattant = (Combattant) perso;
+                if (combattant.aDistancedAttaque(persoJoueur)){
                     if (random.nextInt(100) < 25) { // 25% de chance
                         System.out.println(perso.getNom() + " attaque le joueur !");
-                        Combattant combattant = (Combattant) perso;
                         combattant.combattre(this.monde.getJoueur().getPerso());
                         System.out.println("\n");
                     }
@@ -311,10 +316,10 @@ public class GameLoop {
             // Si c'est un combattant, il a 60% de chances d'attaquer le joueur s'il est à bonne distance
             if (monstre instanceof Combattant) {
                 Personnage persoJoueur = this.monde.getJoueur().getPerso();
-                if (monstre.getPos().distance(persoJoueur.getPos()) <= 1){ // on considère que les monstres ne peuvent attaquer à distance
+                Combattant combattant = (Combattant) monstre;
+                if (combattant.aDistancedAttaque(persoJoueur)){ // on considère que les monstres ne peuvent attaquer à distance
                     if (random.nextInt(100) < 60) { // 60% de chance
                         System.out.println(monstre.getClass().getSimpleName() + " attaque le joueur !");
-                        Combattant combattant = (Combattant) monstre;
                         combattant.combattre(this.monde.getJoueur().getPerso());
                         System.out.println("\n");
                     }

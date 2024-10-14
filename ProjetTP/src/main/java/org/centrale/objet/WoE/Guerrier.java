@@ -94,4 +94,9 @@ public class Guerrier extends Personnage implements Combattant {
             System.out.println("Trop loin !");
         }
     }
+    
+    @Override public boolean aDistancedAttaque(Creature c){
+        double distance = this.getPos().distance(c.getPos());
+        return distance<=this.getDistMaxAtt();
+    }
 }

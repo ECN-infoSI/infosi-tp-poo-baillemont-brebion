@@ -74,4 +74,9 @@ public class Loup extends Monstre implements Combattant {
             System.out.println("Trop loin !");
         }
     }
+    
+    @Override public boolean aDistancedAttaque(Creature c){
+        double distance = this.getPos().distance(c.getPos());
+        return distance<=1; // tous les monstres ont une diqtance d'attaque de 1
+    }
 }

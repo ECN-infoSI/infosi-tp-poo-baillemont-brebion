@@ -110,4 +110,9 @@ public class Archer extends Personnage implements Combattant {
             }
         }
     }
+    
+    @Override public boolean aDistancedAttaque(Creature c){
+        double distance = this.getPos().distance(c.getPos());
+        return ((distance>1) && (distance<=this.getDistMaxAtt()));
+    }
 }
