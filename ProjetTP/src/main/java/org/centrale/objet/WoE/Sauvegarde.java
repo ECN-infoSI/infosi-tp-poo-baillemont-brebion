@@ -153,36 +153,38 @@ public class Sauvegarde {
         fichier.write("Hauteur " + monde.getPlateau().length + "\n");
         
         // Écriture des personnages du monde
-        for (Object element : monde.getPersonnages()) {
+        for (Personnage element : monde.getPersonnages()) {
             String classe = element.getClass().getName();
             fichier.write(classe + " ");
             fichier.write(element.ligneSauvegarde());
         }
         // Écriture des monstres du monde
-        for (Object element : monde.getMonstres()) {
+        for (Monstre element : monde.getMonstres()) {
             String classe = element.getClass().getName();
             fichier.write(classe + " ");
             fichier.write(element.ligneSauvegarde());
         }
         // Écriture des objets du monde
-        for (Object element : monde.getObjets()) {
+        for (Objet element : monde.getObjets()) {
             String classe = element.getClass().getName();
             fichier.write(classe + " ");
             fichier.write(element.ligneSauvegarde());
         }
         
         // Écriture de l'inventaire du personnage
-        for (Object element : monde.getJoueur().getInventaire()) {
+        for (Utilisables element : monde.getJoueur().getInventaire()) {
             String classe = element.getClass().getName();
             fichier.write(classe + " ");
-            fichier.write(element.ligneSauvegarde());
+            Objet elem = (Objet)element;
+            fichier.write(elem.ligneSauvegarde());
         }  
         
         // Écriture des effets du personnage
-        for (Object element : monde.getJoueur().getEffets()) {
+        for (Utilisables element : monde.getJoueur().getEffets()) {
             String classe = element.getClass().getName();
             fichier.write(classe + " ");
-            fichier.write(element.ligneSauvegarde());
+            Objet elem = (Objet)element;
+            fichier.write(elem.ligneSauvegarde());
         }  
         
         fichier.close();
