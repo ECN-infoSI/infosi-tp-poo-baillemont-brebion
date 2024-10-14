@@ -57,7 +57,7 @@ public class NuageToxique extends Objet implements Combattant, Deplacable {
     }
     
     @Override public void combattre(Creature c){
-        if (this.pos.samePosition(c.getPos())){
+        if (this.aDistancedAttaque(c)){
             c.setPtVie(c.getPtVie()-this.degats);
         }
     }
@@ -87,8 +87,14 @@ public class NuageToxique extends Objet implements Combattant, Deplacable {
         this.pos.translate(dirX*dx, dirY*dy);
     }
     
+    /**
+     * Fonction vérifiant si la créature c est à la même position que le nuage
+     * @param c
+     * Créature que l'on veut attaquer
+     * @return 
+     * True si on peut l'attaquer, False si elle est trop proche ou trop loin
+     */
     @Override public boolean aDistancedAttaque(Creature c){
-        double distance = this.getPos().distance(c.getPos());
-        return distance==0; //le nuage attaque seulement s'il est sur la même case qu'une créature
+        return this.getPos().samePosition(c.getPos()); //le nuage attaque seulement s'il est sur la même case qu'une créature
     }
 }

@@ -51,7 +51,7 @@ public class Loup extends Monstre implements Combattant {
      * Créature à combattre
      */
     @Override public void combattre(Creature c){
-        if ((this.pos.distance(c.getPos())) <= 1){ // le loup ne peut pas attaquer à distance
+        if (this.aDistancedAttaque(c)){
             Random r = new Random();
             int tirageAtt = r.nextInt(99)+1;
             int tirageDef = r.nextInt(99)+1;
@@ -75,6 +75,13 @@ public class Loup extends Monstre implements Combattant {
         }
     }
     
+    /**
+     * Fonction vérifiant si la créature c est à une distance <= 1 du loup 
+     * @param c
+     * Créature que l'on veut attaquer
+     * @return 
+     * True si on peut l'attaquer, False si elle est trop proche ou trop loin
+     */
     @Override public boolean aDistancedAttaque(Creature c){
         double distance = this.getPos().distance(c.getPos());
         return distance<=1; // tous les monstres ont une diqtance d'attaque de 1

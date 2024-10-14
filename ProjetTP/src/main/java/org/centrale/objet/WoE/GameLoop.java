@@ -291,7 +291,7 @@ public class GameLoop {
                 Personnage persoJoueur = this.monde.getJoueur().getPerso();
                 Combattant combattant = (Combattant) perso;
                 if (combattant.aDistancedAttaque(persoJoueur)){
-                    if (random.nextInt(100) < 25) { // 25% de chance
+                    if (random.nextInt(100) < 100) { // 25% de chance
                         System.out.println(perso.getNom() + " attaque le joueur !");
                         combattant.combattre(this.monde.getJoueur().getPerso());
                         System.out.println("\n");
@@ -307,7 +307,7 @@ public class GameLoop {
             for (Objet objet : this.monde.getObjets()){
                 if (objet instanceof NuageToxique){
                     NuageToxique nuage = (NuageToxique) objet;
-                    if (nuage.getPos().samePosition(monstre.getPos())){
+                    if (nuage.aDistancedAttaque(monstre)){
                         nuage.combattre(monstre);
                         System.out.println(monstre.getClass().getSimpleName() + " est dans un nuage toxique \n");
                     }
@@ -318,7 +318,7 @@ public class GameLoop {
                 Personnage persoJoueur = this.monde.getJoueur().getPerso();
                 Combattant combattant = (Combattant) monstre;
                 if (combattant.aDistancedAttaque(persoJoueur)){ // on considère que les monstres ne peuvent attaquer à distance
-                    if (random.nextInt(100) < 60) { // 60% de chance
+                    if (random.nextInt(100) < 100) { // 60% de chance
                         System.out.println(monstre.getClass().getSimpleName() + " attaque le joueur !");
                         combattant.combattre(this.monde.getJoueur().getPerso());
                         System.out.println("\n");

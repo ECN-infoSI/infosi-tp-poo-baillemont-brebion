@@ -71,7 +71,7 @@ public class Guerrier extends Personnage implements Combattant {
      * Créature à combattre
      */
     @Override public void combattre(Creature c){
-        if ((this.pos.distance(c.getPos())) <= 1){ // le guerrier ne peut pas attaquer à distance
+        if (this.aDistancedAttaque(c)){ // le guerrier ne peut pas attaquer à distance
             Random r = new Random();
             int tirageAtt = r.nextInt(99)+1;
             int tirageDef = r.nextInt(99)+1;
@@ -95,6 +95,13 @@ public class Guerrier extends Personnage implements Combattant {
         }
     }
     
+    /**
+     * Fonction vérifiant si la créature c est à une distance <= à distMaxAtt du Guerrier
+     * @param c
+     * Créature que l'on veut attaquer
+     * @return 
+     * True si on peut l'attaquer, False si elle est trop proche ou trop loin
+     */
     @Override public boolean aDistancedAttaque(Creature c){
         double distance = this.getPos().distance(c.getPos());
         return distance<=this.getDistMaxAtt();

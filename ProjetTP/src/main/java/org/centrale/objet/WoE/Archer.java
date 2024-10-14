@@ -93,7 +93,7 @@ public class Archer extends Personnage implements Combattant {
         }
         else{
             this.nbFleches -= 1; // il perd une flèche dans tous les cas
-            if ((this.pos.distance(c.getPos()) > 1) && (this.pos.distance(c.getPos()) <= this.distMaxAtt)){ // l'archer ne peut attaquer qu'a distance
+            if (this.aDistancedAttaque(c)){ // l'archer ne peut attaquer qu'a distance
                 Random r = new Random();
                 int tirageAtt = r.nextInt(99)+1;
 
@@ -111,6 +111,13 @@ public class Archer extends Personnage implements Combattant {
         }
     }
     
+    /**
+     * Fonction vérifiant si la créature c est à une distance > 1 et <= distMaxAtt de l'Archer
+     * @param c
+     * Créature que l'on veut attaquer
+     * @return 
+     * True si on peut l'attaquer, False si elle est trop proche ou trop loin
+     */
     @Override public boolean aDistancedAttaque(Creature c){
         double distance = this.getPos().distance(c.getPos());
         return ((distance>1) && (distance<=this.getDistMaxAtt()));
