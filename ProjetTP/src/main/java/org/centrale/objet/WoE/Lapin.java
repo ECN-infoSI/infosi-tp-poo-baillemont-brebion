@@ -45,6 +45,9 @@ public class Lapin extends Monstre {
         super(l);
     };
     
+    /**
+     * Crée un lapin avec des attributs aléatoires
+     */
     public void creaLapinAlea(){
         Random random = new Random();
         this.ptVie = random.nextInt(20)+10; // points de vie entre 10 et 30

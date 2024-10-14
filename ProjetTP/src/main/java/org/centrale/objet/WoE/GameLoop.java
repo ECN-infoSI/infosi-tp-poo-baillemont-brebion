@@ -8,22 +8,29 @@ import java.util.LinkedList;
 import java.util.Iterator;
 
 /**
- *
+ * Classe permettant de lancer le jeu
  * @author morga
+ * @author mattlerigolo
  */
 public class GameLoop {
     private boolean gameOver = false;
     private World_arrayList monde;
     
-    
+    /**
+     * Constructeur
+     * @param monde 
+     */
     public GameLoop(World_arrayList monde) {
         this.monde = monde;
     }
     
-    public void startGame(World_arrayList monde) {
-        monde.getJoueur().getPerso().affiche();
+    /**
+     * Fonction pour lancer le jeu
+     */
+    public void startGame() {
+        this.monde.getJoueur().getPerso().affiche();
         
-        monde.affichePlateau();
+        this.monde.affichePlateau();
         while (!gameOver) {
             // Update stage
             updateGame();
@@ -368,6 +375,7 @@ public class GameLoop {
         if (monde.getJoueur().perso.ptVie <= 0) {
             gameOver = true; 
             System.out.println("GAME OVER : votre personnage est mort ! \n");
+            this.monde.getJoueur().getPerso().setPtVie(0);
         }
     }
 

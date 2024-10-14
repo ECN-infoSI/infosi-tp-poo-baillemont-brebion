@@ -20,6 +20,7 @@ public class Archer extends Personnage implements Combattant {
     public Archer(){
         super();
         this.nbFleches = 10;
+        this.setDistMaxAtt(5);
     };
     
     
@@ -68,7 +69,7 @@ public class Archer extends Personnage implements Combattant {
     };
     
     /**
-     * Création un archer avec des attributs aléatoires
+     * Crée un archer avec des attributs aléatoires
      */
     public void creaArcherAlea(){
         Random random = new Random();

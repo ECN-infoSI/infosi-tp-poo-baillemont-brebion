@@ -65,6 +65,9 @@ public class Guerrier extends Personnage implements Combattant {
         this.epee = epee;
     }
     
+    /**
+     * Crée un guerrier avec des attributs aléatoires
+     */
     public void creaGuerrierAlea(){
         Random random = new Random();
         this.ptVie = random.nextInt(50)+75; // points de vie entre 75 et 125

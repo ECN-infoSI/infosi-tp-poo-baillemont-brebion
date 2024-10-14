@@ -47,6 +47,9 @@ public class Paysan extends Personnage {
         super(p);
     };
     
+    /**
+     * Crée un paysan avec des attributs aléatoires
+     */
     public void creaPaysanAlea(){
         Random random = new Random();
         this.ptVie = random.nextInt(50)+25; // points de vie entre 25 et 75

@@ -126,6 +126,15 @@ public class Joueur {
         this.inventaire = inventaire;
     }
     
+    /**
+     * Déplace le personnage du joueur sur une case choisie
+     * @param plateau
+     * Plateau du jeu
+     * @param newPosX
+     * Valeur X de l'endroit où l'on veut se déplacer
+     * @param newPosY 
+     * Valeur Y de l'endroit où l'on veut se déplacer
+     */
     public void deplace(int[][] plateau, int newPosX, int newPosY){
         plateau[this.perso.pos.getX()][this.perso.pos.getY()] = 0;
 
