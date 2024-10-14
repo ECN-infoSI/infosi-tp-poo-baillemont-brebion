@@ -117,11 +117,17 @@ public class Sauvegarde {
                         Object instance = constructor.newInstance(ligne);
 
                         // Ajout de l'objet au monde
-                        switch (instance) {
-                            case Personnage personnage -> monde.addPersonnage(personnage);
-                            case Monstre monstre -> monde.addMonstre(monstre);
-                            case Objet objet -> monde.addObjet(objet);
-                            default -> System.out.println("Classe non conforme dans le fichier de sauvegarde.");
+                        if (instance instanceof Personnage) {
+                            Personnage personnage = (Personnage) instance;
+                            monde.addPersonnage(personnage);
+                        } else if (instance instanceof Monstre) {
+                            Monstre monstre = (Monstre) instance;
+                            monde.addMonstre(monstre);
+                        } else if (instance instanceof Objet) {
+                            Objet objet = (Objet) instance;
+                            monde.addObjet(objet);
+                        } else {
+                            System.out.println("Classe non conforme dans le fichier de sauvegarde.");
                         }
                     } catch (ClassNotFoundException e) {
                         System.out.println("Classe non trouvée : " + e.getMessage());
