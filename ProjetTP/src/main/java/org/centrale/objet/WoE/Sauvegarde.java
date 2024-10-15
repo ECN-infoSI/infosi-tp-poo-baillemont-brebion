@@ -12,6 +12,7 @@ import java.util.StringTokenizer;
 /**
  *
  * @author morga
+ * @author mattlerigolo
  */
 public class Sauvegarde {
     protected String source;
@@ -35,7 +36,6 @@ public class Sauvegarde {
             ArrayList<String> mots_ligne = new ArrayList<>();
             while (tokenizer.hasMoreTokens()){
                     String mot = tokenizer.nextToken();
-                    mot = mot.toLowerCase(); // mot en minuscules
                     mots_ligne.add(mot);
                 }
             
@@ -52,7 +52,6 @@ public class Sauvegarde {
             mots_ligne = new ArrayList<>();
             while (tokenizer.hasMoreTokens()){
                     String mot = tokenizer.nextToken();
-                    mot = mot.toLowerCase(); // mot en minuscules
                     mots_ligne.add(mot);
                 }
             
@@ -64,6 +63,7 @@ public class Sauvegarde {
                 return null;
             }
             
+            ligne = fichier.readLine();
             // création d'un monde
             World_arrayList monde = new World_arrayList(Largeur, Hauteur);
             
@@ -76,18 +76,19 @@ public class Sauvegarde {
                 
                 // Lecture de la classe
                 String premier_mot = tokenizer.nextToken();
-                if (premier_mot == "Inventaire"){
+                if (premier_mot.equalsIgnoreCase("Inventaire")){
                     String classe = tokenizer.nextToken();
                     try {
                         Class<?> clazz = Class.forName(classe);
                         Constructor<?> constructor = clazz.getConstructor(String.class);
                         Utilisables instance = (Utilisables) constructor.newInstance(ligne.substring(11));
                         monde.getJoueur().getInventaire().add(instance);
-                    }catch (Exception e){
+                    }
+                    catch (Exception e){
                         e.printStackTrace();
                     }
                 }
-                else if (premier_mot == "Effet"){
+                else if (premier_mot.equalsIgnoreCase("Effet")){
                     String classe = tokenizer.nextToken();
                     try {
                         Class<?> clazz = Class.forName(classe);
@@ -98,17 +99,57 @@ public class Sauvegarde {
                         e.printStackTrace();
                     }
                 }
-                else if (premier_mot == "Joueur"){
-                    String classe = tokenizer.nextToken();
-                    try {
-                        Class<?> clazz = Class.forName(classe);
-                        Constructor<?> constructor = clazz.getConstructor(String.class);
-                        Personnage instance = (Personnage) constructor.newInstance(ligne.substring(7));
-                        monde.getJoueur().setPerso(instance);
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
+                else if (premier_mot.equalsIgnoreCase("Joueur")){
+                    monde.getPlateau()[monde.getJoueur().getPerso().getPos().getX()][monde.getJoueur().getPerso().getPos().getX()]=0;
+                    monde.setJoueur(monde.getJoueur().create(ligne));
+                    monde.getPlateau()[monde.getJoueur().getPerso().getPos().getX()][monde.getJoueur().getPerso().getPos().getY()]=1;
                 }
+                else if (premier_mot.equalsIgnoreCase("Archer")){
+                    Archer archer = new Archer();
+                    archer = archer.create(ligne);
+                    monde.addPersonnage(archer);
+                }
+                else if (premier_mot.equalsIgnoreCase("Guerrier")){
+                    Guerrier guerrier = new Guerrier();
+                    guerrier = guerrier.create(ligne);
+                    monde.addPersonnage(guerrier);
+                }
+                else if (premier_mot.equalsIgnoreCase("Paysan")){
+                    Paysan paysan = new Paysan();
+                    paysan = paysan.create(ligne);
+                    monde.addPersonnage(paysan);
+                }
+                else if (premier_mot.equalsIgnoreCase("Personnage")){
+                    Personnage perso = new Personnage();
+                    perso = perso.create(ligne);
+                    monde.addPersonnage(perso);
+                }
+                else if (premier_mot.equalsIgnoreCase("Loup")) {
+                    Loup loup = new Loup();
+                    loup = loup.create(ligne);
+                    monde.addMonstre(loup);
+                } else if (premier_mot.equalsIgnoreCase("Lapin")) {
+                    Lapin lapin = new Lapin();
+                    lapin = lapin.create(ligne);
+                    monde.addMonstre(lapin);
+                } else if (premier_mot.equalsIgnoreCase("ClassiqueBurger")) {
+                    ClassiqueBurger burger = new ClassiqueBurger();
+                    burger = burger.create(ligne);
+                    monde.addObjet(burger);
+                } else if (premier_mot.equalsIgnoreCase("Ilot5RU")) {
+                    Ilot5RU ilot = new Ilot5RU();
+                    ilot = ilot.create(ligne);
+                    monde.addObjet(ilot);
+                } else if (premier_mot.equalsIgnoreCase("NuageToxique")) {
+                    NuageToxique nuage = new NuageToxique();
+                    nuage = nuage.create(ligne);
+                    monde.addObjet(nuage);
+                } else if (premier_mot.equalsIgnoreCase("PotionSoin")) {
+                    PotionSoin potion = new PotionSoin();
+                    potion = potion.create(ligne);
+                    monde.addObjet(potion);
+                }
+                /**
                 else{
                     // ajout de l'information au monde
                     try {
@@ -137,6 +178,7 @@ public class Sauvegarde {
                         System.out.println("Erreur d'accès : " + e.getMessage());
                     }
                 }
+                */
                 ligne = fichier.readLine();
             }
             fichier.close();
@@ -154,43 +196,45 @@ public class Sauvegarde {
     // Écriture du fichier de sauvegarde
     try (BufferedWriter fichier = new BufferedWriter(new FileWriter(this.source))) {
         // Écriture de la largeur et de la hauteur du monde
-        fichier.write("Largeur " + monde.getPlateau()[0].length + "\n");
+        fichier.write("Largeur " + monde.getPlateau()[0].length);
         fichier.newLine();
-        fichier.write("Hauteur " + monde.getPlateau().length + "\n");
+        fichier.write("Hauteur " + monde.getPlateau().length);
+        fichier.newLine();
+        
+        // Écriture du joueur
+        fichier.write(monde.getJoueur().ligneSauvegarde());
+        fichier.newLine();
         
         // Écriture des personnages du monde
         for (Personnage element : monde.getPersonnages()) {
-            String classe = element.getClass().getName();
-            fichier.write(classe + " ");
             fichier.write(element.ligneSauvegarde());
+            fichier.newLine();
         }
         // Écriture des monstres du monde
         for (Monstre element : monde.getMonstres()) {
-            String classe = element.getClass().getName();
-            fichier.write(classe + " ");
             fichier.write(element.ligneSauvegarde());
+            fichier.newLine();
         }
         // Écriture des objets du monde
         for (Objet element : monde.getObjets()) {
-            String classe = element.getClass().getName();
-            fichier.write(classe + " ");
             fichier.write(element.ligneSauvegarde());
+            fichier.newLine();
         }
         
         // Écriture de l'inventaire du personnage
         for (Utilisables element : monde.getJoueur().getInventaire()) {
-            String classe = element.getClass().getName();
-            fichier.write(classe + " ");
+            fichier.write("Inventaire ");
             Objet elem = (Objet)element;
             fichier.write(elem.ligneSauvegarde());
+            fichier.newLine();
         }  
         
         // Écriture des effets du personnage
         for (Utilisables element : monde.getJoueur().getEffets()) {
-            String classe = element.getClass().getName();
-            fichier.write(classe + " ");
+            fichier.write("Effet ");
             Objet elem = (Objet)element;
             fichier.write(elem.ligneSauvegarde());
+            fichier.newLine();
         }  
         
         fichier.close();

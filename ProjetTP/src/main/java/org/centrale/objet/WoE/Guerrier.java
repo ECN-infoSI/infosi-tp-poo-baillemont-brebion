@@ -162,6 +162,8 @@ public class Guerrier extends Personnage implements Combattant {
         return distance<=this.getDistMaxAtt();
     }
 
-    
+    @Override public Guerrier clone(){
+        return new Guerrier(this);
+    }
      
 }

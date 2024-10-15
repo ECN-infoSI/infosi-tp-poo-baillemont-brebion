@@ -56,7 +56,7 @@ public class Paysan extends Personnage {
      * @return 
      * Paysan construit à partir de la ligne
      */
-    @Override public Personnage create(String ligne){
+    @Override public Paysan create(String ligne){
         // tokenisation
         StringTokenizer tokenizer = new StringTokenizer(ligne, " ");
         ArrayList<String> mots_ligne = new ArrayList<>();

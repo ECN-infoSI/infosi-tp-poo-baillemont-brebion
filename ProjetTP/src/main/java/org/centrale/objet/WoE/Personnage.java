@@ -185,4 +185,8 @@ public class Personnage extends Creature{
         this.pagePar = random.nextInt(101); // entre 0 et 100
         this.pageAtt = random.nextInt(101); // entre 0 et 100
     }
+    
+    @Override public Personnage clone(){
+        return new Personnage(this);
+    }
 }

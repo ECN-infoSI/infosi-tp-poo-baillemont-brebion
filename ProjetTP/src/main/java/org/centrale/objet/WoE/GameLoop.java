@@ -287,7 +287,7 @@ public class GameLoop {
         // Update game state, handle user input, and perform calculations
         this.updateEffets();
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Voulez-vous vous déplacer, combattre ou consommer un objet de votre inventaire ?\n1 : Se déplacer\n2 : Combattre\n3 : Consommer");
+        System.out.println("Voulez-vous vous déplacer, combattre ou consommer un objet de votre inventaire ?\n1 : Se déplacer\n2 : Combattre\n3 : Consommer\n4 : Sauvegarder");
         String classe = scanner.nextLine();
         if (classe.equalsIgnoreCase("1")){
             deplaceJoueur();
@@ -329,6 +329,7 @@ public class GameLoop {
                     System.out.println("Erreur lors de la sauvegarde : " + e.getMessage());
                 }
             }
+            return; // si on décide de sauvegarder on n'update pas le tour
         }
         else{
             System.out.println("Action non-valide, pas d'action effectuée \n");

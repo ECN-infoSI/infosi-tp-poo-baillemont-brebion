@@ -174,4 +174,8 @@ public class Archer extends Personnage implements Combattant {
         double distance = this.getPos().distance(c.getPos());
         return ((distance>1) && (distance<=this.getDistMaxAtt()));
     }
+    
+    @Override public Archer clone(){
+        return new Archer(this);
+    }
 }

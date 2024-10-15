@@ -86,9 +86,41 @@ public class Joueur {
      * Personnage à attribuer au joueur
      * @param effets
      * Inventaire du joueur
+     * @param inventaire
+     * Inventaire du joueur
      */
     public Joueur(Personnage perso, LinkedList<Utilisables> effets, LinkedList<Utilisables> inventaire){
         this.perso = new Personnage(perso);
+        this.effets = new LinkedList<Utilisables>(effets);
+        this.inventaire = new LinkedList<Utilisables>(inventaire);
+    }
+    
+    /**
+     * Constructeur avec un archer
+     * @param perso
+     * Archer à attribuer au joueur
+     * @param effets
+     * Inventaire du joueur
+     * @param inventaire
+     * Inventaire du joueur
+     */
+    public Joueur(Archer perso, LinkedList<Utilisables> effets, LinkedList<Utilisables> inventaire){
+        this.perso = new Archer(perso);
+        this.effets = new LinkedList<Utilisables>(effets);
+        this.inventaire = new LinkedList<Utilisables>(inventaire);
+    }
+    
+    /**
+     * Constructeur avec un guerrier
+     * @param perso
+     * Guerrier à attribuer au joueur
+     * @param effets
+     * Inventaire du joueur
+     * @param inventaire
+     * Inventaire du joueur
+     */
+    public Joueur(Guerrier perso, LinkedList<Utilisables> effets, LinkedList<Utilisables> inventaire){
+        this.perso = new Guerrier(perso);
         this.effets = new LinkedList<Utilisables>(effets);
         this.inventaire = new LinkedList<Utilisables>(inventaire);
     }
@@ -99,7 +131,16 @@ public class Joueur {
      * Joueur à copier
      */
     public Joueur(Joueur j){
-        this.perso = new Personnage(j.getPerso());
+            // Vérifie le type de personnage pour conserver sa classe exacte
+        if (j.getPerso() instanceof Archer) {
+            this.perso = new Archer((Archer) j.getPerso());  // Copie si c'est un Archer
+        } 
+        else if (j.getPerso() instanceof Guerrier) {
+            this.perso = new Guerrier((Guerrier) j.getPerso());  // Copie si c'est un Guerrier
+        } 
+        else {
+            this.perso = new Personnage(j.getPerso());  // Copie générique si c'est juste un Personnage
+        }
         this.effets = new LinkedList<Utilisables>(j.getEffets());
         this.inventaire = new LinkedList<Utilisables>(j.getInventaire());
     }
@@ -162,22 +203,21 @@ public class Joueur {
         ArrayList<String> mots_ligne = new ArrayList<>();
         while (tokenizer.hasMoreTokens()){
             String mot = tokenizer.nextToken();
-            mot = mot.toLowerCase(); // mot en minuscules
             mots_ligne.add(mot);
         }
-        if (mots_ligne.get(1).equals("Archer")){
-            Archer personnage = new Archer(mots_ligne.get(2), Integer.parseInt(mots_ligne.get(3)), Integer.parseInt(mots_ligne.get(4)), Integer.parseInt(mots_ligne.get(5)), Integer.parseInt(mots_ligne.get(6)), Integer.parseInt(mots_ligne.get(7)), Integer.parseInt(mots_ligne.get(8)), new Point2D(Integer.parseInt(mots_ligne.get(9)), Integer.parseInt(mots_ligne.get(10))), Integer.parseInt(mots_ligne.get(11)));
-            Joueur joueur = new Joueur(personnage, new LinkedList<Utilisables>(), new LinkedList<Utilisables>());
+        if (mots_ligne.get(1).equalsIgnoreCase("Archer")){
+            Archer archer = new Archer(mots_ligne.get(2), Integer.parseInt(mots_ligne.get(3)), Integer.parseInt(mots_ligne.get(4)), Integer.parseInt(mots_ligne.get(5)), Integer.parseInt(mots_ligne.get(6)), Integer.parseInt(mots_ligne.get(7)), Integer.parseInt(mots_ligne.get(8)), new Point2D(Integer.parseInt(mots_ligne.get(9)), Integer.parseInt(mots_ligne.get(10))), Integer.parseInt(mots_ligne.get(11)));
+            Joueur joueur = new Joueur(archer, new LinkedList<Utilisables>(), new LinkedList<Utilisables>());
             return joueur;
         }       
-        else if (mots_ligne.get(1).equals("Guerrier")){
+        else if (mots_ligne.get(1).equalsIgnoreCase("Guerrier")){
             Epee epee_guerrier = new Epee(Integer.parseInt(mots_ligne.get(11)), Integer.parseInt(mots_ligne.get(12)), mots_ligne.get(13));
-            Guerrier personnage = new Guerrier(mots_ligne.get(2), Integer.parseInt(mots_ligne.get(3)), Integer.parseInt(mots_ligne.get(4)), Integer.parseInt(mots_ligne.get(5)), Integer.parseInt(mots_ligne.get(6)), Integer.parseInt(mots_ligne.get(7)), Integer.parseInt(mots_ligne.get(8)), new Point2D(Integer.parseInt(mots_ligne.get(9)), Integer.parseInt(mots_ligne.get(10))), epee_guerrier);
-            Joueur joueur = new Joueur(personnage, new LinkedList<Utilisables>(), new LinkedList<Utilisables>());
+            Guerrier guerrier = new Guerrier(mots_ligne.get(2), Integer.parseInt(mots_ligne.get(3)), Integer.parseInt(mots_ligne.get(4)), Integer.parseInt(mots_ligne.get(5)), Integer.parseInt(mots_ligne.get(6)), Integer.parseInt(mots_ligne.get(7)), Integer.parseInt(mots_ligne.get(8)), new Point2D(Integer.parseInt(mots_ligne.get(9)), Integer.parseInt(mots_ligne.get(10))), epee_guerrier);
+            Joueur joueur = new Joueur(guerrier, new LinkedList<Utilisables>(), new LinkedList<Utilisables>());
             return joueur;
         }
         else {
-            return new Joueur();
+            return new Joueur(new Personnage(), new LinkedList<Utilisables>(), new LinkedList<Utilisables>());
         }
     }
     
@@ -186,6 +226,7 @@ public class Joueur {
             Archer archer = (Archer) this.getPerso();
             return this.getClass().getSimpleName() + 
                 " " + archer.getClass().getSimpleName() +
+                " " + archer.getNom() +   
                 " " + archer.getPtVie() + 
                 " " + archer.getDegAtt() + 
                 " " + archer.getPtPar() +
@@ -200,6 +241,7 @@ public class Joueur {
             Guerrier guerrier = (Guerrier) this.getPerso();
             return this.getClass().getSimpleName() + 
                 " " + guerrier.getClass().getSimpleName() +
+                " " + guerrier.getNom() +
                 " " + guerrier.getPtVie() + 
                 " " + guerrier.getDegAtt() + 
                 " " + guerrier.getPtPar() +
@@ -213,7 +255,7 @@ public class Joueur {
                 " " + guerrier.getEpee().getNom();
         }
         else  {
-            return "";
+            return this.getPerso().getClass().getSimpleName();
         }
     }
     
