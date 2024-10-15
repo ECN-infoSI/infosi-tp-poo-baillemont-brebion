@@ -34,7 +34,6 @@ public class Ilot5RU extends Nourriture {
         ArrayList<String> mots_ligne = new ArrayList<>();
         while (tokenizer.hasMoreTokens()){
             String mot = tokenizer.nextToken();
-            mot = mot.toLowerCase(); // mot en minuscules
             mots_ligne.add(mot);
         }
         Ilot5RU ilot = new Ilot5RU(new Point2D(Integer.parseInt(mots_ligne.get(1)), Integer.parseInt(mots_ligne.get(2))), Integer.parseInt(mots_ligne.get(3)), Integer.parseInt(mots_ligne.get(4)), Integer.parseInt(mots_ligne.get(5))==1);

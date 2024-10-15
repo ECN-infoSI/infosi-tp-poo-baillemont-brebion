@@ -55,7 +55,6 @@ public class NuageToxique extends Objet implements Combattant, Deplacable {
         ArrayList<String> mots_ligne = new ArrayList<>();
         while (tokenizer.hasMoreTokens()){
             String mot = tokenizer.nextToken();
-            mot = mot.toLowerCase(); // mot en minuscules
             mots_ligne.add(mot);
         }
         NuageToxique nuage = new NuageToxique(new Point2D(Integer.parseInt(mots_ligne.get(1)), Integer.parseInt(mots_ligne.get(2))), Integer.parseInt(mots_ligne.get(3)));

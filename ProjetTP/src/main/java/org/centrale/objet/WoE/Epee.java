@@ -74,7 +74,6 @@ public class Epee extends Objet{
         ArrayList<String> mots_ligne = new ArrayList<>();
         while (tokenizer.hasMoreTokens()){
             String mot = tokenizer.nextToken();
-            mot = mot.toLowerCase(); // mot en minuscules
             mots_ligne.add(mot);
         }
         Epee epee = new Epee(Integer.parseInt(mots_ligne.get(1)), Integer.parseInt(mots_ligne.get(2)), mots_ligne.get(3));

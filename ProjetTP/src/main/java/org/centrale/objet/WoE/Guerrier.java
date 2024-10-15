@@ -63,7 +63,6 @@ public class Guerrier extends Personnage implements Combattant {
         ArrayList<String> mots_ligne = new ArrayList<>();
         while (tokenizer.hasMoreTokens()){
             String mot = tokenizer.nextToken();
-            mot = mot.toLowerCase(); // mot en minuscules
             mots_ligne.add(mot);
         }
         // construction de l'épée
