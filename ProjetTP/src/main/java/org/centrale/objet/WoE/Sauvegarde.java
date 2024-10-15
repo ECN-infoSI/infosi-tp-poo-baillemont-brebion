@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.centrale.objet.WoE;
 import java.io.*;
 import java.lang.reflect.Constructor;
@@ -65,12 +61,9 @@ public class Sauvegarde {
             
             ligne = fichier.readLine();
             // création d'un monde
-            World_arrayList monde = new World_arrayList(Largeur, Hauteur);
+            World_arrayList monde = new World_arrayList(Largeur, Hauteur, false);
             
             while (ligne != null){
-                System.out.println(ligne);
-                // décomposition de la ligne en mots
-                
                 // tokenizer pour la ligne
                 tokenizer = new StringTokenizer(ligne, delimiteurs);
                 

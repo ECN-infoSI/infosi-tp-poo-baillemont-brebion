@@ -13,7 +13,7 @@ public class MesureTemps {
     public static void main(String[] args) {
     for (int k = 100; k < 10000000; k*=10) {
         int totalpdv = 0;
-        World_arrayList world1 = new World_arrayList(5000,5000);
+        World_arrayList world1 = new World_arrayList(5000,5000,true);
 
         world1.creaMondeAlea (
         k, 0, 0, 0, 0, 0, 0, 0, 0);  

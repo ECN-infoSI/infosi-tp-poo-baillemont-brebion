@@ -45,7 +45,7 @@ public class World_arrayList {
      * Constructeur par défaut.
      */
     public World_arrayList(){
-        this.joueur = new Joueur();
+        this.joueur = new Joueur(true);
         this.joueur.perso.setId(nextId ++);
         this.personnages = new ArrayList<Personnage>();
         this.monstres = new ArrayList<Monstre>();
@@ -107,8 +107,8 @@ public class World_arrayList {
         }
     }
     
-    public World_arrayList(int longueur, int largeur){
-        this.joueur = new Joueur();
+    public World_arrayList(int longueur, int largeur, boolean choix){
+        this.joueur = new Joueur(choix);
         this.joueur.perso.setId(nextId ++);
         this.personnages = new ArrayList<Personnage>();
         this.monstres = new ArrayList<Monstre>();
