@@ -74,8 +74,14 @@ public class PotionSoin extends Objet implements Utilisables {
             String mot = tokenizer.nextToken();
             mots_ligne.add(mot);
         }
-        PotionSoin potion = new PotionSoin(Integer.parseInt(mots_ligne.get(1)), new Point2D(Integer.parseInt(mots_ligne.get(2)), Integer.parseInt(mots_ligne.get(3))));
-        return potion;
+        if (!mots_ligne.get(0).equalsIgnoreCase("PotionSoin")){
+            PotionSoin potion = new PotionSoin(Integer.parseInt(mots_ligne.get(2)), new Point2D(Integer.parseInt(mots_ligne.get(3)), Integer.parseInt(mots_ligne.get(4))));
+            return potion;
+        }
+        else {
+            PotionSoin potion = new PotionSoin(Integer.parseInt(mots_ligne.get(1)), new Point2D(Integer.parseInt(mots_ligne.get(2)), Integer.parseInt(mots_ligne.get(3))));
+            return potion;   
+        }
     }
     
     @Override public String ligneSauvegarde(){

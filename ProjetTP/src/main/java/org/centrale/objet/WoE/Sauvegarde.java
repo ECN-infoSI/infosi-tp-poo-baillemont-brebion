@@ -77,26 +77,29 @@ public class Sauvegarde {
                 // Lecture de la classe
                 String premier_mot = tokenizer.nextToken();
                 if (premier_mot.equalsIgnoreCase("Inventaire")){
-                    String classe = tokenizer.nextToken();
-                    try {
-                        Class<?> clazz = Class.forName(classe);
-                        Constructor<?> constructor = clazz.getConstructor(String.class);
-                        Utilisables instance = (Utilisables) constructor.newInstance(ligne.substring(11));
-                        monde.getJoueur().getInventaire().add(instance);
+                    String deuxieme_mot = tokenizer.nextToken();
+                    if (deuxieme_mot.equalsIgnoreCase("ClassiqueBurger")){
+                        ClassiqueBurger burger = new ClassiqueBurger();
+                        monde.getJoueur().getInventaire().add(burger.create(ligne));
                     }
-                    catch (Exception e){
-                        e.printStackTrace();
+                    else if (deuxieme_mot.equalsIgnoreCase("PotionSoin")){
+                        PotionSoin potion = new PotionSoin();
+                        monde.getJoueur().getInventaire().add(potion.create(ligne));
+                    }
+                    else if (deuxieme_mot.equalsIgnoreCase("Ilot5RU")){
+                        Ilot5RU ilot = new Ilot5RU();
+                        monde.getJoueur().getInventaire().add(ilot.create(ligne));
                     }
                 }
                 else if (premier_mot.equalsIgnoreCase("Effet")){
-                    String classe = tokenizer.nextToken();
-                    try {
-                        Class<?> clazz = Class.forName(classe);
-                        Constructor<?> constructor = clazz.getConstructor(String.class);
-                        Utilisables instance = (Utilisables) constructor.newInstance(ligne.substring(6));
-                        monde.getJoueur().getEffets().add(instance);
-                    }catch (Exception e){
-                        e.printStackTrace();
+                    String deuxieme_mot = tokenizer.nextToken();
+                    if (deuxieme_mot.equalsIgnoreCase("ClassiqueBurger")){
+                        ClassiqueBurger burger = new ClassiqueBurger();
+                        monde.getJoueur().getEffets().add(burger.create(ligne));
+                    }
+                    else if (deuxieme_mot.equalsIgnoreCase("Ilot5RU")){
+                        Ilot5RU ilot = new Ilot5RU();
+                        monde.getJoueur().getEffets().add(ilot.create(ligne));
                     }
                 }
                 else if (premier_mot.equalsIgnoreCase("Joueur")){

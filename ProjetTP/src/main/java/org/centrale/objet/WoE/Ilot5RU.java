@@ -36,8 +36,15 @@ public class Ilot5RU extends Nourriture {
             String mot = tokenizer.nextToken();
             mots_ligne.add(mot);
         }
-        Ilot5RU ilot = new Ilot5RU(new Point2D(Integer.parseInt(mots_ligne.get(1)), Integer.parseInt(mots_ligne.get(2))), Integer.parseInt(mots_ligne.get(3)), Integer.parseInt(mots_ligne.get(4)), Integer.parseInt(mots_ligne.get(5))==1);
-        return ilot;
+        if (!mots_ligne.get(0).equalsIgnoreCase("Ilot5RU")){
+            Ilot5RU ilot = new Ilot5RU(new Point2D(Integer.parseInt(mots_ligne.get(2)), Integer.parseInt(mots_ligne.get(3))), Integer.parseInt(mots_ligne.get(4)), Integer.parseInt(mots_ligne.get(5)), Integer.parseInt(mots_ligne.get(6))==1);
+            return ilot;
+        }
+        else {
+            Ilot5RU ilot = new Ilot5RU(new Point2D(Integer.parseInt(mots_ligne.get(1)), Integer.parseInt(mots_ligne.get(2))), Integer.parseInt(mots_ligne.get(3)), Integer.parseInt(mots_ligne.get(4)), Integer.parseInt(mots_ligne.get(5))==1);
+            return ilot;
+        }
+        
     }
     
     
