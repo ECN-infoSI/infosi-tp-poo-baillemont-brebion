@@ -145,7 +145,17 @@ public class Sauvegarde {
                     potion = potion.create(ligne);
                     monde.addObjet(potion);
                 }
-                /**
+                else if (premier_mot.equalsIgnoreCase("Tour")){
+                    int tour = Integer.parseInt(tokenizer.nextToken());   
+                    monde.setTour(tour);
+                    
+        
+        while (tokenizer.hasMoreTokens()){
+            String mot = tokenizer.nextToken();
+            mots_ligne.add(mot);
+        }
+                }
+                
                 else{
                     // ajout de l'information au monde
                     try {
@@ -174,7 +184,7 @@ public class Sauvegarde {
                         System.out.println("Erreur d'accès : " + e.getMessage());
                     }
                 }
-                */
+                
                 ligne = fichier.readLine();
             }
             fichier.close();
@@ -232,6 +242,9 @@ public class Sauvegarde {
             fichier.write(elem.ligneSauvegarde());
             fichier.newLine();
         }  
+       // Ecriture du numéro du tour
+        fichier.write("Tour ");
+        fichier.write(monde.getTour());
         
         fichier.close();
     } catch (Exception e) {

@@ -41,6 +41,11 @@ public class World_arrayList {
      */
     private int nextId = 1; 
     
+    /**
+     * Compteur de tour
+     */
+    private int tour;
+    
      /**
      * Constructeur par défaut.
      */
@@ -469,6 +474,23 @@ public class World_arrayList {
 
         return null;
     }
+
+    public int getNextId() {
+        return nextId;
+    }
+
+    public void setNextId(int nextId) {
+        this.nextId = nextId;
+    }
+
+    public int getTour() {
+        return tour;
+    }
+
+    public void setTour(int tour) {
+        this.tour = tour;
+    }
+    
     
     
 };

@@ -17,6 +17,7 @@ public class GameLoop {
     private boolean gameOver = false;
     private World_arrayList monde;
     
+    
     /**
      * Constructeur
      * @param monde
@@ -55,17 +56,21 @@ public class GameLoop {
                 return;
             }
         }
-        else {
+        else if (choix.equalsIgnoreCase("2")){
             this.monde = new World_arrayList(monde.getPlateau().length, monde.getPlateau()[0].length, true); // on recrée un nouveau monde avec le choix du joueur
             this.monde.creaMondeAlea(1,1,1,1,1,20,20,20,5);
         }
-        int tour = 0;
+        else {
+            System.out.println("Choix non-conforme.");
+            return;
+        }
+        monde.setTour(0);
         this.monde.getJoueur().getPerso().affiche();
         
         this.monde.affichePlateau();
         while (!gameOver) {
-            tour++;
-            System.out.println("Tour n°" + tour);
+            monde.setTour(monde.getTour()+1);
+            System.out.println("Tour n°" + monde.getTour());
             // Update stage
             updateGame();
 
@@ -461,4 +466,24 @@ public class GameLoop {
         monde.getJoueur().perso.affiche();
         this.monde.affichePlateau();
     }
+
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
+    }
+
+    public World_arrayList getMonde() {
+        return monde;
+    }
+
+    public void setMonde(World_arrayList monde) {
+        this.monde = monde;
+    }
+
+    
+    
+    
 }
