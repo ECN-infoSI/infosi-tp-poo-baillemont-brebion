@@ -78,6 +78,7 @@ public class Archer extends Personnage implements Combattant {
             mots_ligne.add(mot);
         }
         Archer archer = new Archer(mots_ligne.get(1), Integer.parseInt(mots_ligne.get(2)), Integer.parseInt(mots_ligne.get(3)), Integer.parseInt(mots_ligne.get(4)), Integer.parseInt(mots_ligne.get(5)), Integer.parseInt(mots_ligne.get(6)), Integer.parseInt(mots_ligne.get(7)), new Point2D(Integer.parseInt(mots_ligne.get(8)), Integer.parseInt(mots_ligne.get(9))), Integer.parseInt(mots_ligne.get(10)));
+        archer.setId(Integer.parseInt(mots_ligne.get(11)));
         return archer;
     }
     
@@ -93,7 +94,8 @@ public class Archer extends Personnage implements Combattant {
                 " " + this.getDistMaxAtt() +
                 " " + this.getPos().getX() +
                 " " + this.getPos().getY() +
-                " " + this.getNbFleches();
+                " " + this.getNbFleches() +
+                " " + this.getId();
     }
 
     public int getNbFleches() {

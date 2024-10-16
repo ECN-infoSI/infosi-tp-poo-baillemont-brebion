@@ -215,12 +215,14 @@ public class Joueur {
         }
         if (mots_ligne.get(1).equalsIgnoreCase("Archer")){
             Archer archer = new Archer(mots_ligne.get(2), Integer.parseInt(mots_ligne.get(3)), Integer.parseInt(mots_ligne.get(4)), Integer.parseInt(mots_ligne.get(5)), Integer.parseInt(mots_ligne.get(6)), Integer.parseInt(mots_ligne.get(7)), Integer.parseInt(mots_ligne.get(8)), new Point2D(Integer.parseInt(mots_ligne.get(9)), Integer.parseInt(mots_ligne.get(10))), Integer.parseInt(mots_ligne.get(11)));
+            archer.setId(Integer.parseInt(mots_ligne.get(12)));
             Joueur joueur = new Joueur(archer, new LinkedList<Utilisables>(), new LinkedList<Utilisables>());
             return joueur;
         }       
         else if (mots_ligne.get(1).equalsIgnoreCase("Guerrier")){
             Epee epee_guerrier = new Epee(Integer.parseInt(mots_ligne.get(11)), Integer.parseInt(mots_ligne.get(12)), mots_ligne.get(13));
             Guerrier guerrier = new Guerrier(mots_ligne.get(2), Integer.parseInt(mots_ligne.get(3)), Integer.parseInt(mots_ligne.get(4)), Integer.parseInt(mots_ligne.get(5)), Integer.parseInt(mots_ligne.get(6)), Integer.parseInt(mots_ligne.get(7)), Integer.parseInt(mots_ligne.get(8)), new Point2D(Integer.parseInt(mots_ligne.get(9)), Integer.parseInt(mots_ligne.get(10))), epee_guerrier);
+            guerrier.setId(Integer.parseInt(mots_ligne.get(14)));
             Joueur joueur = new Joueur(guerrier, new LinkedList<Utilisables>(), new LinkedList<Utilisables>());
             return joueur;
         }
@@ -243,7 +245,8 @@ public class Joueur {
                 " " + archer.getDistMaxAtt() +
                 " " + archer.getPos().getX() +
                 " " + archer.getPos().getY() +
-                " " + archer.getNbFleches();
+                " " + archer.getNbFleches() +
+                " " + archer.getId();
         }
         else if (this.getPerso() instanceof Guerrier){
             Guerrier guerrier = (Guerrier) this.getPerso();
@@ -260,7 +263,8 @@ public class Joueur {
                 " " + guerrier.getPos().getY() +
                 " " + guerrier.getEpee().getPtAtt() +
                 " " + guerrier.getEpee().getPtPar() +
-                " " + guerrier.getEpee().getNom();
+                " " + guerrier.getEpee().getNom() +
+                " " + guerrier.getId();
         }
         else  {
             return this.getPerso().getClass().getSimpleName();

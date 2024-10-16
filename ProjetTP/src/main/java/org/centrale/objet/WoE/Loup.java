@@ -63,6 +63,7 @@ public class Loup extends Monstre implements Combattant {
             mots_ligne.add(mot);
         }
         Loup loup = new Loup(Integer.parseInt(mots_ligne.get(1)), Integer.parseInt(mots_ligne.get(2)), Integer.parseInt(mots_ligne.get(3)), Integer.parseInt(mots_ligne.get(4)), Integer.parseInt(mots_ligne.get(5)), new Point2D(Integer.parseInt(mots_ligne.get(6)), Integer.parseInt(mots_ligne.get(7))));
+        loup.setId(Integer.parseInt(mots_ligne.get(8)));
         return loup;
     }
     
@@ -74,7 +75,8 @@ public class Loup extends Monstre implements Combattant {
                 " " + this.getPageAtt() +
                 " " + this.getPagePar() +
                 " " + this.getPos().getX() +
-                " " + this.getPos().getY();
+                " " + this.getPos().getY() + 
+                " " + this.getId();
     }
     
     /**

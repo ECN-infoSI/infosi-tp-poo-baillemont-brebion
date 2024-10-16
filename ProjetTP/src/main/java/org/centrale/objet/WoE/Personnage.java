@@ -88,6 +88,7 @@ public class Personnage extends Creature{
             mots_ligne.add(mot);
         }
         Personnage perso = new Personnage(mots_ligne.get(1), Integer.parseInt(mots_ligne.get(2)), Integer.parseInt(mots_ligne.get(3)), Integer.parseInt(mots_ligne.get(4)), Integer.parseInt(mots_ligne.get(5)), Integer.parseInt(mots_ligne.get(6)), Integer.parseInt(mots_ligne.get(7)), new Point2D(Integer.parseInt(mots_ligne.get(8)), Integer.parseInt(mots_ligne.get(9))));
+        perso.setId(Integer.parseInt(mots_ligne.get(10)));
         return perso;
     }
     
@@ -101,7 +102,8 @@ public class Personnage extends Creature{
                 " " + this.getPagePar() +
                 " " + this.getDistMaxAtt() +
                 " " + this.getPos().getX() +
-                " " + this.getPos().getY();
+                " " + this.getPos().getY() + 
+                " " + this.getId();
     }
     
     /**
