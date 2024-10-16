@@ -46,7 +46,10 @@ public class ClassiqueBurger extends Nourriture {
         }
 
     }
-    
+    /**
+     * Ecrit une ligne d'information sur l'objet pour sa sauvegarde.
+     * @return
+     */
     @Override public String ligneSauvegarde(){
         int consumed;
         if (this.isIsConsumed()){

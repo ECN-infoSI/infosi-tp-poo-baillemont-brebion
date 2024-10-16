@@ -6,7 +6,7 @@ import java.util.ArrayList;
 // BufferedReader, BufferedWriter
 import java.util.StringTokenizer;
 /**
- *
+ * Classe permettant la sauvegarde et le chargement d'un jeu.
  * @author morga
  * @author mattlerigolo
  */
@@ -17,6 +17,11 @@ public class Sauvegarde {
         this.source = source;
     }
     
+    /**
+     * Charge une partie.
+     * @return
+     * @throws IOException 
+     */
     public World_arrayList chargementPartie() throws IOException{
         String delimiteurs = " "; // délimiteurs pour la tokenisation
         // lecture du fichier source
@@ -198,6 +203,11 @@ public class Sauvegarde {
         
     }
     
+    /**
+     * Sauvegarde une partie.
+     * @param monde
+     * @throws IOException 
+     */
     public void sauvegardePartie(World_arrayList monde) throws IOException {
     // Écriture du fichier de sauvegarde
     try (BufferedWriter fichier = new BufferedWriter(new FileWriter(this.source))) {

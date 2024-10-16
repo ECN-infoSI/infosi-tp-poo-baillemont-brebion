@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.Iterator;
 
 /**
- * Classe permettant de lancer le jeu
+ * Classe permettant de lancer le jeu.
  * @author morga
  * @author mattlerigolo
  */
@@ -28,7 +28,7 @@ public class GameLoop {
     }
     
     /**
-     * Fonction pour lancer le jeu
+     * Fonction pour lancer le jeu.
      */
     public void startGame() {
         Scanner scanner = new Scanner(System.in);
@@ -169,7 +169,9 @@ public class GameLoop {
         }
     }
         
-     
+    /** 
+     * Combat d'une créature choisie par le joueur.
+     */ 
     private void combattre(){
         // Trouve des créatures à combattre
         
@@ -239,6 +241,9 @@ public class GameLoop {
         }
     }
     
+    /** 
+     * Consommation d'un utilisable choisi par le joueur.
+     */
     private void consommer(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Objets dans l'inventaire :");
@@ -282,7 +287,9 @@ public class GameLoop {
             }
         }
     }
-    
+    /**
+     * Mise à jour des effets pendant le tour.
+     */
     private void updateEffets(){
         LinkedList<Utilisables> effets = this.monde.getJoueur().getEffets();
         for (Utilisables objet : effets){
@@ -297,6 +304,9 @@ public class GameLoop {
         }
     }
     
+    /**
+     * Mise à jour du tour.
+     */
     private void updateGame() {
         // Update game state, handle user input, and perform calculations
         this.updateEffets();
@@ -460,7 +470,10 @@ public class GameLoop {
             this.monde.getJoueur().getPerso().setPtVie(0);
         }
     }
-
+    
+    /** 
+     * Affiche le jeu en cours.
+     */
     private void renderGame() {
         // Render the updated game state to the screen
         monde.getJoueur().perso.affiche();

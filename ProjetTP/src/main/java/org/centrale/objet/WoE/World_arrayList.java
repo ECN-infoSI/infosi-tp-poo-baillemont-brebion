@@ -421,16 +421,6 @@ public class World_arrayList {
         return null;
     }
           
-    /**
-    public Object getObjet(int id) {
-        for (Utilisables objet : this.objets) {
-            if (objet.getId() == id) {
-                return objet;
-            }
-        }
-        return null;
-    }
-    */
     
     
     /**

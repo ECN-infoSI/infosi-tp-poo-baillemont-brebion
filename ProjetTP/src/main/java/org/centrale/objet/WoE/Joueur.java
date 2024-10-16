@@ -231,6 +231,10 @@ public class Joueur {
         }
     }
     
+    /**
+     * Ecrit une ligne d'information sur l'objet pour sa sauvegarde.
+     * @return
+     */
     public String ligneSauvegarde(){
         if (this.getPerso() instanceof Archer){
             Archer archer = (Archer) this.getPerso();

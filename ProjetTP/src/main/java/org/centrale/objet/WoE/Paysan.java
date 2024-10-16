@@ -69,6 +69,10 @@ public class Paysan extends Personnage {
         return paysan;
     }
     
+    /**
+     * Ecrit une ligne d'information sur l'objet pour sa sauvegarde.
+     * @return
+     */
     @Override public String ligneSauvegarde(){
         return this.getClass().getSimpleName() + 
                 " " + this.getNom() +

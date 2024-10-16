@@ -72,6 +72,10 @@ public class Guerrier extends Personnage implements Combattant {
         return guerrier;
     }
     
+    /**
+     * Ecrit une ligne d'information sur l'objet pour sa sauvegarde.
+     * @return
+     */
     @Override public String ligneSauvegarde(){
         return this.getClass().getSimpleName() + 
                 " " + this.getNom() +

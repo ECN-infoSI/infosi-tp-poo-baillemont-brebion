@@ -82,7 +82,10 @@ public class Archer extends Personnage implements Combattant {
         return archer;
     }
     
-    
+    /**
+     * Ecrit une ligne d'information sur l'objet pour sa sauvegarde.
+     * @return
+     */
     @Override public String ligneSauvegarde(){
         return this.getClass().getSimpleName() + 
                 " " + this.getNom() +
@@ -98,10 +101,12 @@ public class Archer extends Personnage implements Combattant {
                 " " + this.getId();
     }
 
+    
     public int getNbFleches() {
         return nbFleches;
     };
 
+    
     public void setNbFleches(int nbFleches) {
         this.nbFleches = nbFleches;
     };
@@ -176,6 +181,10 @@ public class Archer extends Personnage implements Combattant {
         return ((distance>1) && (distance<=this.getDistMaxAtt()));
     }
     
+    /**
+     * Clone l'archer.
+     * @return
+     */
     @Override public Archer clone(){
         return new Archer(this);
     }
