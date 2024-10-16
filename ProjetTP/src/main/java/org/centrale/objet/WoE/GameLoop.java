@@ -35,9 +35,9 @@ public class GameLoop {
         System.out.println("Voulez-vous charger une partie sauvegardée ou commencer une nouvelle partie ?\n1 : Charger une partie\n2 : Commencer une nouvelle partie");
         String choix = scanner.nextLine();
         if (choix.equalsIgnoreCase("1")){
-            System.out.println("Entrez le nom du fichier de sauvegarde (par exemple : sauvegarde.txt)");
+            System.out.println("Entrez le nom du fichier de sauvegarde (par exemple : sauvegarde_1)");
             String fichier = scanner.nextLine();
-            File fichierSauvegarde = new File("Sauvegardes", fichier);
+            File fichierSauvegarde = new File("Sauvegardes", fichier + ".txt");
             try {
                 if (fichierSauvegarde.exists()) {
                     Sauvegarde sauv = new Sauvegarde(fichierSauvegarde.getPath());
@@ -309,7 +309,6 @@ public class GameLoop {
      */
     private void updateGame() {
         // Update game state, handle user input, and perform calculations
-        this.updateEffets();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Voulez-vous vous déplacer, combattre ou consommer un objet de votre inventaire ?\n1 : Se déplacer\n2 : Combattre\n3 : Consommer\n4 : Sauvegarder");
         String classe = scanner.nextLine();
@@ -339,25 +338,24 @@ public class GameLoop {
                     }
                     
                     if (choix.equalsIgnoreCase("o")){
-                        System.out.println("Entrez le nom de la sauvegarde");
+                        System.out.println("Entrez le nom de la sauvegarde (ex : sauvegarde_1)");
                         nom_sauv = scanner.nextLine();
                     }
-                    
                     else{
                         // Recherche du prochain numéro de sauvegarde
                         int numeroSauvegarde = 1;
                         while (true) {
-                            nom_sauv = "sauvegarde_" + numeroSauvegarde + ".txt";
-                            File fichier = new File(dossierSauvegardes, nom_sauv);
+                            nom_sauv = "sauvegarde_" + numeroSauvegarde;
+                            File fichier = new File(dossierSauvegardes, nom_sauv + ".txt");
                             if (!fichier.exists()) {
                                 break;
                             }
                             numeroSauvegarde++;
                         }
                     }
-                    Sauvegarde sauv = new Sauvegarde(new File(dossierSauvegardes, nom_sauv).getPath());
+                    Sauvegarde sauv = new Sauvegarde(new File(dossierSauvegardes, nom_sauv + ".txt").getPath());
                     sauv.sauvegardePartie(monde);
-                    System.out.println("Partie sauvegardée avec succès !");
+                    System.out.println("Partie sauvegardée avec succès sous le nom '"+ nom_sauv + "' !");
                 } catch (IOException e) {
                     System.out.println("Erreur lors de la sauvegarde : " + e.getMessage());
                 }
@@ -368,6 +366,7 @@ public class GameLoop {
             System.out.println("Action non-valide, pas d'action effectuée \n");
         }
         System.out.println();
+        this.updateEffets();
         Random random = new Random();
         // On fait se déplacer tous les personnages et ceux qui peuvent attaquer tentent d'attaquer
         for (Personnage perso : this.monde.getPersonnages()) {
