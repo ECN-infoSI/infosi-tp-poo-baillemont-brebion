@@ -63,7 +63,6 @@ public class Lapin extends Monstre {
             mots_ligne.add(mot);
         }
         Lapin lapin = new Lapin(Integer.parseInt(mots_ligne.get(1)), Integer.parseInt(mots_ligne.get(2)), Integer.parseInt(mots_ligne.get(3)), Integer.parseInt(mots_ligne.get(4)), Integer.parseInt(mots_ligne.get(5)), new Point2D(Integer.parseInt(mots_ligne.get(6)), Integer.parseInt(mots_ligne.get(7))));
-        lapin.setId(Integer.parseInt(mots_ligne.get(8)));
         return lapin;
     }
     
@@ -79,8 +78,7 @@ public class Lapin extends Monstre {
                 " " + this.getPageAtt() +
                 " " + this.getPagePar() +
                 " " + this.getPos().getX() +
-                " " + this.getPos().getY() + 
-                " " + this.getId();
+                " " + this.getPos().getY();
     }
     
     /**

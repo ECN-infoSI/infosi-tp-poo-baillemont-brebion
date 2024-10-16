@@ -68,7 +68,6 @@ public class Guerrier extends Personnage implements Combattant {
         // construction de l'épée
         Epee epee_guerrier = new Epee(Integer.parseInt(mots_ligne.get(10)), Integer.parseInt(mots_ligne.get(11)), mots_ligne.get(12));
         Guerrier guerrier = new Guerrier(mots_ligne.get(1), Integer.parseInt(mots_ligne.get(2)), Integer.parseInt(mots_ligne.get(3)), Integer.parseInt(mots_ligne.get(4)), Integer.parseInt(mots_ligne.get(5)), Integer.parseInt(mots_ligne.get(6)), Integer.parseInt(mots_ligne.get(7)), new Point2D(Integer.parseInt(mots_ligne.get(8)), Integer.parseInt(mots_ligne.get(9))), epee_guerrier);
-        guerrier.setId(Integer.parseInt(mots_ligne.get(13)));
         return guerrier;
     }
     
@@ -89,8 +88,7 @@ public class Guerrier extends Personnage implements Combattant {
                 " " + this.getPos().getY() +
                 " " + this.getEpee().getPtAtt() +
                 " " + this.getEpee().getPtPar() +
-                " " + this.getEpee().getNom() +
-                " " + this.getId();
+                " " + this.getEpee().getNom();
     }
 
     /**
