@@ -151,8 +151,8 @@ public class Sauvegarde {
                     monde.addObjet(potion);
                 }
                 else if (premier_mot.equalsIgnoreCase("Tour")){
-                    int tour = Integer.parseInt(tokenizer.nextToken());   
-                    monde.setTour(tour);
+                    // création du tokenizer
+                    monde.setTour(Integer.parseInt(tokenizer.nextToken()));
                     
         
         while (tokenizer.hasMoreTokens()){
@@ -254,7 +254,8 @@ public class Sauvegarde {
         }  
        // Ecriture du numéro du tour
         fichier.write("Tour ");
-        fichier.write(monde.getTour());
+        fichier.write(monde.getTour()+"");
+        fichier.newLine();
         
         fichier.close();
     } catch (Exception e) {
