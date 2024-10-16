@@ -254,7 +254,7 @@ public class Sauvegarde {
         }  
        // Ecriture du numéro du tour
         fichier.write("Tour ");
-        fichier.write(monde.getTour()+"");
+        fichier.write(Integer.toString(monde.getTour()));
         fichier.newLine();
         
         fichier.close();

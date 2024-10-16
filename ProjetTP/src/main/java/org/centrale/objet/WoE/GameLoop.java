@@ -59,12 +59,12 @@ public class GameLoop {
         else if (choix.equalsIgnoreCase("2")){
             this.monde = new World_arrayList(monde.getPlateau().length, monde.getPlateau()[0].length, true); // on recrée un nouveau monde avec le choix du joueur
             this.monde.creaMondeAlea(1,1,1,1,1,20,20,20,5);
+            monde.setTour(0);
         }
         else {
             System.out.println("Choix non-conforme.");
             return;
         }
-        monde.setTour(0);
         this.monde.getJoueur().getPerso().affiche();
         
         this.monde.affichePlateau();
@@ -325,6 +325,7 @@ public class GameLoop {
         else if(classe.equalsIgnoreCase("4")){
             System.out.println("Voulez-vous vraiment sauvegarder la partie ? (o/n)");
             String choix = scanner.nextLine();
+            monde.setTour(monde.getTour()-1);
             if (choix.equalsIgnoreCase("o")){
                 try {
                     System.out.println("Voulez-vous donner un nom à la sauvegarde ? (o/n)");
