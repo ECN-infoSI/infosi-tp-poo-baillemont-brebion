@@ -125,11 +125,11 @@ public class Guerrier extends Personnage implements Combattant {
         } catch (IOException e) {
             this.nom = "Robert";
         }
-        this.ptVie = random.nextInt(50)+25; // points de vie entre 25 et 75
+        this.ptVie = random.nextInt(50)+65; // points de vie entre 65 et 115
         this.ptPar = random.nextInt(10)+5; // entre 5 et 15
         this.degAtt = random.nextInt(10)+5; // degats d'attaque entre 5 et 15
         this.pagePar = random.nextInt(101); // entre 0 et 100
-        this.pageAtt = random.nextInt(101); // entre 0 et 100
+        this.pageAtt = random.nextInt(51)+50; // entre 50 et 100
     }
     
     /**

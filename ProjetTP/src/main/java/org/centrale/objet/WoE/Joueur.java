@@ -47,7 +47,7 @@ public class Joueur {
                 perso.setDegAtt(degAtt);
                 int pagePar = random.nextInt(101); // entre 0 et 100
                 perso.setPagePar(pagePar);
-                int pageAtt = random.nextInt(101); // entre 0 et 100
+                int pageAtt = random.nextInt(61)+40; // entre 60 et 100
                 perso.setPageAtt(pageAtt);
                 int distMaxAtt = random.nextInt(7)+3; // entre 3 et 10
                 perso.setDistMaxAtt(distMaxAtt);
@@ -66,7 +66,7 @@ public class Joueur {
                 perso.setDegAtt(degAtt);
                 int pagePar = random.nextInt(101); // entre 0 et 100
                 perso.setPagePar(pagePar);
-                int pageAtt = random.nextInt(101); // entre 0 et 100
+                int pageAtt = random.nextInt(61)+40; // entre 60 et 100
                 perso.setPageAtt(pageAtt);
                 int ptPar = random.nextInt(10)+5; // entre 5 et 15
                 perso.setPtPar(ptPar);
