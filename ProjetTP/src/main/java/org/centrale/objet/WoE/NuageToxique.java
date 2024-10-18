@@ -61,7 +61,11 @@ public class NuageToxique extends Objet implements Combattant, Deplacable {
         return nuage;
     }
     
-    
+    /**
+    * Ecrit une ligne d'information sur l'objet pour sa sauvegarde.
+    * @return
+    * Ligne de sauvegarde
+    */
     @Override public String ligneSauvegarde(){
         return this.getClass().getSimpleName() +
                 " " + this.getPos().getX() +
@@ -91,6 +95,11 @@ public class NuageToxique extends Objet implements Combattant, Deplacable {
         }
     }
     
+    /**
+     * Déplacement aléatoire du nuage toxique sur les cases adjacentes du plateau de jeu
+     * @param plateau 
+     * Plateau de jeu
+     */
     @Override public void deplace(int[][] plateau){
         Random r = new Random();
         int dx = r.nextInt(2); // le nuage peut se déplacer sur les cases adjacentes
@@ -127,6 +136,9 @@ public class NuageToxique extends Objet implements Combattant, Deplacable {
         return this.getPos().samePosition(c.getPos()); //le nuage attaque seulement s'il est sur la même case qu'une créature
     }
     
+    /**
+     * Crée un nuage de jeu aléatoire
+     */
     @Override public void creaElementDeJeuAlea(){
         Random random = new Random();
         this.setDegats(random.nextInt(6)+3);

@@ -84,6 +84,11 @@ public class PotionSoin extends Objet implements Utilisables {
         }
     }
     
+    /**
+    * Ecrit une ligne d'information sur l'objet pour sa sauvegarde.
+    * @return
+    * Ligne de sauvegarde
+    */
     @Override public String ligneSauvegarde(){
         return this.getClass().getSimpleName() +
                 " " + this.getPtSoin() +
@@ -115,6 +120,9 @@ public class PotionSoin extends Objet implements Utilisables {
         this.consumed = consumed;
     }
     
+    /**
+     * Crée une potion de soin aléatoire
+     */
     @Override public void creaElementDeJeuAlea(){
         Random random = new Random();
         this.setPtSoin(random.nextInt(11)+7); // entre 7 et 17

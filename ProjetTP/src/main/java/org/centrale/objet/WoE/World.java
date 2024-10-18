@@ -3,7 +3,7 @@ import java.util.Random;
 import java.util.function.Predicate;
 
 /**
- * Création d'un monde WoE comprenant un archer, un paysan et un lapin. 
+ * Création d'un monde WoE comprenant un archer, un paysan et un lapin (inutilisé). 
  * Leur position est initialisée aléatoirement à la création du monde par la méthode {@link #creaMondeAlea()}.
  * @author mattlerigolo
  * @author morga

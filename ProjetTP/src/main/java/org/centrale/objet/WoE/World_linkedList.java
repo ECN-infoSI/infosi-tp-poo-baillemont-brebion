@@ -3,7 +3,7 @@ import java.util.Random;
 import java.util.LinkedList;
 
 /**
- * Création d'un monde WoE.
+ * Création d'un monde WoE avec des LinkedList (inutilisé).
  * @author mattlerigolo
  * @author morga
  * 

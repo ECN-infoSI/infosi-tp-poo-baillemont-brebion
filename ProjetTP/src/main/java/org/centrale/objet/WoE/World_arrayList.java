@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
- * Création d'un monde WoE. 
+ * Création d'un monde WoE avec des ArrayList (utilisé dans la classe GameLoop). 
  * @author mattlerigolo
  * @author morga
  * 

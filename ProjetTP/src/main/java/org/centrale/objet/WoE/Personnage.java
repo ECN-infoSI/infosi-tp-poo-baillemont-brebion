@@ -95,6 +95,11 @@ public class Personnage extends Creature{
         return perso;
     }
     
+    /**
+    * Ecrit une ligne d'information sur l'objet pour sa sauvegarde.
+    * @return
+    * Ligne de sauvegarde
+    */
     @Override public String ligneSauvegarde(){
         return this.getClass().getSimpleName() + 
                 " " + this.getNom() +
@@ -201,6 +206,11 @@ public class Personnage extends Creature{
         this.pageAtt = random.nextInt(101); // entre 0 et 100
     }
     
+    /**
+     * Clone le personnage
+     * @return 
+     * Personnage
+     */
     @Override public Personnage clone(){
         return new Personnage(this);
     }

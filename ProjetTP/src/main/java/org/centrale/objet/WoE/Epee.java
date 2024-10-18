@@ -114,6 +114,9 @@ public class Epee extends Objet{
         this.nom = nom;
     }
     
+    /**
+     * Crée une épée avec des attributs aléatoires
+     */
     @Override public void creaElementDeJeuAlea(){
         Random random = new Random();
         this.setPtAtt(random.nextInt(11)+5); // entre 5 et 15

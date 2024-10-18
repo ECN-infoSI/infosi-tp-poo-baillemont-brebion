@@ -87,6 +87,7 @@ public class Archer extends Personnage implements Combattant {
     /**
      * Ecrit une ligne d'information sur l'objet pour sa sauvegarde.
      * @return
+     * Ligne pour la sauvegarde
      */
     @Override public String ligneSauvegarde(){
         return this.getClass().getSimpleName() + 
@@ -191,6 +192,7 @@ public class Archer extends Personnage implements Combattant {
     /**
      * Clone l'archer.
      * @return
+     * Archer
      */
     @Override public Archer clone(){
         return new Archer(this);

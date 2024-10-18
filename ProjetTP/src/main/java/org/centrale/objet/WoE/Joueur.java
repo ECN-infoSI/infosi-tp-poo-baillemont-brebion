@@ -3,6 +3,7 @@ package org.centrale.objet.WoE;
 /**
  * Classe du joueur 
  * @author mattlerigolo
+ * @author morga
  */
 
 import java.util.ArrayList;
@@ -204,6 +205,13 @@ public class Joueur {
         this.perso.pos.translate(newPosX - this.perso.pos.getX(), newPosY - this.perso.pos.getY());
     }
     
+    /**
+     * Crée un joueur à partir d'une ligne de sauvegarde
+     * @param ligne
+     * Ligne de sauvegarde
+     * @return 
+     * Joueur
+     */
     public Joueur create(String ligne){
         // tokenisation
         
@@ -232,6 +240,7 @@ public class Joueur {
     /**
      * Ecrit une ligne d'information sur l'objet pour sa sauvegarde.
      * @return
+     * Ligne de sauvegarde
      */
     public String ligneSauvegarde(){
         if (this.getPerso() instanceof Archer){

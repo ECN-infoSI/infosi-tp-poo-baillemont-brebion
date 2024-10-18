@@ -69,6 +69,7 @@ public class Loup extends Monstre implements Combattant {
     /**
      * Ecrit une ligne d'information sur l'objet pour sa sauvegarde.
      * @return
+     * Ligne de sauvegarde
      */
     @Override public String ligneSauvegarde(){
         return this.getClass().getSimpleName() + 

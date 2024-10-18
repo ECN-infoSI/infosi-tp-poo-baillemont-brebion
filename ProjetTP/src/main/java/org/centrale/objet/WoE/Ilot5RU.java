@@ -9,14 +9,33 @@ import java.util.StringTokenizer;
  * @author mattlerigolo
  */
 public class Ilot5RU extends Nourriture {
+    /**
+     * Constructeur par défaut
+     */
     public Ilot5RU() {
         super();
     }
-
+    
+    /**
+     * Constructeur
+     * @param pos
+     * Position
+     * @param bonusMalus
+     * Valeur du bonus ou malus
+     * @param tempsEffet
+     * Durée d'effectivité de l'effet
+     * @param isConsumed 
+     * Consommée ou non ?
+     */
     public Ilot5RU(Point2D pos, int bonusMalus, int tempsEffet, boolean isConsumed) {
         super(pos, bonusMalus, tempsEffet, isConsumed);
     }
 
+    /**
+     * Constructeur de copie
+     * @param n 
+     * Nourriture à copier
+     */
     public Ilot5RU(Nourriture n) {
         super(n);
     }
@@ -47,7 +66,11 @@ public class Ilot5RU extends Nourriture {
         
     }
     
-    
+    /**
+    * Ecrit une ligne d'information sur l'objet pour sa sauvegarde.
+    * @return
+    * Ligne de sauvegarde
+    */
     @Override public String ligneSauvegarde(){
         int consumed;
         if (this.isIsConsumed()){
@@ -64,11 +87,20 @@ public class Ilot5RU extends Nourriture {
                 " " + consumed;
     }
     
+    /**
+     * Le personnage p consomme la nourriture
+     * @param p
+     * Personnage qui mange
+     */
     @Override public void mangerPar(Personnage p){
         p.setDegAtt(p.getDegAtt()-this.getBonusMalus());
         this.setIsConsumed(true);
     }
     
+    /**
+     * Arrête l'effet de la nourriture
+     * @param p 
+     */
     @Override public void finEffet(Personnage p){
         if (this.effetFini()){
             p.setDegAtt(p.getDegAtt()+this.getBonusMalus());

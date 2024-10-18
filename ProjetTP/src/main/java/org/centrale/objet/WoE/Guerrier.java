@@ -47,7 +47,6 @@ public class Guerrier extends Personnage implements Combattant {
      * @param epee
      * Epée du guerrier
      */
-    
     public Guerrier(String nom, int ptVie, int degAtt, int ptPar, int pageAtt, int pagePar, int distMaxAtt, Point2D pos, Epee epee){
         super(nom, ptVie, degAtt, ptPar, pageAtt, pagePar, distMaxAtt, pos);
         this.epee = epee;
@@ -77,6 +76,7 @@ public class Guerrier extends Personnage implements Combattant {
     /**
      * Ecrit une ligne d'information sur l'objet pour sa sauvegarde.
      * @return
+     * Ligne de sauvegarde
      */
     @Override public String ligneSauvegarde(){
         return this.getClass().getSimpleName() + 
@@ -174,6 +174,11 @@ public class Guerrier extends Personnage implements Combattant {
         return distance<=this.getDistMaxAtt();
     }
 
+    /**
+     * Clone le guerrier
+     * @return 
+     * Guerrier
+     */
     @Override public Guerrier clone(){
         return new Guerrier(this);
     }

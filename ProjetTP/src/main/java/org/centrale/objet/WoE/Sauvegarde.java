@@ -20,7 +20,9 @@ public class Sauvegarde {
     /**
      * Charge une partie.
      * @return
+     * Monde correspondant à la partie chargée
      * @throws IOException 
+     * Si on arrive pas à trouver le fichier
      */
     public World_arrayList chargementPartie() throws IOException{
         String delimiteurs = " "; // délimiteurs pour la tokenisation
@@ -206,6 +208,7 @@ public class Sauvegarde {
     /**
      * Sauvegarde une partie.
      * @param monde
+     * Monde à sauvegarder
      * @throws IOException 
      */
     public void sauvegardePartie(World_arrayList monde) throws IOException {

@@ -4,19 +4,38 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 /**
- * Nourriture qui augmente les points de parade quand consommée
+ * Nourriture qui influe sur les points de parade quand consommée
  * @author mattlerigolo
  */
 public class ClassiqueBurger extends Nourriture {
-
+    
+    /**
+     * Constructeur par défaut
+     */
     public ClassiqueBurger() {
         super();
     }
 
+    /**
+    * Constructeur
+    * @param pos
+    * Position
+    * @param bonusMalus
+    * Valeur du bonus ou malus
+    * @param tempsEffet
+    * Durée d'effectivité de l'effet
+    * @param isConsumed 
+    * Consommée ou non ?
+    */
     public ClassiqueBurger(Point2D pos, int bonusMalus, int tempsEffet, boolean isConsumed) {
         super(pos, bonusMalus, tempsEffet, isConsumed);
     }
 
+    /**
+     * Constructeur de copie
+     * @param n
+     * NOurriture à copier
+     */
     public ClassiqueBurger(Nourriture n) {
         super(n);
     }

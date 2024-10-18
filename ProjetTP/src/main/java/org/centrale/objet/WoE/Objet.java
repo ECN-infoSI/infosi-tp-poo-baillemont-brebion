@@ -1,7 +1,7 @@
 package org.centrale.objet.WoE;
 
 /**
- *
+ * Objet
  * @author morga
  * @author mattlerigolo
  */
