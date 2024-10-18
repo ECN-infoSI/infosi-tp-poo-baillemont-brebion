@@ -84,6 +84,9 @@ public class GameLoop {
                 e.printStackTrace();
             }
         }
+        if (gameOver){
+            System.out.println("\nPartie terminée, merci d'avoir joué !");
+        }
     }
     
     /**
@@ -310,7 +313,7 @@ public class GameLoop {
     private void updateGame() {
         // Update game state, handle user input, and perform calculations
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Voulez-vous vous déplacer, combattre ou consommer un objet de votre inventaire ?\n1 : Se déplacer\n2 : Combattre\n3 : Consommer\n4 : Sauvegarder");
+        System.out.println("Voulez-vous vous déplacer, combattre ou consommer un objet de votre inventaire ?\n1 : Se déplacer\n2 : Combattre\n3 : Consommer\n4 : Sauvegarder\n5 : Quitter");
         String classe = scanner.nextLine();
         if (classe.equalsIgnoreCase("1")){
             deplaceJoueur();
@@ -361,6 +364,10 @@ public class GameLoop {
                 }
             }
             return; // si on décide de sauvegarder on n'update pas le tour
+        }
+        else if(classe.equalsIgnoreCase("5")){
+            this.gameOver = true;
+            return;
         }
         else{
             System.out.println("Action non-valide, pas d'action effectuée \n");
