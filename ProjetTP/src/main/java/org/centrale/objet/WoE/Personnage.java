@@ -3,6 +3,10 @@ package org.centrale.objet.WoE;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.StringTokenizer;
+import java.util.List;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.io.IOException;
 
 /**
  *
@@ -173,11 +177,23 @@ public class Personnage extends Creature{
         }
     }
     
+    public static List<String> loadNamesFromFile(String filePath) throws IOException {
+        return Files.readAllLines(Paths.get(filePath));
+    }
+    
     /**
      * Crée un personnage avec des attributs aléatoires
      */
     @Override public void creaElementDeJeuAlea(){
         Random random = new Random();
+        try {
+            // Charger noms depuis les fichiers texte
+            List<String> noms = loadNamesFromFile("mmo_names.txt");
+            // Générer et afficher un nom
+            nom = noms.get(random.nextInt(noms.size()));
+        } catch (IOException e) {
+            this.nom = "Robert";
+        }
         this.ptVie = random.nextInt(50)+25; // points de vie entre 25 et 75
         this.ptPar = random.nextInt(10)+5; // entre 5 et 15
         this.degAtt = random.nextInt(10)+5; // degats d'attaque entre 5 et 15

@@ -32,7 +32,7 @@ public class Joueur {
             System.out.print("Quelle classe voulez-vous jouer ? (Guerrier ou Archer) \n");
             String classe = scanner.nextLine();
 
-            System.out.print("Quel nom voulez vous donner à votre personnage ? \n");
+            System.out.print("Quel nom voulez vous donner à votre personnage ? (sans espace)\n");
             String nom = scanner.nextLine();
 
             System.out.print("\n");

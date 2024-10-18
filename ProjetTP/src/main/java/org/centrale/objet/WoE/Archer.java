@@ -1,8 +1,11 @@
 package org.centrale.objet.WoE;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.StringTokenizer;
+import static org.centrale.objet.WoE.Personnage.loadNamesFromFile;
 
 /**
  * Sous-classe de Personnage représentant un archer
@@ -110,17 +113,23 @@ public class Archer extends Personnage implements Combattant {
     };
     
     /**
-     * Crée un archer avec des attributs aléatoires
+     * Crée un personnage avec des attributs aléatoires
      */
     @Override public void creaElementDeJeuAlea(){
         Random random = new Random();
-        this.ptVie = random.nextInt(50)+50; // points de vie entre 50 et 100
+        try {
+            // Charger noms depuis les fichiers texte
+            List<String> noms = loadNamesFromFile("mmo_names.txt");
+            // Générer et afficher un nom
+            nom = noms.get(random.nextInt(noms.size()));
+        } catch (IOException e) {
+            this.nom = "Robert";
+        }
+        this.ptVie = random.nextInt(50)+25; // points de vie entre 25 et 75
         this.ptPar = random.nextInt(10)+5; // entre 5 et 15
         this.degAtt = random.nextInt(10)+5; // degats d'attaque entre 5 et 15
         this.pagePar = random.nextInt(101); // entre 0 et 100
         this.pageAtt = random.nextInt(101); // entre 0 et 100
-        this.distMaxAtt = random.nextInt(7)+3; // entre 3 et 10
-        this.nbFleches = random.nextInt(10)+5; // entre 5 et 15
     }
     
     /**

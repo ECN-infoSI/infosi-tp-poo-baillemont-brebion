@@ -58,7 +58,7 @@ public class GameLoop {
         }
         else if (choix.equalsIgnoreCase("2")){
             this.monde = new World_arrayList(monde.getPlateau().length, monde.getPlateau()[0].length, true); // on recrée un nouveau monde avec le choix du joueur
-            this.monde.creaMondeAlea(1,1,1,1,1,20,20,20,5);
+            this.monde.creaMondeAlea(3,3,3,3,3,10,10,10,4);
             monde.setTour(0);
         }
         else {

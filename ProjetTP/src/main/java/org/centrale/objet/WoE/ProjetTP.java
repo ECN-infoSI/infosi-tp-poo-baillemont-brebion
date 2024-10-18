@@ -8,7 +8,7 @@ package org.centrale.objet.WoE;
 public class ProjetTP {
 
     public static void main(String[] args) {
-        World_arrayList monde = new World_arrayList(5,5,false);
+        World_arrayList monde = new World_arrayList(10,10,false);
         GameLoop Game = new GameLoop(monde);
         
         Game.startGame();
